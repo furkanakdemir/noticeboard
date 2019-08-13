@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="added">#4caf50</color>
+    <color name="changed">#2196f3</color>
+    <color name="deprecated">#ff9800</color>
+    <color name="removed">#f44336</color>
+    <color name="fixed">#ff5722</color>
+    <color name="security">#00bcd4</color>
+
+</resources>

@@ -1,10 +1,10 @@
 package net.furkanakdemir.noticeboardsample
 
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import net.furkanakdemir.noticeboard.NoticeBoardActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,8 +14,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            startActivity(Intent(this, NoticeBoardActivity::class.java))
         }
     }
 

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NoticeBoard</string>
+    <string name="title_activity_notice_board">NoticeBoardActivity</string>
 </resources>
