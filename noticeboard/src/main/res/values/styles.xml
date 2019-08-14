@@ -1,15 +1,15 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light" />
+    <style name="NoticeBoardTheme" parent="Theme.MaterialComponents.Light" />
 
-    <style name="AppTheme.NoActionBar">
+    <style name="NoticeBoardTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="NoticeBoardTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="NoticeBoardTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
 
     <style name="NoticeBoard" />

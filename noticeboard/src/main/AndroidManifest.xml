@@ -6,7 +6,7 @@
         <activity
             android:name=".NoticeBoardActivity"
             android:label="@string/title_activity_notice_board"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/NoticeBoardTheme.NoActionBar" />
     </application>
 
 </manifest>
