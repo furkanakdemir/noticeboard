@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.furkanakdemir.noticeboard.data.NoticeBoardRepository
 import net.furkanakdemir.noticeboard.data.Repository
+import net.furkanakdemir.noticeboard.util.color.NoticeBoardColorProvider
 
 class NoticeBoardActivity : AppCompatActivity() {
 
@@ -22,7 +23,7 @@ class NoticeBoardActivity : AppCompatActivity() {
 
         viewManager = LinearLayoutManager(this)
 
-        viewAdapter = NoticeBoardAdapter()
+        viewAdapter = NoticeBoardAdapter(NoticeBoardColorProvider(this))
 
         recyclerView = findViewById<RecyclerView>(R.id.change_recyclerview).apply {
             // use this setting to improve performance if you know that changes

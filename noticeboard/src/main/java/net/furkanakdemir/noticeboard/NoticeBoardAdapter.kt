@@ -4,10 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
 import net.furkanakdemir.noticeboard.core.BaseViewHolder
+import net.furkanakdemir.noticeboard.util.color.ColorProvider
 
-class NoticeBoardAdapter : RecyclerView.Adapter<BaseViewHolder<NoticeBoardItem>>() {
+class NoticeBoardAdapter constructor(
+    val colorProvider: ColorProvider
+) : RecyclerView.Adapter<BaseViewHolder<NoticeBoardItem>>() {
 
     var releaseList: MutableList<NoticeBoardItem> = mutableListOf()
         set(value) {
@@ -15,7 +19,6 @@ class NoticeBoardAdapter : RecyclerView.Adapter<BaseViewHolder<NoticeBoardItem>>
             releaseList.addAll(value)
             notifyDataSetChanged()
         }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<NoticeBoardItem> {
 
@@ -77,6 +80,11 @@ class NoticeBoardAdapter : RecyclerView.Adapter<BaseViewHolder<NoticeBoardItem>>
 
             itemView.findViewById<TextView>(R.id.change_description).text = model.description
             itemView.findViewById<TextView>(R.id.change_type).text = model.type.name
+
+            val colorId = colorProvider.getChangeTypeBackgroundColor(model.type)
+
+            DrawableCompat.setTint(itemView.findViewById<TextView>(R.id.change_type).background, colorId)
+
         }
 
     }

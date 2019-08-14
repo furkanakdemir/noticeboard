@@ -14,6 +14,9 @@
 
     <style name="NoticeBoard" />
 
+
+    <!-- Header Styles-->
+
     <style name="NoticeBoard.Header" />
 
     <style name="NoticeBoard.Header.Divider">
@@ -31,4 +34,25 @@
     <style name="NoticeBoard.Header.Version">
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Caption</item>
     </style>
+
+    <!-- Change Type Styles-->
+
+    <style name="NoticeBoard.Change" />
+
+
+    <style name="NoticeBoard.Change.Type">
+        <item name="android:lines">1</item>
+        <item name="android:padding">@dimen/notice_board_spacing_medium</item>
+        <item name="android:maxWidth">144dp</item>
+        <item name="android:background">@drawable/background_change_fixed</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/notice_board_change_type_text_default</item>
+    </style>
+
+    <style name="NoticeBoard.Change.Description">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:gravity">center_vertical|start</item>
+    </style>
+
 </resources>

@@ -1,3 +1,14 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Spacing -->
+    <dimen name="notice_board_spacing_none">0dp</dimen>
+    <dimen name="notice_board_spacing_tiny">4dp</dimen>
+    <dimen name="notice_board_spacing_small">8dp</dimen>
+    <dimen name="notice_board_spacing_medium">16dp</dimen>
+    <dimen name="notice_board_spacing_big">32dp</dimen>
+
+    <!-- Header -->
+    <dimen name="notice_board_height_header">56dp</dimen>
+
 </resources>

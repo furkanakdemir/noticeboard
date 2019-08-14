@@ -9,4 +9,7 @@
     <color name="fixed">#ff5722</color>
     <color name="security">#00bcd4</color>
 
+
+    <color name="notice_board_change_type_text_default">#FFFFFF</color>
+
 </resources>
