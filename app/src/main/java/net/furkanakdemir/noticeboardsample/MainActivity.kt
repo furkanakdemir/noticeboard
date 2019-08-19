@@ -1,10 +1,9 @@
 package net.furkanakdemir.noticeboardsample
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import net.furkanakdemir.noticeboard.NoticeBoardActivity
+import net.furkanakdemir.noticeboard.NoticeBoard
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,8 +12,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            startActivity(Intent(this, NoticeBoardActivity::class.java))
+        fab.setOnClickListener {
+            val noticeBoard = NoticeBoard.create {
+                context(this@MainActivity)
+                source(NoticeBoard.Source.DYNAMIC)
+            }
+
+            noticeBoard.pin()
         }
     }
 
