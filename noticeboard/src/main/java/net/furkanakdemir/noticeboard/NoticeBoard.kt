@@ -2,46 +2,46 @@ package net.furkanakdemir.noticeboard
 
 import android.content.Context
 import android.content.Intent
+import net.furkanakdemir.noticeboard.data.InMemoryNoticeBoardRepository
+import net.furkanakdemir.noticeboard.data.NoticeBoardRepository
 
-class NoticeBoard private constructor(private val context: Context, val source: Source) {
+class NoticeBoard(
+    private val context: Context,
+    private var sourceType: Source = Source.Dynamic(),
+    private var displayOptions: DisplayOptions = DisplayOptions.ACTIVITY
+) {
 
+    private val noticeBoardRepository: NoticeBoardRepository = InMemoryNoticeBoardRepository
 
-    private constructor(builder: Builder) : this(builder.context, builder.source)
-
-    companion object {
-        fun create(init: Builder.() -> Unit) = Builder(init).build()
+    inline fun pin(func: NoticeBoard.() -> Unit): NoticeBoard {
+        this.func()
+        this.pin()
+        return this
     }
 
+    fun data(items: List<NoticeBoardItem>) {
+        noticeBoardRepository.saveChanges(items)
+    }
 
-    class Builder private constructor() {
+    fun source(source: Source) {
+        this.sourceType = source
 
-        constructor(init: Builder.() -> Unit) : this() {
-            init()
+        when (source) {
+            is Source.Dynamic -> noticeBoardRepository.saveChanges(source.items)
+            is Source.Xml -> TODO()
+            is Source.Json -> TODO()
         }
-
-        internal lateinit var context: Context
-        internal var source: Source = Source.DYNAMIC
-
-        fun context(context: Context) {
-            this.context = context
-        }
-
-        fun source(source: Source) {
-            this.source = source
-        }
-
-        fun build() = NoticeBoard(this)
     }
 
     fun pin() {
-        context.startActivity(Intent(context, NoticeBoardActivity::class.java))
+        when (displayOptions) {
+            DisplayOptions.ACTIVITY -> context.startActivity(
+                Intent(
+                    context,
+                    NoticeBoardActivity::class.java
+                )
+            )
+            DisplayOptions.DIALOG -> TODO()
+        }
     }
-
-
-    enum class Source {
-        DYNAMIC,
-        XML,
-        JSON
-    }
-
 }
