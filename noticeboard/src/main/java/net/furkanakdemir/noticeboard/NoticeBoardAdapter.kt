@@ -42,7 +42,7 @@ class NoticeBoardAdapter constructor(
         when (holder) {
             is HeaderViewHolder -> holder.bind(noticeBoardItem as NoticeBoardItem.ReleaseHeader)
             is ChangeViewHolder -> holder.bind(noticeBoardItem as NoticeBoardItem.ChangeItem)
-            else -> throw IllegalArgumentException()
+            else -> throw IllegalArgumentException("Invalid view holder $holder")
         }
     }
 
