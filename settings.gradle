@@ -1,1 +1,1 @@
-include ':app', ':noticeboard'
+include ':sample', ':noticeboard'
