@@ -27,7 +27,6 @@ class NoticeBoardActivity : AppCompatActivity() {
         recyclerView = findViewById<RecyclerView>(R.id.change_recyclerview).apply {
             setHasFixedSize(true)
             adapter = viewAdapter
-
         }
 
         viewAdapter.releaseList = noticeBoardRepository.getChanges().toMutableList()
