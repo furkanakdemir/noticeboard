@@ -4,7 +4,7 @@
 
     <application>
         <activity
-            android:name=".NoticeBoardActivity"
+            android:name=".ui.NoticeBoardActivity"
             android:label="@string/title_activity_notice_board"
             android:theme="@style/NoticeBoardTheme.NoActionBar" />
     </application>

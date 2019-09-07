@@ -42,4 +42,12 @@ dependencies {
     implementation(Deps.constraintlayout)
     implementation(Deps.recyclerview)
     implementation(Deps.material)
+    implementation(Deps.retrofit_converter_gson)
+
+    implementation(Deps.dagger_android)
+    implementation(Deps.dagger_android_support)
+    kapt(Deps.dagger_android_processor)
+    kapt(Deps.dagger_compiler)
+
+    implementation(Deps.moshi)
 }

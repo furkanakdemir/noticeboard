@@ -1,4 +1,6 @@
-package net.furkanakdemir.noticeboard
+package net.furkanakdemir.noticeboard.ui
+
+import net.furkanakdemir.noticeboard.ChangeType
 
 sealed class NoticeBoardItem {
 

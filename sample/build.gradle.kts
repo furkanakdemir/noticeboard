@@ -39,4 +39,6 @@ dependencies {
     implementation(Deps.kotlin)
     implementation(Deps.appcompat)
     implementation(Deps.constraintlayout)
+    implementation(Deps.recyclerview)
+    implementation(Deps.material)
 }

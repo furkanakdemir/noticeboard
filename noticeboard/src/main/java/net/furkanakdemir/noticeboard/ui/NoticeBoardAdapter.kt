@@ -1,4 +1,4 @@
-package net.furkanakdemir.noticeboard
+package net.furkanakdemir.noticeboard.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
+import net.furkanakdemir.noticeboard.R
 import net.furkanakdemir.noticeboard.core.BaseViewHolder
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
 

@@ -32,6 +32,8 @@ object Versions {
     const val coroutine = "1.3.0"
     const val mockito_kotlin = "2.1.0"
     const val mockito_core = "2.23.0"
+
+    const val moshi = "1.8.0"
 }
 
 
@@ -110,6 +112,9 @@ object Deps {
 
     // Annotation
     const val annotation = "androidx.annotation:annotation:${Versions.annotation}"
+
+    // Json Library
+    const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
 
 }
 
