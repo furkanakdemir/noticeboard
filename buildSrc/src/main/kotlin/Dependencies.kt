@@ -6,7 +6,7 @@ object Versions {
 
     const val dagger = "2.24"
     const val navigation = "2.1.0-rc01"
-    const val lifecycle = "2.1.0-rc01"
+    const val lifecycle = "2.1.0"
     const val timber = "4.7.1"
     const val paging = "2.1.0"
     const val glide = "4.9.0"
@@ -29,6 +29,7 @@ object Versions {
     const val truth = "1.0"
 
     const val core_ktx = "1.0.2"
+    const val fragment_ktx = "1.1.0"
     const val coroutine = "1.3.0"
     const val mockito_kotlin = "2.1.0"
     const val mockito_core = "2.23.0"
@@ -66,10 +67,13 @@ object Deps {
 
     // Kotlin
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin_version}"
-    const val core_ktx = "androidx.core:core-ktx:${Versions.core_ktx}"
     const val coroutine_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutine}"
     const val coroutine_android =
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutine}"
+
+    // Android KTX
+    const val core_ktx = "androidx.core:core-ktx:${Versions.core_ktx}"
+    const val fragment_ktx = "androidx.fragment:fragment-ktx:${Versions.fragment_ktx}"
 
     // AndroidX
     const val constraintlayout =
@@ -84,8 +88,6 @@ object Deps {
 
     // Lifecycle
     const val lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
-    const val lifecycle_viewmodel_ktx =
-        "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
 
     // Navigation
     const val navigation_fragment_ktx =

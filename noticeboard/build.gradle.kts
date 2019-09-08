@@ -50,4 +50,6 @@ dependencies {
     kapt(Deps.dagger_compiler)
 
     implementation(Deps.moshi)
+
+    implementation(Deps.lifecycle_extensions)
 }

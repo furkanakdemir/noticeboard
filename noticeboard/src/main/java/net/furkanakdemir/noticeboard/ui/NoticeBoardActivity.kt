@@ -3,10 +3,12 @@ package net.furkanakdemir.noticeboard.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import net.furkanakdemir.noticeboard.R
 import net.furkanakdemir.noticeboard.data.model.Release
-import net.furkanakdemir.noticeboard.data.repository.NoticeBoardRepository
 import net.furkanakdemir.noticeboard.di.DaggerInjector
 import net.furkanakdemir.noticeboard.util.color.NoticeBoardColorProvider
 import net.furkanakdemir.noticeboard.util.mapper.Mapper
@@ -16,10 +18,12 @@ class NoticeBoardActivity : AppCompatActivity() {
 
     private var toolbar: Toolbar? = null
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: NoticeBoardAdapter
+    private lateinit var noticeBoardAdapter: NoticeBoardAdapter
 
     @Inject
-    lateinit var noticeBoardRepository: NoticeBoardRepository
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private lateinit var noticeBoardViewModel: NoticeBoardViewModel
 
     @Inject
     lateinit var viewMapper: Mapper<List<Release>, List<NoticeBoardItem>>
@@ -29,18 +33,28 @@ class NoticeBoardActivity : AppCompatActivity() {
         DaggerInjector.component?.inject(this)
 
         setContentView(R.layout.activity_notice_board)
+        noticeBoardViewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(NoticeBoardViewModel::class.java)
 
         setupToolbar()
 
-        viewAdapter =
+        setupRecyclerView()
+
+        noticeBoardViewModel.releaseLiveData.observe(this, Observer {
+            noticeBoardAdapter.releaseList = it.toMutableList()
+        })
+
+        noticeBoardViewModel.getChanges()
+    }
+
+    private fun setupRecyclerView() {
+        noticeBoardAdapter =
             NoticeBoardAdapter(NoticeBoardColorProvider(this))
 
         recyclerView = findViewById<RecyclerView>(R.id.change_recyclerview).apply {
             setHasFixedSize(true)
-            adapter = viewAdapter
+            adapter = noticeBoardAdapter
         }
-
-        viewAdapter.releaseList = viewMapper.map(noticeBoardRepository.getChanges()).toMutableList()
     }
 
     private fun setupToolbar() {
@@ -49,8 +63,7 @@ class NoticeBoardActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-        supportActionBar?.title =
-            TITLE_DEFAULT
+        supportActionBar?.title = TITLE_DEFAULT
     }
 
     override fun onSupportNavigateUp(): Boolean {

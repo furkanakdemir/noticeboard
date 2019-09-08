@@ -15,7 +15,6 @@ class JsonNoticeBoardDataSource(
 ) : NoticeBoardDataSource {
     override fun getReleases(): List<Release> {
         val jsonString = fileReader.getFile(filepath)
-        println(jsonString)
 
         val moshi = Moshi.Builder().build()
 
