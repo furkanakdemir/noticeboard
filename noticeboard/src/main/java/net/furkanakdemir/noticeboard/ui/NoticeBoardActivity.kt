@@ -33,12 +33,13 @@ class NoticeBoardActivity : AppCompatActivity() {
         DaggerInjector.component?.inject(this)
 
         setContentView(R.layout.activity_notice_board)
-        noticeBoardViewModel =
-            ViewModelProviders.of(this, viewModelFactory).get(NoticeBoardViewModel::class.java)
 
         setupToolbar()
 
         setupRecyclerView()
+
+        noticeBoardViewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(NoticeBoardViewModel::class.java)
 
         noticeBoardViewModel.releaseLiveData.observe(this, Observer {
             noticeBoardAdapter.releaseList = it.toMutableList()

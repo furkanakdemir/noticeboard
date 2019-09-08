@@ -13,26 +13,11 @@ class InMemoryNoticeBoardRepository @Inject constructor(
 
     private lateinit var result: Result<List<Release>>
 
-    override fun getChanges(): Result<List<Release>> {
-        return result
-    }
+    override fun getChanges(): Result<List<Release>> = result
 
     override fun fetchChanges(source: Source) {
-        when (source) {
-            is Source.Dynamic -> result = Result.Success(source.items)
-            is Source.Xml -> {
-                val dataSource = noticeBoardDataSourceFactory.createXmlDataSource(source.filepath)
-                val releases = dataSource.getReleases()
-
-                result = Result.Success(releases)
-            }
-            is Source.Json -> {
-
-                val dataSource = noticeBoardDataSourceFactory.createJsonDataSource(source.filepath)
-                val releases = dataSource.getReleases()
-
-                result = Result.Success(releases)
-            }
-        }
+        val dataSource = noticeBoardDataSourceFactory.createDataSource(source)
+        val releases = dataSource.getReleases()
+        result = Result.Success(releases)
     }
 }
