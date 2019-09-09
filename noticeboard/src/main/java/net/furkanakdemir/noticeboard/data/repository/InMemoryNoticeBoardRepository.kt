@@ -6,7 +6,6 @@ import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.result.Result
 import javax.inject.Inject
 
-
 class InMemoryNoticeBoardRepository @Inject constructor(
     private val noticeBoardDataSourceFactory: NoticeBoardDataSourceFactory
 ) : NoticeBoardRepository {
@@ -17,7 +16,12 @@ class InMemoryNoticeBoardRepository @Inject constructor(
 
     override fun fetchChanges(source: Source) {
         val dataSource = noticeBoardDataSourceFactory.createDataSource(source)
-        val releases = dataSource.getReleases()
-        result = Result.Success(releases)
+
+        result = try {
+            val releases = dataSource.getReleases()
+            Result.Success(releases)
+        } catch (e: Exception) {
+            Result.Error(e)
+        }
     }
 }

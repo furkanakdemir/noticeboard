@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.data.repository.NoticeBoardRepository
+import net.furkanakdemir.noticeboard.result.Event
 import net.furkanakdemir.noticeboard.result.Result
 import net.furkanakdemir.noticeboard.util.mapper.Mapper
 import javax.inject.Inject
@@ -18,12 +19,27 @@ class NoticeBoardViewModel @Inject constructor(
     val releaseLiveData: LiveData<List<NoticeBoardItem>>
         get() = _releaseLiveData
 
+    private val _eventLiveData = MutableLiveData<Event<String>>()
+    val eventLiveData: LiveData<Event<String>>
+        get() = _eventLiveData
+
 
     fun getChanges() {
         val result = noticeBoardRepository.getChanges()
 
-        if (result is Result.Success) {
-            _releaseLiveData.value = viewMapper.map(result.data)
+        println("Result is $result")
+
+        when (result) {
+            is Result.Success -> {
+                if (result.data.isNullOrEmpty()) {
+                    _eventLiveData.value = Event("Empty List")
+                } else {
+                    _releaseLiveData.value = viewMapper.map(result.data)
+                }
+            }
+            is Result.Error -> {
+                _eventLiveData.value = Event("Error!")
+            }
         }
     }
 }

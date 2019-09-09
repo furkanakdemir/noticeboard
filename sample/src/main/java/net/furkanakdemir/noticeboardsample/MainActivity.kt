@@ -91,6 +91,9 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
             SourceType.DYNAMIC.ordinal -> openDynamic()
             SourceType.XML.ordinal -> openXml()
             SourceType.JSON.ordinal -> openJson()
+            SourceType.EMPTY_JSON.ordinal -> openEmptyFileJson()
+            SourceType.EMPTY_ARRAY_JSON.ordinal -> openEmptyArrayJson()
+            SourceType.INVALID_JSON.ordinal -> openInvalidJson()
         }
 
     }
@@ -98,6 +101,33 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
     private fun openJson() {
 
         val filepath = "sample.json"
+
+        NoticeBoard(this@MainActivity).pin {
+            source(Source.Json(filepath))
+        }
+    }
+
+    private fun openEmptyArrayJson() {
+
+        val filepath = "sample_empty.json"
+
+        NoticeBoard(this@MainActivity).pin {
+            source(Source.Json(filepath))
+        }
+    }
+
+    private fun openEmptyFileJson() {
+
+        val filepath = "sample_empty_file.json"
+
+        NoticeBoard(this@MainActivity).pin {
+            source(Source.Json(filepath))
+        }
+    }
+
+    private fun openInvalidJson() {
+
+        val filepath = "sample_invalid.json"
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Json(filepath))
@@ -119,6 +149,9 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
     enum class SourceType(val type: String) {
         DYNAMIC("Dynamic"),
         XML("Xml"),
-        JSON("Json")
+        JSON("Json"),
+        EMPTY_JSON("Empty Json"),
+        EMPTY_ARRAY_JSON("Empty Array Json"),
+        INVALID_JSON("Invalid Json")
     }
 }

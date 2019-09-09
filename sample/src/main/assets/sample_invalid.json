@@ -1,0 +1,30 @@
+[
+  {
+    "date": "12 Aug 2019",
+    "version": "1.2.3",
+    "changes": [
+      {
+        "type": 0,
+        "description": "Lorem"
+      },
+      {
+        "type": 1,
+        "description": "Lorem"
+      }
+    ]
+  },
+  {
+    "date": "10 Aug 2019",
+    "version": "1.2.2",
+    "changes": [
+      {
+        "type": 2,
+        "description": "Lorem"
+      }
+      {
+        "type": 3,
+        "description": "Lorem"
+      }
+    ]
+  }
+]
