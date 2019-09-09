@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<releases>
+    <release>
+        <change>
+            <description>Lorem</description>
+            <type>0</type>
+        </change>
+        <change>
+            <description>Lorem</description>
+            <type>1</type>
+        </change>
+        <date>22 Jun 2019</date>
+        <version>7.8.9</version>
+    </release>
+    <release>
+    <change>
+        <description>denied</description>
+        <type>2</type>
+    </change>
+    <change>
+    <description>file</description>
+    <type>3
+</releases>

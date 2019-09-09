@@ -94,8 +94,38 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
             SourceType.EMPTY_JSON.ordinal -> openEmptyFileJson()
             SourceType.EMPTY_ARRAY_JSON.ordinal -> openEmptyArrayJson()
             SourceType.INVALID_JSON.ordinal -> openInvalidJson()
+            SourceType.EMPTY_XML.ordinal -> openEmptyFileXml()
+            SourceType.EMPTY_ARRAY_XML.ordinal -> openEmptyArrayXml()
+            SourceType.INVALID_XML.ordinal -> openInvalidXml()
         }
 
+    }
+
+    private fun openInvalidXml() {
+        val filepath = "sample_invalid.xml"
+
+        NoticeBoard(this@MainActivity).pin {
+            source(Source.Xml(filepath))
+        }
+
+    }
+
+    private fun openEmptyArrayXml() {
+
+        val filepath = "sample_empty.xml"
+
+        NoticeBoard(this@MainActivity).pin {
+            source(Source.Xml(filepath))
+        }
+    }
+
+    private fun openEmptyFileXml() {
+
+        val filepath = "sample_empty_file.xml"
+
+        NoticeBoard(this@MainActivity).pin {
+            source(Source.Xml(filepath))
+        }
     }
 
     private fun openJson() {
@@ -152,6 +182,9 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
         JSON("Json"),
         EMPTY_JSON("Empty Json"),
         EMPTY_ARRAY_JSON("Empty Array Json"),
-        INVALID_JSON("Invalid Json")
+        INVALID_JSON("Invalid Json"),
+        EMPTY_XML("Empty Xml"),
+        EMPTY_ARRAY_XML("Empty Array Xml"),
+        INVALID_XML("Invalid Xml")
     }
 }
