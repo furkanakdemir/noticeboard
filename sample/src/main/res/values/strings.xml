@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">NoticeBoardSample</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="action_display_activity">Activity</string>
+    <string name="action_display_dialog">Dialog</string>
+    <string name="action_display_options">Display Options</string>
 </resources>

@@ -1,10 +1,11 @@
 package net.furkanakdemir.noticeboardsample
 
 import android.os.Bundle
-import android.os.Handler
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.LinearLayout.VERTICAL
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,15 +18,65 @@ import net.furkanakdemir.noticeboard.data.model.Release
 
 class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
-    private var toolbar: Toolbar? = null
+    private lateinit var displayOptionsDialog: AlertDialog
     private lateinit var recyclerView: RecyclerView
     private lateinit var sampleAdapter: SampleAdapter
+
+    private var currentDisplayOptions: DisplayOptions = DisplayOptions.ACTIVITY
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupToolbar()
         setupRecyclerView()
+
+        buildDisplayOptionsDialog()
+    }
+
+    private fun buildDisplayOptionsDialog() {
+        val builderSingle = AlertDialog.Builder(this)
+        builderSingle.setTitle(TITLE_DISPLAY_OPTIONS_DIALOG)
+
+
+        val menuItems = arrayOf(
+            getString(R.string.action_display_activity),
+            getString(R.string.action_display_dialog)
+        )
+
+        builderSingle.setSingleChoiceItems(menuItems, 0) { dialog, which ->
+            currentDisplayOptions = when (which) {
+                0 -> DisplayOptions.ACTIVITY
+                1 -> DisplayOptions.DIALOG
+                else -> throw IllegalArgumentException("Invalid index $which")
+            }
+
+            dialog.dismiss()
+        }
+
+        builderSingle.setNegativeButton(TEXT_DISPLAY_OPTIONS_DIALOG_CLOSE, null)
+        displayOptionsDialog = builderSingle.create()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_sample, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_display_options -> {
+                showDisplayOptionsDialog()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun showDisplayOptionsDialog() {
+
+        if (!displayOptionsDialog.isShowing) {
+            displayOptionsDialog.show()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -42,11 +93,6 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
             it.type
         }.toMutableList()
 
-        Handler().postDelayed(
-            {
-                recyclerView.findViewHolderForLayoutPosition(0)?.itemView?.performClick()
-            }, 500
-        )
 
     }
 
@@ -115,7 +161,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
         val myColorProvider = CustomColorProvider(this)
 
         NoticeBoard(this@MainActivity).pin {
-            displayIn(DisplayOptions.DIALOG)
+            displayIn(currentDisplayOptions)
             title("ChangeLogs")
             source(Source.Dynamic(newItems))
             colorProvider(myColorProvider)
@@ -151,6 +197,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
         NoticeBoard(this@MainActivity).pin {
             source(Source.Xml(filepath))
             title("Recent Changes")
+            displayIn(currentDisplayOptions)
         }
 
     }
@@ -161,6 +208,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Xml(filepath))
+            displayIn(currentDisplayOptions)
         }
     }
 
@@ -170,6 +218,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Xml(filepath))
+            displayIn(currentDisplayOptions)
         }
     }
 
@@ -179,6 +228,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Json(filepath))
+            displayIn(currentDisplayOptions)
         }
     }
 
@@ -188,6 +238,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Json(filepath))
+            displayIn(currentDisplayOptions)
         }
     }
 
@@ -197,6 +248,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Json(filepath))
+            displayIn(currentDisplayOptions)
         }
     }
 
@@ -206,6 +258,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Json(filepath))
+            displayIn(currentDisplayOptions)
         }
     }
 
@@ -214,11 +267,14 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Xml(filepath))
+            displayIn(currentDisplayOptions)
         }
     }
 
     companion object {
         private const val TITLE_NOTICEBOARD_SAMPLE = "NoticeBoards"
+        private const val TITLE_DISPLAY_OPTIONS_DIALOG = "Display Options"
+        private const val TEXT_DISPLAY_OPTIONS_DIALOG_CLOSE = "Close"
     }
 
     enum class SourceType(val type: String) {
