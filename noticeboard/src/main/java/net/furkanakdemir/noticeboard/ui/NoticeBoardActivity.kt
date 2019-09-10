@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_notice_board.*
 import net.furkanakdemir.noticeboard.NoticeBoard.Companion.KEY_TITLE
 import net.furkanakdemir.noticeboard.R
+import net.furkanakdemir.noticeboard.config.ConfigRepository
 import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.di.DaggerInjector
 import net.furkanakdemir.noticeboard.result.EventObserver
-import net.furkanakdemir.noticeboard.util.color.NoticeBoardColorProvider
 import net.furkanakdemir.noticeboard.util.mapper.Mapper
 import javax.inject.Inject
 
@@ -31,6 +31,9 @@ class NoticeBoardActivity : AppCompatActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var noticeBoardViewModel: NoticeBoardViewModel
+
+    @Inject
+    lateinit var configRepository: ConfigRepository
 
     @Inject
     lateinit var viewMapper: Mapper<List<Release>, List<NoticeBoardItem>>
@@ -73,7 +76,7 @@ class NoticeBoardActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        noticeBoardAdapter = NoticeBoardAdapter(NoticeBoardColorProvider(this))
+        noticeBoardAdapter = NoticeBoardAdapter(configRepository.getColorProvider())
 
         recyclerView = findViewById<RecyclerView>(R.id.change_recyclerview).apply {
             setHasFixedSize(true)

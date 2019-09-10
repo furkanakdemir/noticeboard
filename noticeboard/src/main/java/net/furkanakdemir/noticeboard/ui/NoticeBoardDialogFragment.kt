@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import net.furkanakdemir.noticeboard.NoticeBoard.Companion.KEY_TITLE
 import net.furkanakdemir.noticeboard.NoticeBoard.Companion.TITLE_DEFAULT
 import net.furkanakdemir.noticeboard.R
+import net.furkanakdemir.noticeboard.config.ConfigRepository
 import net.furkanakdemir.noticeboard.di.DaggerInjector
 import net.furkanakdemir.noticeboard.result.EventObserver
-import net.furkanakdemir.noticeboard.util.color.NoticeBoardColorProvider
 import javax.inject.Inject
 
 
@@ -28,9 +28,14 @@ class NoticeBoardDialogFragment : DialogFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    @Inject
+    lateinit var configRepository: ConfigRepository
+
     private lateinit var noticeBoardViewModel: NoticeBoardViewModel
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
+        DaggerInjector.component?.inject(this)
 
         val builder = AlertDialog.Builder(requireContext())
 
@@ -49,7 +54,6 @@ class NoticeBoardDialogFragment : DialogFragment() {
     }
 
     private fun setupViewModel() {
-        DaggerInjector.component?.inject(this)
 
         noticeBoardViewModel =
             ViewModelProviders.of(this, viewModelFactory).get(NoticeBoardViewModel::class.java)
@@ -69,7 +73,7 @@ class NoticeBoardDialogFragment : DialogFragment() {
 
     private fun buildView(): View? {
         val view = requireActivity().layoutInflater.inflate(R.layout.dialog_notice_board, null)
-        noticeBoardAdapter = NoticeBoardAdapter(NoticeBoardColorProvider(requireContext()))
+        noticeBoardAdapter = NoticeBoardAdapter(configRepository.getColorProvider())
 
         recyclerView = view.findViewById(R.id.change_recyclerview)
         messageTextView = view.findViewById(R.id.messageTextView)

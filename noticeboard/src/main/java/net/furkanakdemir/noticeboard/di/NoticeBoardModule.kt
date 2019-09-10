@@ -3,6 +3,8 @@ package net.furkanakdemir.noticeboard.di
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import net.furkanakdemir.noticeboard.config.ConfigRepository
+import net.furkanakdemir.noticeboard.config.NoticeBoardConfigRepository
 import net.furkanakdemir.noticeboard.data.datasource.NoticeBoardDataSourceFactory
 import net.furkanakdemir.noticeboard.data.mapper.ChangeDomainMapper
 import net.furkanakdemir.noticeboard.data.mapper.ReleaseDomainMapper
@@ -12,6 +14,8 @@ import net.furkanakdemir.noticeboard.data.repository.InMemoryNoticeBoardReposito
 import net.furkanakdemir.noticeboard.data.repository.NoticeBoardRepository
 import net.furkanakdemir.noticeboard.ui.NoticeBoardItem
 import net.furkanakdemir.noticeboard.ui.ReleaseViewMapper
+import net.furkanakdemir.noticeboard.util.color.ColorProvider
+import net.furkanakdemir.noticeboard.util.color.NoticeBoardColorProvider
 import net.furkanakdemir.noticeboard.util.io.DefaultFileReader
 import net.furkanakdemir.noticeboard.util.io.FileReader
 import net.furkanakdemir.noticeboard.util.mapper.ListMapper
@@ -44,6 +48,16 @@ class NoticeBoardModule constructor(val context: Context) {
             fileReader,
             mapper
         )
+
+    @Provides
+    @Singleton
+    fun provideColorProvider(context: Context): ColorProvider =
+        NoticeBoardColorProvider(context)
+
+    @Provides
+    @Singleton
+    fun provideConfigRepository(colorProvider: ColorProvider): ConfigRepository =
+        NoticeBoardConfigRepository(colorProvider)
 
     @Provides
     fun provideReleaseListMapper(releaseDomainMapper: ReleaseDomainMapper):

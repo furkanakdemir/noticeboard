@@ -2,10 +2,12 @@ package net.furkanakdemir.noticeboard
 
 import android.content.Context
 import androidx.fragment.app.FragmentActivity
+import net.furkanakdemir.noticeboard.config.ConfigRepository
 import net.furkanakdemir.noticeboard.data.repository.NoticeBoardRepository
 import net.furkanakdemir.noticeboard.di.DaggerInjector
 import net.furkanakdemir.noticeboard.ui.NoticeBoardActivity
 import net.furkanakdemir.noticeboard.ui.NoticeBoardDialogFragment
+import net.furkanakdemir.noticeboard.util.color.ColorProvider
 import javax.inject.Inject
 
 class NoticeBoard(
@@ -23,6 +25,9 @@ class NoticeBoard(
 
     @Inject
     lateinit var noticeBoardRepository: NoticeBoardRepository
+
+    @Inject
+    lateinit var configRepository: ConfigRepository
 
     fun pin(func: NoticeBoard.() -> Unit): NoticeBoard {
         this.func()
@@ -46,6 +51,10 @@ class NoticeBoard(
         }
     }
 
+    fun colorProvider(colorProvider: ColorProvider) {
+        configRepository.saveColorProvider(colorProvider)
+    }
+
     private fun pin() {
         noticeBoardRepository.fetchChanges(sourceType)
 
@@ -65,7 +74,7 @@ class NoticeBoard(
     }
 
     companion object {
-        public const val TITLE_DEFAULT = "NoticeBoard"
-        public const val KEY_TITLE = "KEY_TITLE"
+        const val TITLE_DEFAULT = "NoticeBoard"
+        const val KEY_TITLE = "KEY_TITLE"
     }
 }
