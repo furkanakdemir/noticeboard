@@ -1,6 +1,10 @@
 <resources>
 
-    <style name="NoticeBoardTheme" parent="Theme.MaterialComponents.Light" />
+    <style name="NoticeBoardTheme" parent="Theme.MaterialComponents.Light">
+        <item name="colorPrimary">@color/noticeBoardColorPrimary</item>
+        <item name="colorPrimaryDark">@color/noticeBoardColorPrimaryDark</item>
+        <item name="colorAccent">@color/noticeBoardColorAccent</item>
+    </style>
 
     <style name="NoticeBoardTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -10,7 +14,6 @@
     <style name="NoticeBoardTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
     <style name="NoticeBoardTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
-
 
     <style name="NoticeBoard" />
 
@@ -27,7 +30,8 @@
 
     <style name="NoticeBoard.Header.Date">
 
-        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6
+        </item>
 
     </style>
 
