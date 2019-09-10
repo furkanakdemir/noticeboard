@@ -52,4 +52,13 @@ dependencies {
     implementation(Deps.moshi)
 
     implementation(Deps.lifecycle_extensions)
+
+    // Test Dependencies
+
+    // JUnit
+    testImplementation(TestDeps.junit)
+
+    // Core library
+    testImplementation(TestDeps.mockito_core)
+    testImplementation(TestDeps.mockito_kotlin)
 }
