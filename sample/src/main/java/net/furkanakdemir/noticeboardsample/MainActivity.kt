@@ -5,7 +5,6 @@ import android.os.Handler
 import android.widget.LinearLayout.VERTICAL
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -14,7 +13,6 @@ import net.furkanakdemir.noticeboard.DisplayOptions
 import net.furkanakdemir.noticeboard.NoticeBoard
 import net.furkanakdemir.noticeboard.Source
 import net.furkanakdemir.noticeboard.data.model.Release
-import net.furkanakdemir.noticeboard.util.color.NoticeBoardColorProvider
 
 
 class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
@@ -114,13 +112,13 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
             )
         )
 
-        val myColorProvider = NoticeBoardColorProvider(this)
-        myColorProvider.COLOR_ADDED = ContextCompat.getColor(this, R.color.colorAccent)
+        val myColorProvider = CustomColorProvider(this)
 
         NoticeBoard(this@MainActivity).pin {
             displayIn(DisplayOptions.DIALOG)
             title("ChangeLogs")
             source(Source.Dynamic(newItems))
+            colorProvider(myColorProvider)
         }
     }
 

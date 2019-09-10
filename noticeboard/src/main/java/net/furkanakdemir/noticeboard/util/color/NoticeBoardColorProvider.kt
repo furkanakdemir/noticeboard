@@ -5,24 +5,24 @@ import androidx.core.content.ContextCompat
 import net.furkanakdemir.noticeboard.ChangeType
 import net.furkanakdemir.noticeboard.R
 
-open class NoticeBoardColorProvider(private val context: Context) : ColorProvider {
+open class NoticeBoardColorProvider(context: Context) : ColorProvider {
 
-    open var COLOR_ADDED = ContextCompat.getColor(context, R.color.added)
-    open var COLOR_CHANGED = ContextCompat.getColor(context, R.color.changed)
-    open var COLOR_DEPRECATED = ContextCompat.getColor(context, R.color.deprecated)
-    open var COLOR_REMOVED = ContextCompat.getColor(context, R.color.removed)
-    open var COLOR_FIXED = ContextCompat.getColor(context, R.color.fixed)
-    open var COLOR_SECURITY = ContextCompat.getColor(context, R.color.security)
+    protected open var colorAdded = ContextCompat.getColor(context, R.color.added)
+    protected open var colorChanged = ContextCompat.getColor(context, R.color.changed)
+    protected open var colorDeprecated = ContextCompat.getColor(context, R.color.deprecated)
+    protected open var colorRemoved = ContextCompat.getColor(context, R.color.removed)
+    protected open var colorFixed = ContextCompat.getColor(context, R.color.fixed)
+    protected open var colorSecurity = ContextCompat.getColor(context, R.color.security)
 
     override fun getChangeTypeBackgroundColor(changeType: ChangeType): Int {
 
         return when (changeType) {
-            ChangeType.ADDED -> COLOR_ADDED
-            ChangeType.CHANGED -> COLOR_CHANGED
-            ChangeType.DEPRECATED -> COLOR_DEPRECATED
-            ChangeType.REMOVED -> COLOR_REMOVED
-            ChangeType.FIXED -> COLOR_FIXED
-            ChangeType.SECURITY -> COLOR_SECURITY
+            ChangeType.ADDED -> colorAdded
+            ChangeType.CHANGED -> colorChanged
+            ChangeType.DEPRECATED -> colorDeprecated
+            ChangeType.REMOVED -> colorRemoved
+            ChangeType.FIXED -> colorFixed
+            ChangeType.SECURITY -> colorSecurity
         }
     }
 }
