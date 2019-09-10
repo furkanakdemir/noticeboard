@@ -43,7 +43,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
         }.toMutableList()
 
         Handler().postDelayed(
-            Runnable {
+            {
                 recyclerView.findViewHolderForLayoutPosition(0)?.itemView?.performClick()
             }, 500
         )
@@ -62,11 +62,27 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
                     Release.Change(
                         "Crash in Payment",
                         ChangeType.FIXED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.SECURITY.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.DEPRECATED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.REMOVED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.CHANGED.ordinal
                     )
                 )
             ),
             Release(
-                "16 Sep 2019", "1.0.0",
+                "16 Sep 2019", "2.0.0",
                 listOf(
                     Release.Change(
                         "New Login Page",
@@ -75,175 +91,22 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
                     Release.Change(
                         "Crash in Payment",
                         ChangeType.FIXED.ordinal
-                    )
-                )
-            ),
-            Release(
-                "16 Sep 2019", "1.0.0",
-                listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
                     ),
                     Release.Change(
                         "Crash in Payment",
-                        ChangeType.FIXED.ordinal
-                    )
-                )
-            ),
-            Release(
-                "16 Sep 2019", "1.0.0",
-                listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
+                        ChangeType.SECURITY.ordinal
                     ),
                     Release.Change(
                         "Crash in Payment",
-                        ChangeType.FIXED.ordinal
-                    )
-                )
-            ),
-            Release(
-                "16 Sep 2019", "1.0.0",
-                listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
+                        ChangeType.DEPRECATED.ordinal
                     ),
                     Release.Change(
                         "Crash in Payment",
-                        ChangeType.FIXED.ordinal
-                    )
-                )
-            ),
-            Release(
-                "16 Sep 2019", "1.0.0",
-                listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
+                        ChangeType.REMOVED.ordinal
                     ),
                     Release.Change(
                         "Crash in Payment",
-                        ChangeType.FIXED.ordinal
-                    )
-                )
-            ),
-            Release(
-                "16 Sep 2019", "1.0.0",
-                listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.FIXED.ordinal
-                    )
-                )
-            ),
-            Release(
-                "16 Sep 2019", "1.0.0",
-                listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.FIXED.ordinal
-                    )
-                )
-            ),
-            Release(
-                "16 Sep 2019", "1.0.0",
-                listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.FIXED.ordinal
-                    )
-                )
-            ),
-            Release(
-                "16 Sep 2019", "1.0.0",
-                listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.FIXED.ordinal
-                    )
-                )
-            ),
-            Release(
-                "16 Sep 2019", "1.0.0",
-                listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.FIXED.ordinal
-                    )
-                )
-            ),
-            Release(
-                "16 Sep 2019", "1.0.0",
-                listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.FIXED.ordinal
-                    )
-                )
-            ),
-            Release(
-                "16 Sep 2019", "1.0.0",
-                listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.FIXED.ordinal
-                    )
-                )
-            ),
-            Release(
-                "16 Sep 2019", "1.0.0",
-                listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.FIXED.ordinal
-                    )
-                )
-            ),
-            Release(
-                "16 Sep 2019", "1.0.0",
-                listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.FIXED.ordinal
+                        ChangeType.CHANGED.ordinal
                     )
                 )
             )

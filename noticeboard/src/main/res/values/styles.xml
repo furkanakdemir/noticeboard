@@ -46,11 +46,16 @@
 
     <style name="NoticeBoard.Change.Type">
         <item name="android:lines">1</item>
-        <item name="android:padding">@dimen/notice_board_spacing_medium</item>
+        <item name="android:paddingTop">@dimen/notice_board_spacing_tiny</item>
+        <item name="android:paddingBottom">@dimen/notice_board_spacing_tiny</item>
+        <item name="android:paddingStart">@dimen/notice_board_spacing_medium</item>
+        <item name="android:paddingEnd">@dimen/notice_board_spacing_medium</item>
         <item name="android:maxWidth">144dp</item>
-        <item name="android:background">@drawable/background_change_fixed</item>
+        <item name="android:background">@drawable/background_change_type</item>
         <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center</item>
         <item name="android:textColor">@color/notice_board_change_type_text_default</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="NoticeBoard.Change.Description">

@@ -15,6 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:overScrollMode="never"
         tools:itemCount="21"
         tools:listitem="@layout/list_item_change_log" />
 

@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:maxHeight="56dp"
     android:orientation="vertical">
 
 
     <TextView
         android:id="@+id/change_type"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:layout_margin="@dimen/notice_board_spacing_small"
         tools:text="@tools:sample/lorem"
         style="@style/NoticeBoard.Change.Type"

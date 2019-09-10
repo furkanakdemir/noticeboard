@@ -31,26 +31,26 @@ class NoticeBoardDialogFragment : DialogFragment() {
     private lateinit var noticeBoardViewModel: NoticeBoardViewModel
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
         val builder = AlertDialog.Builder(requireContext())
 
         val title = arguments?.getString(KEY_TITLE, TITLE_DEFAULT)
 
         builder.setTitle(title).setPositiveButton(
             getString(R.string.dialog_notice_board_close)
-        ) { p0, p1 -> dismiss() }
+        ) { _, _ -> dismiss() }
 
-        val view = requireActivity().layoutInflater.inflate(R.layout.dialog_notice_board, null)
-        noticeBoardAdapter = NoticeBoardAdapter(NoticeBoardColorProvider(requireContext()))
-
-        recyclerView = view.findViewById(R.id.change_recyclerview)
-        messageTextView = view.findViewById(R.id.messageTextView)
-        recyclerView?.apply {
-            setHasFixedSize(true)
-            adapter = noticeBoardAdapter
-        }
+        val view = buildView()
         builder.setView(view)
 
+        setupViewModel()
+
+        return builder.create()
+    }
+
+    private fun setupViewModel() {
         DaggerInjector.component?.inject(this)
+
         noticeBoardViewModel =
             ViewModelProviders.of(this, viewModelFactory).get(NoticeBoardViewModel::class.java)
 
@@ -65,25 +65,19 @@ class NoticeBoardDialogFragment : DialogFragment() {
         })
 
         noticeBoardViewModel.getChanges()
-
-        return builder.create()
     }
 
+    private fun buildView(): View? {
+        val view = requireActivity().layoutInflater.inflate(R.layout.dialog_notice_board, null)
+        noticeBoardAdapter = NoticeBoardAdapter(NoticeBoardColorProvider(requireContext()))
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        dialog?.let {
-            val width = resources.getDimensionPixelSize(R.dimen.width_dialog)
-            val height = resources.getDimensionPixelSize(R.dimen.height_dialog)
-            dialog.window?.setLayout(width, height)
+        recyclerView = view.findViewById(R.id.change_recyclerview)
+        messageTextView = view.findViewById(R.id.messageTextView)
+        recyclerView?.apply {
+            setHasFixedSize(true)
+            adapter = noticeBoardAdapter
         }
+        return view
     }
 
     private fun showMessage() {
@@ -95,16 +89,6 @@ class NoticeBoardDialogFragment : DialogFragment() {
     private fun showContent() {
         messageTextView?.visibility = View.GONE
         recyclerView?.visibility = View.VISIBLE
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        dialog?.let {
-            val width = resources.getDimensionPixelSize(R.dimen.width_dialog)
-            val height = resources.getDimensionPixelSize(R.dimen.height_dialog)
-            dialog.window?.setLayout(width, height)
-        }
     }
 
     companion object {
