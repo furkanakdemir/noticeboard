@@ -1,5 +1,7 @@
 package net.furkanakdemir.noticeboard.ui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -10,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_notice_board.*
+import net.furkanakdemir.noticeboard.NoticeBoard.Companion.KEY_TITLE
 import net.furkanakdemir.noticeboard.R
 import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.di.DaggerInjector
@@ -82,9 +85,13 @@ class NoticeBoardActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.notice_board_toolbar)
         setSupportActionBar(toolbar)
 
+        val title = intent.getStringExtra(KEY_TITLE)
+            ?: throw IllegalStateException("field $KEY_TITLE missing in Intent")
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-        supportActionBar?.title = TITLE_DEFAULT
+
+        supportActionBar?.title = title
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -93,6 +100,11 @@ class NoticeBoardActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val TITLE_DEFAULT = "NoticeBoard"
+
+        fun createIntent(context: Context, title: String): Intent {
+            val intent = Intent(context, NoticeBoardActivity::class.java)
+            intent.putExtra(KEY_TITLE, title)
+            return intent
+        }
     }
 }

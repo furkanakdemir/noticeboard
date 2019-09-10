@@ -1,6 +1,7 @@
 package net.furkanakdemir.noticeboardsample
 
 import android.os.Bundle
+import android.os.Handler
 import android.widget.LinearLayout.VERTICAL
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import net.furkanakdemir.noticeboard.ChangeType
+import net.furkanakdemir.noticeboard.DisplayOptions
 import net.furkanakdemir.noticeboard.NoticeBoard
 import net.furkanakdemir.noticeboard.Source
 import net.furkanakdemir.noticeboard.data.model.Release
@@ -40,6 +42,12 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
             it.type
         }.toMutableList()
 
+        Handler().postDelayed(
+            Runnable {
+                recyclerView.findViewHolderForLayoutPosition(0)?.itemView?.performClick()
+            }, 500
+        )
+
     }
 
     private fun openDynamic() {
@@ -69,11 +77,182 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
                         ChangeType.FIXED.ordinal
                     )
                 )
+            ),
+            Release(
+                "16 Sep 2019", "1.0.0",
+                listOf(
+                    Release.Change(
+                        "New Login Page",
+                        ChangeType.ADDED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.FIXED.ordinal
+                    )
+                )
+            ),
+            Release(
+                "16 Sep 2019", "1.0.0",
+                listOf(
+                    Release.Change(
+                        "New Login Page",
+                        ChangeType.ADDED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.FIXED.ordinal
+                    )
+                )
+            ),
+            Release(
+                "16 Sep 2019", "1.0.0",
+                listOf(
+                    Release.Change(
+                        "New Login Page",
+                        ChangeType.ADDED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.FIXED.ordinal
+                    )
+                )
+            ),
+            Release(
+                "16 Sep 2019", "1.0.0",
+                listOf(
+                    Release.Change(
+                        "New Login Page",
+                        ChangeType.ADDED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.FIXED.ordinal
+                    )
+                )
+            ),
+            Release(
+                "16 Sep 2019", "1.0.0",
+                listOf(
+                    Release.Change(
+                        "New Login Page",
+                        ChangeType.ADDED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.FIXED.ordinal
+                    )
+                )
+            ),
+            Release(
+                "16 Sep 2019", "1.0.0",
+                listOf(
+                    Release.Change(
+                        "New Login Page",
+                        ChangeType.ADDED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.FIXED.ordinal
+                    )
+                )
+            ),
+            Release(
+                "16 Sep 2019", "1.0.0",
+                listOf(
+                    Release.Change(
+                        "New Login Page",
+                        ChangeType.ADDED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.FIXED.ordinal
+                    )
+                )
+            ),
+            Release(
+                "16 Sep 2019", "1.0.0",
+                listOf(
+                    Release.Change(
+                        "New Login Page",
+                        ChangeType.ADDED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.FIXED.ordinal
+                    )
+                )
+            ),
+            Release(
+                "16 Sep 2019", "1.0.0",
+                listOf(
+                    Release.Change(
+                        "New Login Page",
+                        ChangeType.ADDED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.FIXED.ordinal
+                    )
+                )
+            ),
+            Release(
+                "16 Sep 2019", "1.0.0",
+                listOf(
+                    Release.Change(
+                        "New Login Page",
+                        ChangeType.ADDED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.FIXED.ordinal
+                    )
+                )
+            ),
+            Release(
+                "16 Sep 2019", "1.0.0",
+                listOf(
+                    Release.Change(
+                        "New Login Page",
+                        ChangeType.ADDED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.FIXED.ordinal
+                    )
+                )
+            ),
+            Release(
+                "16 Sep 2019", "1.0.0",
+                listOf(
+                    Release.Change(
+                        "New Login Page",
+                        ChangeType.ADDED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.FIXED.ordinal
+                    )
+                )
+            ),
+            Release(
+                "16 Sep 2019", "1.0.0",
+                listOf(
+                    Release.Change(
+                        "New Login Page",
+                        ChangeType.ADDED.ordinal
+                    ),
+                    Release.Change(
+                        "Crash in Payment",
+                        ChangeType.FIXED.ordinal
+                    )
+                )
             )
         )
 
 
         NoticeBoard(this@MainActivity).pin {
+            displayIn(DisplayOptions.DIALOG)
+            title("ChangeLogs")
             source(Source.Dynamic(newItems))
         }
     }
@@ -106,6 +285,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Xml(filepath))
+            title("Recent Changes")
         }
 
     }
