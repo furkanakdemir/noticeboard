@@ -7,18 +7,15 @@ import javax.inject.Inject
 
 class DefaultFileReader @Inject constructor(val context: Context) : FileReader {
     override fun getFile(filename: String): String? {
-
-
         var bufferedReader: BufferedReader? = null
         var data: String? = null
 
         try {
-            bufferedReader = BufferedReader(
-                InputStreamReader(
-                    context.assets?.open(filename),
-                    "UTF-8"
-                )
+            val inputStreamReader = InputStreamReader(
+                context.assets?.open(filename),
+                Charsets.UTF_8
             )
+            bufferedReader = BufferedReader(inputStreamReader)
 
             data = bufferedReader.readLines().joinToString(separator = "\n")
 

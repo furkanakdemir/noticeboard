@@ -27,6 +27,7 @@ class XmlNoticeBoardDataSource(
         val jsonString = fileReader.getFile(filepath)
 
         val parserFactory: SAXParserFactory = SAXParserFactory.newInstance()
+        parserFactory.isNamespaceAware = true
 
         val saxParser: SAXParser = parserFactory.newSAXParser()
         val defaultHandler = object : DefaultHandler() {
