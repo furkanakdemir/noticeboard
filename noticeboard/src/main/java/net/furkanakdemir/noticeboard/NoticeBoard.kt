@@ -10,9 +10,7 @@ import net.furkanakdemir.noticeboard.ui.NoticeBoardDialogFragment
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
 import javax.inject.Inject
 
-class NoticeBoard(
-    val context: Context
-) {
+class NoticeBoard(val context: Context) {
 
     private var sourceType: Source = Source.Dynamic()
     private var displayOptions: DisplayOptions = DisplayOptions.ACTIVITY

@@ -23,6 +23,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
     private lateinit var sampleAdapter: SampleAdapter
 
     private var currentDisplayOptions: DisplayOptions = DisplayOptions.ACTIVITY
+    private var title: String = TITLE_NOTICEBOARD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,6 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
     private fun buildDisplayOptionsDialog() {
         val builderSingle = AlertDialog.Builder(this)
         builderSingle.setTitle(TITLE_DISPLAY_OPTIONS_DIALOG)
-
 
         val menuItems = arrayOf(
             getString(R.string.action_display_activity),
@@ -92,8 +92,28 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
         sampleAdapter.samples = SourceType.values().map {
             it.type
         }.toMutableList()
+    }
 
+    private fun setupToolbar() {
+        setSupportActionBar(main_toolbar)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        supportActionBar?.setDisplayShowHomeEnabled(false)
+        supportActionBar?.title = TITLE_NOTICEBOARD_SAMPLE
+    }
+
+    override fun onClicked(position: Int) {
+        when (position) {
+            SourceType.DYNAMIC.ordinal -> openDynamic()
+            SourceType.XML.ordinal -> openXml()
+            SourceType.JSON.ordinal -> openJson()
+            SourceType.EMPTY_JSON.ordinal -> openEmptyFileJson()
+            SourceType.EMPTY_ARRAY_JSON.ordinal -> openEmptyArrayJson()
+            SourceType.INVALID_JSON.ordinal -> openInvalidJson()
+            SourceType.EMPTY_XML.ordinal -> openEmptyFileXml()
+            SourceType.EMPTY_ARRAY_XML.ordinal -> openEmptyArrayXml()
+            SourceType.INVALID_XML.ordinal -> openInvalidXml()
+        }
     }
 
     private fun openDynamic() {
@@ -162,33 +182,10 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             displayIn(currentDisplayOptions)
-            title("ChangeLogs")
+            title(title)
             source(Source.Dynamic(newItems))
             colorProvider(myColorProvider)
         }
-    }
-
-    private fun setupToolbar() {
-        setSupportActionBar(main_toolbar)
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        supportActionBar?.setDisplayShowHomeEnabled(false)
-        supportActionBar?.title = TITLE_NOTICEBOARD_SAMPLE
-    }
-
-    override fun onClicked(position: Int) {
-        when (position) {
-            SourceType.DYNAMIC.ordinal -> openDynamic()
-            SourceType.XML.ordinal -> openXml()
-            SourceType.JSON.ordinal -> openJson()
-            SourceType.EMPTY_JSON.ordinal -> openEmptyFileJson()
-            SourceType.EMPTY_ARRAY_JSON.ordinal -> openEmptyArrayJson()
-            SourceType.INVALID_JSON.ordinal -> openInvalidJson()
-            SourceType.EMPTY_XML.ordinal -> openEmptyFileXml()
-            SourceType.EMPTY_ARRAY_XML.ordinal -> openEmptyArrayXml()
-            SourceType.INVALID_XML.ordinal -> openInvalidXml()
-        }
-
     }
 
     private fun openInvalidXml() {
@@ -196,7 +193,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Xml(filepath))
-            title("Recent Changes")
+            title(title)
             displayIn(currentDisplayOptions)
         }
 
@@ -208,6 +205,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Xml(filepath))
+            title(title)
             displayIn(currentDisplayOptions)
         }
     }
@@ -218,6 +216,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Xml(filepath))
+            title(title)
             displayIn(currentDisplayOptions)
         }
     }
@@ -228,6 +227,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Json(filepath))
+            title(title)
             displayIn(currentDisplayOptions)
         }
     }
@@ -238,6 +238,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Json(filepath))
+            title(title)
             displayIn(currentDisplayOptions)
         }
     }
@@ -248,6 +249,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Json(filepath))
+            title(title)
             displayIn(currentDisplayOptions)
         }
     }
@@ -258,6 +260,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Json(filepath))
+            title(title)
             displayIn(currentDisplayOptions)
         }
     }
@@ -267,6 +270,7 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
         NoticeBoard(this@MainActivity).pin {
             source(Source.Xml(filepath))
+            title(title)
             displayIn(currentDisplayOptions)
         }
     }
@@ -275,6 +279,8 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
         private const val TITLE_NOTICEBOARD_SAMPLE = "NoticeBoards"
         private const val TITLE_DISPLAY_OPTIONS_DIALOG = "Display Options"
         private const val TEXT_DISPLAY_OPTIONS_DIALOG_CLOSE = "Close"
+
+        private const val TITLE_NOTICEBOARD = "Change Logs"
     }
 
     enum class SourceType(val type: String) {
