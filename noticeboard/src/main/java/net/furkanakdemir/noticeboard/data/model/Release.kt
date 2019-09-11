@@ -18,6 +18,4 @@ data class Release(
     override fun toString(): String {
         return "$date $version\n-------\n$changes\n"
     }
-
-
 }

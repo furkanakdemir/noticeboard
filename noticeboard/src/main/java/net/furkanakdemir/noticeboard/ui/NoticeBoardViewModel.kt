@@ -25,11 +25,7 @@ class NoticeBoardViewModel @Inject constructor(
 
 
     fun getChanges() {
-        val result = noticeBoardRepository.getChanges()
-
-        println("Result is $result")
-
-        when (result) {
+        when (val result = noticeBoardRepository.getChanges()) {
             is Result.Success -> {
                 if (result.data.isNullOrEmpty()) {
                     _eventLiveData.value = Event("Empty List")

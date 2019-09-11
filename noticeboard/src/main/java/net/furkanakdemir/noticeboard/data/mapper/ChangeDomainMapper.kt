@@ -10,5 +10,4 @@ class ChangeDomainMapper @Inject constructor() : Mapper<ReleaseRaw.ChangeRaw, Re
         input.description,
         input.type
     )
-
 }
