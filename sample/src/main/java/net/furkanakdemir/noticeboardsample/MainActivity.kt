@@ -283,6 +283,15 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
         private const val TITLE_NOTICEBOARD = "Change Logs"
     }
 
+    override fun onBackPressed() {
+        // TODO Remove when memory leak is fixed
+        if (isTaskRoot && supportFragmentManager.backStackEntryCount == 0) {
+            finishAfterTransition()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     enum class SourceType(val type: String) {
         DYNAMIC("Dynamic"),
         XML("Xml"),
