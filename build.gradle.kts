@@ -10,6 +10,7 @@ buildscript {
         classpath(Plugins.android_gradle_plugin)
         classpath(Plugins.kotlin_gradle_plugin)
         classpath(Plugins.ktlint_plugin)
+        classpath(Plugins.dex_count_plugin)
     }
 }
 

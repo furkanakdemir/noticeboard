@@ -2,6 +2,7 @@ object Versions {
     const val kotlin_version = "1.3.50"
     const val android_gradle_plugin = "3.5.0"
     const val ktlint_plugin = "8.2.0"
+    const val dex_count_plugin = "0.8.6"
 
 
     const val dagger = "2.24"
@@ -35,6 +36,7 @@ object Versions {
     const val mockito_core = "2.23.0"
 
     const val moshi = "1.8.0"
+    const val leak_canary = "2.0-beta-3"
 }
 
 
@@ -45,6 +47,7 @@ object Plugins {
     const val kotlin_gradle_plugin =
         "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}"
     const val ktlint_plugin = "org.jlleitschuh.gradle:ktlint-gradle:${Versions.ktlint_plugin}"
+    const val dex_count_plugin = "com.getkeepsafe.dexcount:dexcount-gradle-plugin:${Versions.dex_count_plugin}"
 
     const val android_application = "com.android.application"
     const val android_library = "com.android.library"
@@ -52,13 +55,14 @@ object Plugins {
     const val kotlin_android_extensions = "android.extensions"
     const val kapt = "kapt"
     const val ktlint = "org.jlleitschuh.gradle.ktlint"
+    const val dex_count = "com.getkeepsafe.dexcount"
 
 }
 
 object AndroidSdk {
     const val sdk_minimum = 21
-    const val sdk_compile = 28
-    const val sdk_target = 28
+    const val sdk_compile = 29
+    const val sdk_target = 29
     const val version_code = 1
     const val version_name = "1.0.0"
 }
@@ -117,6 +121,9 @@ object Deps {
 
     // Json Library
     const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
+
+    // Leak Canary
+    const val leak_canary = "com.squareup.leakcanary:leakcanary-android:${Versions.leak_canary}"
 
 }
 

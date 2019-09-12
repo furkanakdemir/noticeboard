@@ -3,6 +3,7 @@ plugins {
     kotlin(Plugins.kotlin_android)
     kotlin(Plugins.kotlin_android_extensions)
     kotlin(Plugins.kapt)
+    id(Plugins.dex_count)
 }
 
 android {
@@ -54,4 +55,6 @@ dependencies {
     implementation(Deps.constraintlayout)
     implementation(Deps.recyclerview)
     implementation(Deps.material)
+
+    debugImplementation(Deps.leak_canary)
 }
