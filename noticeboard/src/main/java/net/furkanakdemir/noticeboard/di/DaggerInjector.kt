@@ -15,5 +15,9 @@ class DaggerInjector private constructor() {
                 .build()
             return component
         }
+
+        fun clear() {
+            component = null
+        }
     }
 }

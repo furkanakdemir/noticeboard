@@ -1,7 +1,11 @@
 package net.furkanakdemir.noticeboard
 
-import android.content.Context
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.OnLifecycleEvent
 import net.furkanakdemir.noticeboard.config.ConfigRepository
 import net.furkanakdemir.noticeboard.data.repository.NoticeBoardRepository
 import net.furkanakdemir.noticeboard.di.DaggerInjector
@@ -10,15 +14,22 @@ import net.furkanakdemir.noticeboard.ui.NoticeBoardDialogFragment
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
 import javax.inject.Inject
 
-class NoticeBoard(val context: Context) {
+
+class NoticeBoard(private val target: FragmentActivity) {
+
+    constructor(fragmentTarget: Fragment) :
+            this(fragmentTarget.requireActivity())
 
     private var sourceType: Source = Source.Dynamic()
     private var displayOptions: DisplayOptions = DisplayOptions.ACTIVITY
     private var title: String = TITLE_DEFAULT
+    private lateinit var observer: NoticeBoardLifeCycleObserver
 
     init {
-        DaggerInjector.buildComponent(context)
+        DaggerInjector.buildComponent(target)
         DaggerInjector.component?.inject(this)
+
+        observeLifecycle()
     }
 
     @Inject
@@ -57,11 +68,11 @@ class NoticeBoard(val context: Context) {
         noticeBoardRepository.fetchChanges(sourceType)
 
         when (displayOptions) {
-            DisplayOptions.ACTIVITY -> context.startActivity(
-                NoticeBoardActivity.createIntent(context, title)
+            DisplayOptions.ACTIVITY -> target.startActivity(
+                NoticeBoardActivity.createIntent(target, title)
             )
             DisplayOptions.DIALOG -> {
-                val fm = (context as FragmentActivity).supportFragmentManager
+                val fm = target.supportFragmentManager
                 val noticeBoardDialogFragment = NoticeBoardDialogFragment.newInstance(title)
                 noticeBoardDialogFragment.show(
                     fm,
@@ -69,6 +80,22 @@ class NoticeBoard(val context: Context) {
                 )
             }
         }
+    }
+
+    private fun observeLifecycle() {
+        observer = NoticeBoardLifeCycleObserver(target)
+    }
+
+    inner class NoticeBoardLifeCycleObserver(lifecycleOwner: LifecycleOwner) : LifecycleObserver {
+        init {
+            lifecycleOwner.lifecycle.addObserver(this)
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        fun onDestroy() {
+            DaggerInjector.clear()
+        }
+
     }
 
     companion object {
