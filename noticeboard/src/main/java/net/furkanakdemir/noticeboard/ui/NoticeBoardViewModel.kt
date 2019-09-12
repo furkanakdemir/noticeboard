@@ -23,7 +23,6 @@ class NoticeBoardViewModel @Inject constructor(
     val eventLiveData: LiveData<Event<String>>
         get() = _eventLiveData
 
-
     fun getChanges() {
         when (val result = noticeBoardRepository.getChanges()) {
             is Result.Success -> {

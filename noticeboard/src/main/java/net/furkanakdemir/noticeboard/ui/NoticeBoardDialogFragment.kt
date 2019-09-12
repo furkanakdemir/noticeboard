@@ -18,7 +18,6 @@ import net.furkanakdemir.noticeboard.di.DaggerInjector
 import net.furkanakdemir.noticeboard.result.EventObserver
 import javax.inject.Inject
 
-
 class NoticeBoardDialogFragment : DialogFragment() {
 
     private var recyclerView: RecyclerView? = null
@@ -87,7 +86,6 @@ class NoticeBoardDialogFragment : DialogFragment() {
     private fun showMessage() {
         messageTextView?.visibility = View.VISIBLE
         recyclerView?.visibility = View.GONE
-
     }
 
     private fun showContent() {
@@ -104,5 +102,4 @@ class NoticeBoardDialogFragment : DialogFragment() {
             return frag
         }
     }
-
 }

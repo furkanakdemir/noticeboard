@@ -14,7 +14,6 @@ import net.furkanakdemir.noticeboard.ui.NoticeBoardDialogFragment
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
 import javax.inject.Inject
 
-
 class NoticeBoard(private val target: FragmentActivity) {
 
     constructor(fragmentTarget: Fragment) :
@@ -95,7 +94,6 @@ class NoticeBoard(private val target: FragmentActivity) {
         fun onDestroy() {
             DaggerInjector.clear()
         }
-
     }
 
     companion object {

@@ -8,7 +8,6 @@ import java.io.IOException
 import javax.xml.parsers.SAXParser
 import javax.xml.parsers.SAXParserFactory
 
-
 class XmlNoticeBoardDataSource(
     private val fileReader: FileReader,
     private val filepath: String
@@ -22,7 +21,6 @@ class XmlNoticeBoardDataSource(
     override fun getReleases(): List<Release> {
 
         val releases = mutableListOf<Release>()
-
 
         val jsonString = fileReader.getFile(filepath)
 
@@ -72,7 +70,6 @@ class XmlNoticeBoardDataSource(
                         )
                     )
                     changeMap.clear()
-
                 } else if (localName.equals(KEY_RELEASE, ignoreCase = true)) {
                     releases.add(
                         Release(
@@ -84,12 +81,10 @@ class XmlNoticeBoardDataSource(
                 }
             }
 
-            //overriding the characters() method of DefaultHandler
             override fun characters(ch: CharArray, start: Int, length: Int) {
                 if (currentElement) {
                     currentValue += String(ch, start, length)
                 }
-
             }
         }
 

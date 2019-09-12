@@ -59,7 +59,6 @@ class NoticeBoardAdapter constructor(
         private const val VIEW_TYPE_ITEM = 2
     }
 
-
     inner class HeaderViewHolder(itemView: View) : BaseViewHolder<NoticeBoardItem.ReleaseHeader>(itemView) {
         override fun bind(item: NoticeBoardItem.ReleaseHeader) {
             itemView.findViewById<TextView>(R.id.dateTextView).text = item.date

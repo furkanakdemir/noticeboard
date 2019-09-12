@@ -22,7 +22,6 @@ import net.furkanakdemir.noticeboard.util.mapper.ListMapper
 import net.furkanakdemir.noticeboard.util.mapper.Mapper
 import net.furkanakdemir.noticeboard.util.mapper.RealListMapper
 
-
 @Module
 class NoticeBoardModule constructor(val context: Context) {
 

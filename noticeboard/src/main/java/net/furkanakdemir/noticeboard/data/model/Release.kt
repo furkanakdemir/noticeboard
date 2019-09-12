@@ -1,6 +1,5 @@
 package net.furkanakdemir.noticeboard.data.model
 
-
 data class Release(
     val date: String = "",
     val version: String = "",

@@ -18,7 +18,6 @@ class DefaultFileReader @Inject constructor(val context: Context) : FileReader {
             bufferedReader = BufferedReader(inputStreamReader)
 
             data = bufferedReader.readLines().joinToString(separator = "\n")
-
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {

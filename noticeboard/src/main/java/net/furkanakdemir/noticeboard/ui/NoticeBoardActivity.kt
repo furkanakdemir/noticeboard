@@ -67,7 +67,6 @@ class NoticeBoardActivity : AppCompatActivity() {
     private fun showMessage() {
         messageTextView.visibility = VISIBLE
         recyclerView.visibility = GONE
-
     }
 
     private fun showContent() {
