@@ -51,7 +51,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Empty" />
+            android:text="@string/noticeboard_empty_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
