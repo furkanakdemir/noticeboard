@@ -1,6 +1,6 @@
 package net.furkanakdemir.noticeboard.data.model
 
-data class ReleaseRaw(
+internal data class ReleaseRaw(
     val changes: List<ChangeRaw> = emptyList(),
     val date: String = "",
     val version: String = ""

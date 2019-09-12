@@ -10,7 +10,7 @@ import net.furkanakdemir.noticeboard.result.Result
 import net.furkanakdemir.noticeboard.util.mapper.Mapper
 import javax.inject.Inject
 
-class NoticeBoardViewModel @Inject constructor(
+internal class NoticeBoardViewModel @Inject constructor(
     private val noticeBoardRepository: NoticeBoardRepository,
     private val viewMapper: Mapper<List<Release>, List<NoticeBoardItem>>
 ) : ViewModel() {

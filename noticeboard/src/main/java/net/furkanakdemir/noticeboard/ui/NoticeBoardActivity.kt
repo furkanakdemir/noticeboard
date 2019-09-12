@@ -21,7 +21,7 @@ import net.furkanakdemir.noticeboard.result.EventObserver
 import net.furkanakdemir.noticeboard.util.mapper.Mapper
 import javax.inject.Inject
 
-class NoticeBoardActivity : AppCompatActivity() {
+internal class NoticeBoardActivity : AppCompatActivity() {
 
     private var toolbar: Toolbar? = null
     private lateinit var recyclerView: RecyclerView

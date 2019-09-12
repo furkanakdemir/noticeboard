@@ -8,7 +8,7 @@ import java.io.IOException
 import javax.xml.parsers.SAXParser
 import javax.xml.parsers.SAXParserFactory
 
-class XmlNoticeBoardDataSource(
+internal class XmlNoticeBoardDataSource(
     private val fileReader: FileReader,
     private val filepath: String
 ) : NoticeBoardDataSource {

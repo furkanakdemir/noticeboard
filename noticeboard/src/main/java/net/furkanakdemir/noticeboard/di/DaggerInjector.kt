@@ -2,7 +2,7 @@ package net.furkanakdemir.noticeboard.di
 
 import android.content.Context
 
-class DaggerInjector private constructor() {
+internal class DaggerInjector private constructor() {
     companion object {
 
         var component: NoticeBoardComponent? = null

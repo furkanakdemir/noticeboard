@@ -23,10 +23,10 @@ class NoticeBoardDataSourceFactoryTest {
     private lateinit var noticeBoardDataSourceFactory: NoticeBoardDataSourceFactory
 
     @Mock
-    lateinit var fileReader: FileReader
+    internal lateinit var fileReader: FileReader
 
     @Mock
-    lateinit var mapper: ListMapper<ReleaseRaw, Release>
+    internal lateinit var mapper: ListMapper<ReleaseRaw, Release>
 
 
     @Before

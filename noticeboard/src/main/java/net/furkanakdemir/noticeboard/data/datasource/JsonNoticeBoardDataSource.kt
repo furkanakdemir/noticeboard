@@ -8,7 +8,7 @@ import net.furkanakdemir.noticeboard.data.model.ReleaseRaw
 import net.furkanakdemir.noticeboard.util.io.FileReader
 import net.furkanakdemir.noticeboard.util.mapper.ListMapper
 
-class JsonNoticeBoardDataSource(
+internal class JsonNoticeBoardDataSource(
     private val fileReader: FileReader,
     private val filepath: String,
     private val mapper: ListMapper<ReleaseRaw, Release>

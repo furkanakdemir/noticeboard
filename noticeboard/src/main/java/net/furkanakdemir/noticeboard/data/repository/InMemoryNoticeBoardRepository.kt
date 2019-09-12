@@ -7,7 +7,7 @@ import net.furkanakdemir.noticeboard.result.Result
 import java.io.IOException
 import javax.inject.Inject
 
-class InMemoryNoticeBoardRepository @Inject constructor(
+internal class InMemoryNoticeBoardRepository @Inject constructor(
     private val noticeBoardDataSourceFactory: NoticeBoardDataSourceFactory
 ) : NoticeBoardRepository {
 

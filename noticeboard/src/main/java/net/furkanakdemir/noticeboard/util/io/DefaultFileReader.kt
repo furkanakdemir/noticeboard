@@ -6,7 +6,7 @@ import java.io.IOException
 import java.io.InputStreamReader
 import javax.inject.Inject
 
-class DefaultFileReader @Inject constructor(val context: Context) : FileReader {
+internal class DefaultFileReader @Inject constructor(val context: Context) : FileReader {
     override fun getFile(filename: String): String? {
         var bufferedReader: BufferedReader? = null
         var data: String? = null

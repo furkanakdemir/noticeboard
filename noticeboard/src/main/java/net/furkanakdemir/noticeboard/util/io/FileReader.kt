@@ -1,5 +1,5 @@
 package net.furkanakdemir.noticeboard.util.io
 
-interface FileReader {
+internal interface FileReader {
     fun getFile(filename: String): String?
 }

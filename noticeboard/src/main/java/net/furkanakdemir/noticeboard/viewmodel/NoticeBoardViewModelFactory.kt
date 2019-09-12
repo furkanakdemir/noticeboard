@@ -8,7 +8,7 @@ import javax.inject.Provider
 
 @Suppress("UNCHECKED_CAST", "TooGenericExceptionCaught", "TooGenericExceptionThrown")
 @NoticeBoardScope
-class NoticeBoardViewModelFactory @Inject constructor(
+internal class NoticeBoardViewModelFactory @Inject constructor(
     private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

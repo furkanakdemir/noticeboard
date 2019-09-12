@@ -5,7 +5,8 @@ import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.util.mapper.Mapper
 import javax.inject.Inject
 
-class ReleaseViewMapper @Inject constructor() : Mapper<List<Release>, List<NoticeBoardItem>> {
+internal class ReleaseViewMapper @Inject constructor() :
+    Mapper<List<Release>, List<NoticeBoardItem>> {
     override fun map(input: List<Release>): List<NoticeBoardItem> {
         val items = mutableListOf<NoticeBoardItem>()
 

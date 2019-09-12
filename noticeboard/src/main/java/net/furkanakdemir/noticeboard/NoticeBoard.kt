@@ -32,10 +32,10 @@ class NoticeBoard(private val target: FragmentActivity) {
     }
 
     @Inject
-    lateinit var noticeBoardRepository: NoticeBoardRepository
+    internal lateinit var noticeBoardRepository: NoticeBoardRepository
 
     @Inject
-    lateinit var configRepository: ConfigRepository
+    internal lateinit var configRepository: ConfigRepository
 
     fun pin(func: NoticeBoard.() -> Unit): NoticeBoard {
         this.func()
@@ -85,7 +85,8 @@ class NoticeBoard(private val target: FragmentActivity) {
         observer = NoticeBoardLifeCycleObserver(target)
     }
 
-    inner class NoticeBoardLifeCycleObserver(lifecycleOwner: LifecycleOwner) : LifecycleObserver {
+    internal inner class NoticeBoardLifeCycleObserver(lifecycleOwner: LifecycleOwner) :
+        LifecycleObserver {
         init {
             lifecycleOwner.lifecycle.addObserver(this)
         }

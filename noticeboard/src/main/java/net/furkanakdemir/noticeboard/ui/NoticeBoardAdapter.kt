@@ -10,7 +10,7 @@ import net.furkanakdemir.noticeboard.R
 import net.furkanakdemir.noticeboard.core.BaseViewHolder
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
 
-class NoticeBoardAdapter constructor(
+internal class NoticeBoardAdapter constructor(
     val colorProvider: ColorProvider
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 

@@ -8,7 +8,7 @@ import dagger.multibindings.IntoMap
 import net.furkanakdemir.noticeboard.ui.NoticeBoardViewModel
 
 @Module
-abstract class ViewModelModule {
+internal abstract class ViewModelModule {
 
     @Binds
     @IntoMap

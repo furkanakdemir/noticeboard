@@ -18,7 +18,7 @@ import net.furkanakdemir.noticeboard.di.DaggerInjector
 import net.furkanakdemir.noticeboard.result.EventObserver
 import javax.inject.Inject
 
-class NoticeBoardDialogFragment : DialogFragment() {
+internal class NoticeBoardDialogFragment : DialogFragment() {
 
     private var recyclerView: RecyclerView? = null
     private var messageTextView: TextView? = null

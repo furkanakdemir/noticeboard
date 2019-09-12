@@ -23,7 +23,7 @@ import net.furkanakdemir.noticeboard.util.mapper.Mapper
 import net.furkanakdemir.noticeboard.util.mapper.RealListMapper
 
 @Module
-class NoticeBoardModule constructor(val context: Context) {
+internal class NoticeBoardModule constructor(val context: Context) {
 
     @Provides
     @NoticeBoardScope

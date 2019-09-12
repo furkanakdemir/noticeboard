@@ -8,7 +8,7 @@ import net.furkanakdemir.noticeboard.viewmodel.ViewModelModule
 
 @NoticeBoardScope
 @Component(modules = [NoticeBoardModule::class, ViewModelModule::class])
-interface NoticeBoardComponent {
+internal interface NoticeBoardComponent {
     fun inject(noticeBoardActivity: NoticeBoardActivity)
     fun inject(noticeBoard: NoticeBoard)
     fun inject(noticeBoardDialogFragment: NoticeBoardDialogFragment)
