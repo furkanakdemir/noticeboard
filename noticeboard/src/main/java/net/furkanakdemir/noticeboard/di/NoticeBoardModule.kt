@@ -21,21 +21,20 @@ import net.furkanakdemir.noticeboard.util.io.FileReader
 import net.furkanakdemir.noticeboard.util.mapper.ListMapper
 import net.furkanakdemir.noticeboard.util.mapper.Mapper
 import net.furkanakdemir.noticeboard.util.mapper.RealListMapper
-import javax.inject.Singleton
 
 
 @Module
 class NoticeBoardModule constructor(val context: Context) {
 
     @Provides
-    @Singleton
+    @NoticeBoardScope
     fun provideContext(): Context = context
 
     @Provides
     fun provideFileReader(context: Context): FileReader = DefaultFileReader(context)
 
     @Provides
-    @Singleton
+    @NoticeBoardScope
     fun provideNoticeBoardRepository(factory: NoticeBoardDataSourceFactory): NoticeBoardRepository =
         InMemoryNoticeBoardRepository(factory)
 
@@ -50,12 +49,12 @@ class NoticeBoardModule constructor(val context: Context) {
         )
 
     @Provides
-    @Singleton
+    @NoticeBoardScope
     fun provideColorProvider(context: Context): ColorProvider =
         NoticeBoardColorProvider(context)
 
     @Provides
-    @Singleton
+    @NoticeBoardScope
     fun provideConfigRepository(colorProvider: ColorProvider): ConfigRepository =
         NoticeBoardConfigRepository(colorProvider)
 
