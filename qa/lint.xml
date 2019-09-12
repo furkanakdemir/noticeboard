@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!-- Don't warn about available alpha versions -->
+    <issue id="GradleDependency">
+        <ignore regexp="is available: .*[alpha|beta]" />
+    </issue>
+</lint>
