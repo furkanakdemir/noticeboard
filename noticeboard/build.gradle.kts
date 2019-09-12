@@ -5,6 +5,7 @@ plugins {
     kotlin(Plugins.kapt)
     id(Plugins.ktlint)
     id(Plugins.dex_count)
+    id(Plugins.detekt)
 }
 
 

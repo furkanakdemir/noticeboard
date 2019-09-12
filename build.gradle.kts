@@ -1,3 +1,7 @@
+plugins {
+    id(Plugins.detekt).version(Versions.detekt_plugin)
+}
+
 buildscript {
     repositories {
         google()
@@ -19,6 +23,17 @@ allprojects {
         google()
         jcenter()
     }
+}
+
+detekt {
+    config =
+        files("/qa/default-detekt-config.yml")
+}
+
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
+    exclude("resources/")
+    exclude(".*build.*")
+    exclude(".*/tmp/.*")
 }
 
 tasks {

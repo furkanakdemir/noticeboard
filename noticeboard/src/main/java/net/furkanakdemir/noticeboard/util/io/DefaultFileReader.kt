@@ -2,6 +2,7 @@ package net.furkanakdemir.noticeboard.util.io
 
 import android.content.Context
 import java.io.BufferedReader
+import java.io.IOException
 import java.io.InputStreamReader
 import javax.inject.Inject
 
@@ -18,12 +19,12 @@ class DefaultFileReader @Inject constructor(val context: Context) : FileReader {
             bufferedReader = BufferedReader(inputStreamReader)
 
             data = bufferedReader.readLines().joinToString(separator = "\n")
-        } catch (e: Exception) {
+        } catch (e: IOException) {
             e.printStackTrace()
         } finally {
             try {
                 bufferedReader?.close()
-            } catch (e: Exception) {
+            } catch (e: IOException) {
                 e.printStackTrace()
             }
         }

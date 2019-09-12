@@ -15,7 +15,7 @@ import net.furkanakdemir.noticeboard.NoticeBoard
 import net.furkanakdemir.noticeboard.Source
 import net.furkanakdemir.noticeboard.data.model.Release
 
-
+@Suppress("LongMethod", "ComplexMethod", "TooManyFunctions")
 class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
     private lateinit var displayOptionsDialog: AlertDialog

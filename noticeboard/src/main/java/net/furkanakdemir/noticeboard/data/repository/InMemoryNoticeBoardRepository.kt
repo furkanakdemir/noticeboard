@@ -4,6 +4,7 @@ import net.furkanakdemir.noticeboard.Source
 import net.furkanakdemir.noticeboard.data.datasource.NoticeBoardDataSourceFactory
 import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.result.Result
+import java.io.IOException
 import javax.inject.Inject
 
 class InMemoryNoticeBoardRepository @Inject constructor(
@@ -20,7 +21,7 @@ class InMemoryNoticeBoardRepository @Inject constructor(
         result = try {
             val releases = dataSource.getReleases()
             Result.Success(releases)
-        } catch (e: Exception) {
+        } catch (e: IOException) {
             Result.Error(e)
         }
     }

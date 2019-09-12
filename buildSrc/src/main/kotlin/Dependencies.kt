@@ -3,6 +3,7 @@ object Versions {
     const val android_gradle_plugin = "3.5.0"
     const val ktlint_plugin = "8.2.0"
     const val dex_count_plugin = "0.8.6"
+    const val detekt_plugin = "1.0.1"
 
 
     const val dagger = "2.24"
@@ -56,6 +57,7 @@ object Plugins {
     const val kapt = "kapt"
     const val ktlint = "org.jlleitschuh.gradle.ktlint"
     const val dex_count = "com.getkeepsafe.dexcount"
+    const val detekt = "io.gitlab.arturbosch.detekt"
 
 }
 
