@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.dsl.TestOptions
+
 plugins {
     id(Plugins.android_library)
     kotlin(Plugins.kotlin_android)
@@ -35,6 +37,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    testOptions {
+        unitTests(delegateClosureOf<TestOptions.UnitTestOptions> {
+            isReturnDefaultValues = true
+            isIncludeAndroidResources = true
+
+        })
+    }
 }
 
 dependencies {
@@ -58,8 +67,15 @@ dependencies {
 
     // JUnit
     testImplementation(TestDeps.junit)
+    testImplementation(TestDeps.junit)
+
+    // AndroidJUnitRunner and JUnit Rules
+    testImplementation(TestDeps.test_runner)
+    testImplementation(TestDeps.test_rules)
 
     // Core library
     testImplementation(TestDeps.mockito_core)
     testImplementation(TestDeps.mockito_kotlin)
+
+    testImplementation(TestDeps.robolectric)
 }

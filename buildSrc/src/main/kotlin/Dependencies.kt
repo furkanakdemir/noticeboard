@@ -22,6 +22,7 @@ object Versions {
 
     const val junit = "4.12"
     const val espresso = "3.2.0"
+    const val robolectric = "4.3"
     const val annotation = "1.1.0"
     const val test_runner = "1.2.0"
     const val test_rules = "1.2.0"
@@ -158,6 +159,9 @@ object TestDeps {
 
     // Espresso dependencies
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
+
+    // Robolectric
+    const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
 
 }
 

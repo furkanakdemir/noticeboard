@@ -1,5 +1,6 @@
 package net.furkanakdemir.noticeboard
 
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
@@ -19,9 +20,13 @@ class NoticeBoard(private val target: FragmentActivity) {
     constructor(fragmentTarget: Fragment) :
             this(fragmentTarget.requireActivity())
 
-    private var sourceType: Source = Source.Dynamic()
-    private var displayOptions: DisplayOptions = DisplayOptions.ACTIVITY
-    private var title: String = TITLE_DEFAULT
+    @VisibleForTesting
+    var sourceType: Source = Source.Dynamic()
+    @VisibleForTesting
+    var displayOptions: DisplayOptions = DisplayOptions.ACTIVITY
+    @VisibleForTesting
+    var title: String = TITLE_DEFAULT
+
     private lateinit var observer: NoticeBoardLifeCycleObserver
 
     init {

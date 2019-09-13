@@ -119,4 +119,8 @@ object TestData {
     internal val TEST_SOURCE_DYNAMIC = Source.Dynamic(items)
     internal val TEST_SOURCE_JSON = Source.Json(TEST_FILEPATH)
     internal val TEST_SOURCE_XML = Source.Xml(TEST_FILEPATH)
+
+
+    internal const val TEST_TITLE = "TEST_TITLE"
+    internal const val EMPTY = ""
 }

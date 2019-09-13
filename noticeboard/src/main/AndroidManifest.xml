@@ -8,6 +8,12 @@
             android:label="@string/title_activity_notice_board"
             android:launchMode="singleTask"
             android:theme="@style/NoticeBoardTheme.NoActionBar" />
+
+        <activity
+            android:name=".util.fakes.FakeActivity"
+            android:label="@string/title_activity_notice_board"
+            android:launchMode="singleTask"
+            android:theme="@style/NoticeBoardTheme.NoActionBar" />
     </application>
 
 </manifest>
