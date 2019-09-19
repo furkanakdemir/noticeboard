@@ -4,6 +4,7 @@ import net.furkanakdemir.noticeboard.Source
 import net.furkanakdemir.noticeboard.data.datasource.NoticeBoardDataSourceFactory
 import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.result.Result
+import org.xml.sax.SAXException
 import java.io.IOException
 import javax.inject.Inject
 
@@ -22,6 +23,8 @@ internal class InMemoryNoticeBoardRepository @Inject constructor(
             val releases = dataSource.getReleases()
             Result.Success(releases)
         } catch (e: IOException) {
+            Result.Error(e)
+        } catch (e: SAXException) {
             Result.Error(e)
         }
     }
