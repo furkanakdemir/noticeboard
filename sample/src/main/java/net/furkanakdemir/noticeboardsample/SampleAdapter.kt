@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class SampleAdapter constructor(private val callback: OnSampleClickCallback) :
+class SampleAdapter constructor(val onSampleClick: (String) -> Unit) :
     RecyclerView.Adapter<SampleAdapter.SampleViewHolder>() {
 
     var samples: MutableList<String> = mutableListOf()
@@ -27,7 +27,7 @@ class SampleAdapter constructor(private val callback: OnSampleClickCallback) :
     override fun onBindViewHolder(holder: SampleViewHolder, position: Int) {
         holder.bind(samples[position])
         holder.itemView.setOnClickListener {
-            callback.onClicked(position)
+            onSampleClick(samples[position])
         }
     }
 
@@ -35,10 +35,6 @@ class SampleAdapter constructor(private val callback: OnSampleClickCallback) :
         fun bind(title: String) {
             itemView.findViewById<TextView>(R.id.sample).text = title
         }
-    }
-
-    interface OnSampleClickCallback {
-        fun onClicked(position: Int)
     }
 }
 

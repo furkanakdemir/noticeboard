@@ -16,7 +16,7 @@ import net.furkanakdemir.noticeboard.Source
 import net.furkanakdemir.noticeboard.data.model.Release
 
 @Suppress("LongMethod", "ComplexMethod", "TooManyFunctions")
-class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var displayOptionsDialog: AlertDialog
     private lateinit var recyclerView: RecyclerView
@@ -81,7 +81,19 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
 
     private fun setupRecyclerView() {
 
-        sampleAdapter = SampleAdapter(this)
+        sampleAdapter = SampleAdapter {
+            when (it) {
+                SourceType.DYNAMIC.type -> openDynamic()
+                SourceType.XML.type -> openXml()
+                SourceType.JSON.type -> openJson()
+                SourceType.EMPTY_JSON.type -> openEmptyFileJson()
+                SourceType.EMPTY_ARRAY_JSON.type -> openEmptyArrayJson()
+                SourceType.INVALID_JSON.type -> openInvalidJson()
+                SourceType.EMPTY_XML.type -> openEmptyFileXml()
+                SourceType.EMPTY_ARRAY_XML.type -> openEmptyArrayXml()
+                SourceType.INVALID_XML.type -> openInvalidXml()
+            }
+        }
 
         recyclerView = findViewById<RecyclerView>(R.id.main_recyclerview).apply {
             setHasFixedSize(true)
@@ -100,20 +112,6 @@ class MainActivity : SampleAdapter.OnSampleClickCallback, AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.setDisplayShowHomeEnabled(false)
         supportActionBar?.title = TITLE_NOTICEBOARD_SAMPLE
-    }
-
-    override fun onClicked(position: Int) {
-        when (position) {
-            SourceType.DYNAMIC.ordinal -> openDynamic()
-            SourceType.XML.ordinal -> openXml()
-            SourceType.JSON.ordinal -> openJson()
-            SourceType.EMPTY_JSON.ordinal -> openEmptyFileJson()
-            SourceType.EMPTY_ARRAY_JSON.ordinal -> openEmptyArrayJson()
-            SourceType.INVALID_JSON.ordinal -> openInvalidJson()
-            SourceType.EMPTY_XML.ordinal -> openEmptyFileXml()
-            SourceType.EMPTY_ARRAY_XML.ordinal -> openEmptyArrayXml()
-            SourceType.INVALID_XML.ordinal -> openInvalidXml()
-        }
     }
 
     private fun openDynamic() {
