@@ -1,4 +1,7 @@
 import com.android.build.gradle.internal.dsl.TestOptions
+import com.jfrog.bintray.gradle.BintrayExtension
+import java.io.FileInputStream
+import java.util.*
 
 plugins {
     id(Plugins.android_library)
@@ -8,8 +11,9 @@ plugins {
     id(Plugins.ktlint)
     id(Plugins.dex_count)
     id(Plugins.detekt)
+    `maven-publish`
+    id("com.jfrog.bintray") version "1.8.4"
 }
-
 
 android {
     compileSdkVersion(AndroidSdk.sdk_compile)
@@ -22,7 +26,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         consumerProguardFiles("proguard-rules.pro")
-
     }
 
     buildTypes {
@@ -44,6 +47,91 @@ android {
 
         })
     }
+}
+
+val developerId = "furkanakdemir"
+val developerName = "Furkan Akdemir"
+val artifactId = "noticeboard"
+val artifactGroup = "net.furkanakdemir"
+val artifactDescription = "Change Log library for Android API 21+"
+
+val publicationName = "noticeboard"
+
+val artifactVersion = "1.0.8"
+val vcs = "https://github.com/furkanakdemir/noticeboard"
+
+val sourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.getByName("main").allSource)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("noticeboard") {
+            groupId = artifactGroup
+            artifactId = artifactId
+            version = artifactVersion
+            artifact("$buildDir/outputs/aar/noticeboard-debug.aar")
+
+
+            artifact(sourcesJar.get())
+
+
+            pom {
+                name.set("NoticeBoard")
+                description.set(artifactDescription)
+                url.set(vcs)
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set(developerId)
+                        name.set(developerName)
+                    }
+                }
+
+                scm {
+                    url.set(vcs)
+                }
+            }
+        }
+    }
+}
+
+val properties = Properties()
+val fis = FileInputStream(rootProject.file("local.properties"))
+properties.load(fis)
+
+val bintrayUser: String by lazy { properties.getProperty("bintrayUser") }
+val bintrayKey: String by lazy { properties.getProperty("bintrayKey") }
+
+bintray {
+
+    user = bintrayUser
+    key = bintrayKey
+    publish = true
+    setPublications(publicationName)
+    pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
+        repo = "noticeboard"
+        name = "net.furkanakdemir.noticeboard"
+        websiteUrl = vcs
+        githubRepo = "furkanakdemir/noticeboard"
+        vcsUrl = vcs
+        description = artifactDescription
+        setLabels("kotlin")
+        setLicenses("Apache-2.0")
+        desc = description
+
+        // Configure version
+        version.apply {
+            name = artifactVersion
+            released = Date().toString()
+        }
+    })
 }
 
 dependencies {
