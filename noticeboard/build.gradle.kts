@@ -44,7 +44,6 @@ android {
         unitTests(delegateClosureOf<TestOptions.UnitTestOptions> {
             isReturnDefaultValues = true
             isIncludeAndroidResources = true
-
         })
     }
 }
@@ -57,12 +56,12 @@ val artifactDescription = "Change Log library for Android API 21+"
 
 val publicationName = "noticeboard"
 
-val artifactVersion = "1.0.8"
+val artifactVersion = "1.0.10"
 val vcs = "https://github.com/furkanakdemir/noticeboard"
 
-val sourcesJar by tasks.registering(Jar::class) {
+val androidSourcesJar by tasks.registering(Jar::class) {
     archiveClassifier.set("sources")
-    from(sourceSets.getByName("main").allSource)
+    from(android.sourceSets.getByName("main").java.srcDirs)
 }
 
 publishing {
@@ -71,12 +70,8 @@ publishing {
             groupId = artifactGroup
             artifactId = artifactId
             version = artifactVersion
-            artifact("$buildDir/outputs/aar/noticeboard-debug.aar")
-
-
-            artifact(sourcesJar.get())
-
-
+            artifact("$buildDir/outputs/aar/noticeboard-release.aar")
+            artifact(androidSourcesJar.get())
             pom {
                 name.set("NoticeBoard")
                 description.set(artifactDescription)
