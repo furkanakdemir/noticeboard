@@ -56,7 +56,7 @@ val artifactDescription = "Change Log library for Android API 21+"
 
 val publicationName = "noticeboard"
 
-val artifactVersion = "1.0.10"
+val artifactVersion = "1.0.11"
 val vcs = "https://github.com/furkanakdemir/noticeboard"
 
 val androidSourcesJar by tasks.registering(Jar::class) {
@@ -136,11 +136,6 @@ dependencies {
     implementation(Deps.constraintlayout)
     implementation(Deps.recyclerview)
     implementation(Deps.material)
-
-    implementation(Deps.dagger_android)
-    implementation(Deps.dagger_android_support)
-    kapt(Deps.dagger_android_processor)
-    kapt(Deps.dagger_compiler)
 
     implementation(Deps.moshi)
 

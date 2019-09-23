@@ -1,9 +1,8 @@
 package net.furkanakdemir.noticeboard.config
 
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
-import javax.inject.Inject
 
-internal class NoticeBoardConfigRepository @Inject constructor(defaultColorProvider: ColorProvider) :
+internal class NoticeBoardConfigRepository constructor(defaultColorProvider: ColorProvider) :
     ConfigRepository {
 
     private var colorProvider: ColorProvider

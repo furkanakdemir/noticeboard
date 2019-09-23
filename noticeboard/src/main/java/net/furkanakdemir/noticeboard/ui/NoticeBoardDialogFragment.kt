@@ -7,16 +7,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
+import net.furkanakdemir.noticeboard.InternalNoticeBoard
 import net.furkanakdemir.noticeboard.NoticeBoard.Companion.KEY_TITLE
 import net.furkanakdemir.noticeboard.NoticeBoard.Companion.TITLE_DEFAULT
 import net.furkanakdemir.noticeboard.R
-import net.furkanakdemir.noticeboard.config.ConfigRepository
-import net.furkanakdemir.noticeboard.di.DaggerInjector
 import net.furkanakdemir.noticeboard.result.EventObserver
-import javax.inject.Inject
 
 internal class NoticeBoardDialogFragment : DialogFragment() {
 
@@ -24,18 +21,9 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
     private var messageTextView: TextView? = null
     private lateinit var noticeBoardAdapter: NoticeBoardAdapter
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    @Inject
-    lateinit var configRepository: ConfigRepository
-
     private lateinit var noticeBoardViewModel: NoticeBoardViewModel
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
-        DaggerInjector.component?.inject(this)
-
         val builder = AlertDialog.Builder(requireContext())
 
         val title = arguments?.getString(KEY_TITLE, TITLE_DEFAULT)
@@ -55,7 +43,7 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
     private fun setupViewModel() {
 
         noticeBoardViewModel =
-            ViewModelProviders.of(this, viewModelFactory).get(NoticeBoardViewModel::class.java)
+            ViewModelProviders.of(this).get(NoticeBoardViewModel::class.java)
 
         noticeBoardViewModel.releaseLiveData.observe(this, Observer {
             noticeBoardAdapter.releaseList = it.toMutableList()
@@ -72,7 +60,7 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
 
     private fun buildView(): View? {
         val view = requireActivity().layoutInflater.inflate(R.layout.dialog_notice_board, null)
-        noticeBoardAdapter = NoticeBoardAdapter(configRepository.getColorProvider())
+        noticeBoardAdapter = NoticeBoardAdapter(InternalNoticeBoard.getColorProvider())
 
         recyclerView = view.findViewById(R.id.change_recyclerview)
         messageTextView = view.findViewById(R.id.messageTextView)

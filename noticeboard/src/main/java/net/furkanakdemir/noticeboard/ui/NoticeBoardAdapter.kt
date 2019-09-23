@@ -10,9 +10,8 @@ import net.furkanakdemir.noticeboard.R
 import net.furkanakdemir.noticeboard.core.BaseViewHolder
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
 
-internal class NoticeBoardAdapter constructor(
-    val colorProvider: ColorProvider
-) : RecyclerView.Adapter<BaseViewHolder<*>>() {
+internal class NoticeBoardAdapter(val colorProvider: ColorProvider) :
+    RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     var releaseList: MutableList<NoticeBoardItem> = mutableListOf()
         set(value) {
@@ -59,21 +58,26 @@ internal class NoticeBoardAdapter constructor(
         private const val VIEW_TYPE_ITEM = 2
     }
 
-    inner class HeaderViewHolder(itemView: View) : BaseViewHolder<NoticeBoardItem.ReleaseHeader>(itemView) {
+    inner class HeaderViewHolder(itemView: View) :
+        BaseViewHolder<NoticeBoardItem.ReleaseHeader>(itemView) {
         override fun bind(item: NoticeBoardItem.ReleaseHeader) {
             itemView.findViewById<TextView>(R.id.dateTextView).text = item.date
             itemView.findViewById<TextView>(R.id.versionTextView).text = item.version
         }
     }
 
-    inner class ChangeViewHolder(itemView: View) : BaseViewHolder<NoticeBoardItem.ChangeItem>(itemView) {
+    inner class ChangeViewHolder(itemView: View) :
+        BaseViewHolder<NoticeBoardItem.ChangeItem>(itemView) {
         override fun bind(item: NoticeBoardItem.ChangeItem) {
             itemView.findViewById<TextView>(R.id.change_description).text = item.description
             itemView.findViewById<TextView>(R.id.change_type).text = item.type.name
 
             val colorId = colorProvider.getChangeTypeBackgroundColor(item.type)
 
-            DrawableCompat.setTint(itemView.findViewById<TextView>(R.id.change_type).background, colorId)
+            DrawableCompat.setTint(
+                itemView.findViewById<TextView>(R.id.change_type).background,
+                colorId
+            )
         }
     }
 }

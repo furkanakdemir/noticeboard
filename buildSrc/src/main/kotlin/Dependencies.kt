@@ -5,13 +5,8 @@ object Versions {
     const val dex_count_plugin = "0.8.6"
     const val detekt_plugin = "1.0.1"
 
-
-    const val dagger = "2.24"
     const val navigation = "2.1.0-rc01"
     const val lifecycle = "2.1.0"
-    const val timber = "4.7.1"
-    const val paging = "2.1.0"
-    const val glide = "4.9.0"
     const val fragment = "1.1.0-rc04"
     const val constraintlayout = "1.1.3"
     const val appcompat = "1.0.2"
@@ -23,7 +18,6 @@ object Versions {
     const val junit = "4.12"
     const val espresso = "3.2.0"
     const val robolectric = "4.3"
-    const val annotation = "1.1.0"
     const val test_runner = "1.2.0"
     const val test_rules = "1.2.0"
     const val test_core = "1.2.0"
@@ -108,19 +102,6 @@ object Deps {
         "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
     const val logging_interceptor =
         "com.squareup.okhttp3:logging-interceptor:${Versions.logging_interceptor}"
-
-    // Dagger
-    const val dagger_android = "com.google.dagger:dagger-android:${Versions.dagger}"
-    const val dagger_android_support = "com.google.dagger:dagger-android-support:${Versions.dagger}"
-    const val dagger_android_processor =
-        "com.google.dagger:dagger-android-processor:${Versions.dagger}"
-    const val dagger_compiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
-
-    // Logging
-    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
-
-    // Annotation
-    const val annotation = "androidx.annotation:annotation:${Versions.annotation}"
 
     // Json Library
     const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"

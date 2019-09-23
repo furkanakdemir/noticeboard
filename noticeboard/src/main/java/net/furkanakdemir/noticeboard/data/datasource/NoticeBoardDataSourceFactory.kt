@@ -5,9 +5,8 @@ import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.data.model.ReleaseRaw
 import net.furkanakdemir.noticeboard.util.io.FileReader
 import net.furkanakdemir.noticeboard.util.mapper.ListMapper
-import javax.inject.Inject
 
-internal class NoticeBoardDataSourceFactory @Inject constructor(
+internal class NoticeBoardDataSourceFactory constructor(
     private val fileReader: FileReader,
     private val mapper: ListMapper<ReleaseRaw, Release>
 ) {

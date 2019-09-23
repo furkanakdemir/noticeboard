@@ -3,17 +3,11 @@ package net.furkanakdemir.noticeboard
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.OnLifecycleEvent
-import net.furkanakdemir.noticeboard.config.ConfigRepository
-import net.furkanakdemir.noticeboard.data.repository.NoticeBoardRepository
-import net.furkanakdemir.noticeboard.di.DaggerInjector
 import net.furkanakdemir.noticeboard.ui.NoticeBoardActivity
 import net.furkanakdemir.noticeboard.ui.NoticeBoardDialogFragment
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
-import javax.inject.Inject
+import net.furkanakdemir.noticeboard.util.color.NoticeBoardColorProvider
+import net.furkanakdemir.noticeboard.util.io.DefaultFileReader
 
 class NoticeBoard(private val target: FragmentActivity) {
 
@@ -27,20 +21,11 @@ class NoticeBoard(private val target: FragmentActivity) {
     @VisibleForTesting
     var title: String = TITLE_DEFAULT
 
-    private lateinit var observer: NoticeBoardLifeCycleObserver
-
     init {
-        DaggerInjector.buildComponent(target)
-        DaggerInjector.component?.inject(this)
-
-        observeLifecycle()
+        InternalNoticeBoard.defaultColorProvider = NoticeBoardColorProvider(target)
+        InternalNoticeBoard.fileReader = DefaultFileReader(target)
+        InternalNoticeBoard.setup()
     }
-
-    @Inject
-    internal lateinit var noticeBoardRepository: NoticeBoardRepository
-
-    @Inject
-    internal lateinit var configRepository: ConfigRepository
 
     fun pin(func: NoticeBoard.() -> Unit): NoticeBoard {
         this.func()
@@ -65,11 +50,13 @@ class NoticeBoard(private val target: FragmentActivity) {
     }
 
     fun colorProvider(colorProvider: ColorProvider) {
-        configRepository.saveColorProvider(colorProvider)
+        InternalNoticeBoard.saveColorProvider(colorProvider)
     }
 
     private fun pin() {
-        noticeBoardRepository.fetchChanges(sourceType)
+
+
+        InternalNoticeBoard.fetchChanges(sourceType)
 
         when (displayOptions) {
             DisplayOptions.ACTIVITY -> target.startActivity(
@@ -83,22 +70,6 @@ class NoticeBoard(private val target: FragmentActivity) {
                     NoticeBoardDialogFragment::class.java.canonicalName
                 )
             }
-        }
-    }
-
-    private fun observeLifecycle() {
-        observer = NoticeBoardLifeCycleObserver(target)
-    }
-
-    internal inner class NoticeBoardLifeCycleObserver(lifecycleOwner: LifecycleOwner) :
-        LifecycleObserver {
-        init {
-            lifecycleOwner.lifecycle.addObserver(this)
-        }
-
-        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-        fun onDestroy() {
-            DaggerInjector.clear()
         }
     }
 

@@ -4,15 +4,15 @@ import android.content.Context
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
-import javax.inject.Inject
+import java.io.Reader
 
-internal class DefaultFileReader @Inject constructor(val context: Context) : FileReader {
+internal class DefaultFileReader(val context: Context) : FileReader {
     override fun getFile(filename: String): String? {
         var bufferedReader: BufferedReader? = null
         var data: String? = null
 
         try {
-            val inputStreamReader = InputStreamReader(
+            val inputStreamReader: Reader? = InputStreamReader(
                 context.assets?.open(filename),
                 Charsets.UTF_8
             )
