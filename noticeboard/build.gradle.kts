@@ -153,6 +153,7 @@ dependencies {
     // Core library
     testImplementation(TestDeps.mockito_core)
     testImplementation(TestDeps.mockito_kotlin)
+    testImplementation(TestDeps.mockito_inline)
 
     testImplementation(TestDeps.robolectric)
 }

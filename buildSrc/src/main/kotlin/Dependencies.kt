@@ -126,6 +126,7 @@ object TestDeps {
     // Core library
     const val test_core = "androidx.test:core:${Versions.test_core}"
     const val mockito_core = "org.mockito:mockito-core:${Versions.mockito_core}"
+    const val mockito_inline = "org.mockito:mockito-inline:${Versions.mockito_core}"
     const val mockito_kotlin =
         "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockito_kotlin}"
 

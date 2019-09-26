@@ -25,7 +25,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.android.controller.ActivityController
 import org.hamcrest.CoreMatchers.`is` as Is
 
-
 @RunWith(RobolectricTestRunner::class)
 class NoticeBoardTest {
 
@@ -61,7 +60,13 @@ class NoticeBoardTest {
 
     @Test
     fun pin() {
-        // TODO Write a test
+        val actual = NoticeBoard(activity)
+        actual.internalNoticeBoard = mock()
+        actual.pin { }
+
+        assertThat(actual.displayOptions, Is(DisplayOptions.ACTIVITY))
+        assertThat(actual.sourceType, instanceOf(Source.Dynamic::class.java))
+        verify(actual.internalNoticeBoard).fetchChanges(actual.sourceType)
     }
 
     @Test
@@ -117,12 +122,11 @@ class NoticeBoardTest {
     fun colorProvider() {
 
         val actual = NoticeBoard(activity)
-
-        actual.configRepository = mock()
+        actual.internalNoticeBoard = mock()
 
         actual.colorProvider(colorProvider)
 
-        verify(actual.configRepository).saveColorProvider(colorProvider)
+        verify(actual.internalNoticeBoard).saveColorProvider(colorProvider)
     }
 
     @After

@@ -23,13 +23,16 @@ class NoticeBoard(private val target: FragmentActivity) {
     @VisibleForTesting
     var title: String = TITLE_DEFAULT
 
-    private var observer: NoticeBoardLifeCycleObserver
+    private val observer: NoticeBoardLifeCycleObserver
 
     private val dialogTag = NoticeBoardDialogFragment::class.java.canonicalName
 
+    @VisibleForTesting
+    internal var internalNoticeBoard: InternalNoticeBoard
+
     init {
         observer = NoticeBoardLifeCycleObserver(target)
-        InternalNoticeBoard.getInstance(target)
+        internalNoticeBoard = InternalNoticeBoard.getInstance(target)
     }
 
     fun source(source: Source) {
@@ -49,17 +52,16 @@ class NoticeBoard(private val target: FragmentActivity) {
     }
 
     fun colorProvider(colorProvider: ColorProvider) {
-        InternalNoticeBoard.getInstance(target).saveColorProvider(colorProvider)
+        internalNoticeBoard.saveColorProvider(colorProvider)
     }
 
-    fun pin(func: NoticeBoard.() -> Unit): NoticeBoard {
+    fun pin(func: NoticeBoard.() -> Unit) {
         this.func()
         this.pin()
-        return this
     }
 
     private fun pin() {
-        InternalNoticeBoard.getInstance(target).fetchChanges(sourceType)
+        internalNoticeBoard.fetchChanges(sourceType)
 
         when (displayOptions) {
             DisplayOptions.ACTIVITY -> target.startActivity(
