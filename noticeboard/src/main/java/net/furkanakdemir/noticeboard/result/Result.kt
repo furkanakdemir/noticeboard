@@ -16,8 +16,6 @@
 
 package net.furkanakdemir.noticeboard.result
 
-import net.furkanakdemir.noticeboard.result.Result.Success
-
 /**
  * A generic class that holds a value with its loading status.
  * @param <T>
@@ -35,14 +33,10 @@ sealed class Result<out R> {
             Loading -> "Loading"
         }
     }
+
+    fun <T> Result<T>.successOr(fallback: T): T {
+        return (this as? Success<T>)?.data ?: fallback
+    }
 }
 
-/**
- * `true` if [Result] is of type [Success] & holds non-null [Success.data].
- */
-val Result<*>.succeeded
-    get() = this is Success && data != null
 
-fun <T> Result<T>.successOr(fallback: T): T {
-    return (this as? Success<T>)?.data ?: fallback
-}

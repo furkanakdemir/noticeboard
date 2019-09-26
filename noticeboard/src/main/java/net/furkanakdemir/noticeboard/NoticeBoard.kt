@@ -75,7 +75,7 @@ class NoticeBoard(private val target: FragmentActivity) {
         }
     }
 
-    inner class NoticeBoardLifeCycleObserver(lifecycleOwner: LifecycleOwner) : LifecycleObserver {
+    private class NoticeBoardLifeCycleObserver(lifecycleOwner: LifecycleOwner) : LifecycleObserver {
         init {
             lifecycleOwner.lifecycle.addObserver(this)
         }

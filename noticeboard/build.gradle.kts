@@ -55,7 +55,7 @@ val artifactDescription = "Change Log library for Android API 21+"
 
 val publicationName = "noticeboard"
 
-val artifactVersion = "1.0.16"
+val artifactVersion = "1.0.19"
 val vcs = "https://github.com/furkanakdemir/noticeboard"
 
 val androidSourcesJar by tasks.registering(Jar::class) {
