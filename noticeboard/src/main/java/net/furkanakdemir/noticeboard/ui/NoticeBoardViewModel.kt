@@ -22,7 +22,7 @@ internal class NoticeBoardViewModel : ViewModel() {
         get() = _eventLiveData
 
     fun getChanges() {
-        when (val result = InternalNoticeBoard.getChanges()) {
+        when (val result = InternalNoticeBoard.getInstance().getChanges()) {
             is Result.Success -> {
                 if (result.data.isNullOrEmpty()) {
                     _eventLiveData.value = Event("Empty List")

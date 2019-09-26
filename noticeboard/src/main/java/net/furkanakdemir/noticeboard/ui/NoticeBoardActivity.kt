@@ -60,7 +60,7 @@ internal class NoticeBoardActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        noticeBoardAdapter = NoticeBoardAdapter(InternalNoticeBoard.getColorProvider())
+        noticeBoardAdapter = NoticeBoardAdapter(InternalNoticeBoard.getInstance(this).getColorProvider())
 
         recyclerView = findViewById<RecyclerView>(R.id.change_recyclerview).apply {
             setHasFixedSize(true)

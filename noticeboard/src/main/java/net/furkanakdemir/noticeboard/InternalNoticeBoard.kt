@@ -1,34 +1,53 @@
 package net.furkanakdemir.noticeboard
 
+import android.content.Context
 import net.furkanakdemir.noticeboard.config.ConfigRepository
 import net.furkanakdemir.noticeboard.config.NoticeBoardConfigRepository
 import net.furkanakdemir.noticeboard.data.datasource.NoticeBoardDataSourceFactory
 import net.furkanakdemir.noticeboard.data.mapper.ChangeDomainMapper
 import net.furkanakdemir.noticeboard.data.mapper.ReleaseDomainMapper
 import net.furkanakdemir.noticeboard.data.model.Release
+import net.furkanakdemir.noticeboard.data.model.ReleaseRaw
 import net.furkanakdemir.noticeboard.data.repository.InMemoryNoticeBoardRepository
 import net.furkanakdemir.noticeboard.data.repository.NoticeBoardRepository
 import net.furkanakdemir.noticeboard.result.Result
+import net.furkanakdemir.noticeboard.util.SingletonHolder
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
+import net.furkanakdemir.noticeboard.util.color.NoticeBoardColorProvider
+import net.furkanakdemir.noticeboard.util.io.DefaultFileReader
 import net.furkanakdemir.noticeboard.util.io.FileReader
+import net.furkanakdemir.noticeboard.util.mapper.ListMapper
+import net.furkanakdemir.noticeboard.util.mapper.Mapper
 import net.furkanakdemir.noticeboard.util.mapper.RealListMapper
 
-internal object InternalNoticeBoard {
+internal class InternalNoticeBoard private constructor(context: Context?) {
 
-    private lateinit var noticeBoardRepository: NoticeBoardRepository
-    private lateinit var configRepository: ConfigRepository
+    private var noticeBoardRepository: NoticeBoardRepository
+    private var configRepository: ConfigRepository
 
-    lateinit var fileReader: FileReader
-    lateinit var defaultColorProvider: ColorProvider
-    lateinit var factory: NoticeBoardDataSourceFactory
+    private val defaultColorProvider: ColorProvider = NoticeBoardColorProvider(context)
 
-    fun setup() {
-        factory = NoticeBoardDataSourceFactory(
-            fileReader,
-            RealListMapper(ReleaseDomainMapper(RealListMapper(ChangeDomainMapper())))
-        )
+    init {
+        requireNotNull(context) { "Context cannot be null" }
+        val factory = buildDataSourceFactory(context)
+
         noticeBoardRepository = InMemoryNoticeBoardRepository(factory)
         configRepository = NoticeBoardConfigRepository(defaultColorProvider)
+    }
+
+    private fun buildDataSourceFactory(context: Context): NoticeBoardDataSourceFactory {
+        val releaseListDomainMapper = buildMapper()
+        val fileReader: FileReader = DefaultFileReader(context)
+        return NoticeBoardDataSourceFactory(fileReader, releaseListDomainMapper)
+    }
+
+    private fun buildMapper(): ListMapper<ReleaseRaw, Release> {
+        val changeDomainMapper: Mapper<ReleaseRaw.ChangeRaw, Release.Change> = ChangeDomainMapper()
+        val changeListDomainMapper: ListMapper<ReleaseRaw.ChangeRaw, Release.Change> =
+            RealListMapper(changeDomainMapper)
+        val releaseDomainMapper: Mapper<ReleaseRaw, Release> =
+            ReleaseDomainMapper(changeListDomainMapper)
+        return RealListMapper(releaseDomainMapper)
     }
 
     fun saveColorProvider(colorProvider: ColorProvider) {
@@ -46,4 +65,6 @@ internal object InternalNoticeBoard {
     fun getChanges(): Result<List<Release>> {
         return noticeBoardRepository.getChanges()
     }
+
+    companion object : SingletonHolder<InternalNoticeBoard, Context>(::InternalNoticeBoard)
 }

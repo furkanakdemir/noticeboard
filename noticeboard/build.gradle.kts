@@ -25,12 +25,11 @@ android {
         versionName = AndroidSdk.version_name
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        consumerProguardFiles("proguard-rules.pro")
+        consumerProguardFiles("consumer-proguard-rules.pro")
     }
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = true
             signingConfig = signingConfigs.getByName("debug")
         }
     }
@@ -56,7 +55,7 @@ val artifactDescription = "Change Log library for Android API 21+"
 
 val publicationName = "noticeboard"
 
-val artifactVersion = "1.0.11"
+val artifactVersion = "1.0.16"
 val vcs = "https://github.com/furkanakdemir/noticeboard"
 
 val androidSourcesJar by tasks.registering(Jar::class) {

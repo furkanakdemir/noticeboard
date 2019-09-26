@@ -5,14 +5,17 @@ import androidx.core.content.ContextCompat
 import net.furkanakdemir.noticeboard.ChangeType
 import net.furkanakdemir.noticeboard.R
 
-open class NoticeBoardColorProvider(context: Context) : ColorProvider {
+open class NoticeBoardColorProvider(context: Context?) : ColorProvider {
+    init {
+        requireNotNull(context) { "Context cannot be null" }
+    }
 
-    protected open var colorAdded = ContextCompat.getColor(context, R.color.added)
-    protected open var colorChanged = ContextCompat.getColor(context, R.color.changed)
-    protected open var colorDeprecated = ContextCompat.getColor(context, R.color.deprecated)
-    protected open var colorRemoved = ContextCompat.getColor(context, R.color.removed)
-    protected open var colorFixed = ContextCompat.getColor(context, R.color.fixed)
-    protected open var colorSecurity = ContextCompat.getColor(context, R.color.security)
+    protected open var colorAdded = ContextCompat.getColor(context!!, R.color.added)
+    protected open var colorChanged = ContextCompat.getColor(context!!, R.color.changed)
+    protected open var colorDeprecated = ContextCompat.getColor(context!!, R.color.deprecated)
+    protected open var colorRemoved = ContextCompat.getColor(context!!, R.color.removed)
+    protected open var colorFixed = ContextCompat.getColor(context!!, R.color.fixed)
+    protected open var colorSecurity = ContextCompat.getColor(context!!, R.color.security)
 
     override fun getChangeTypeBackgroundColor(changeType: ChangeType): Int {
 

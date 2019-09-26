@@ -60,7 +60,7 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
 
     private fun buildView(): View? {
         val view = requireActivity().layoutInflater.inflate(R.layout.dialog_notice_board, null)
-        noticeBoardAdapter = NoticeBoardAdapter(InternalNoticeBoard.getColorProvider())
+        noticeBoardAdapter = NoticeBoardAdapter(InternalNoticeBoard.getInstance().getColorProvider())
 
         recyclerView = view.findViewById(R.id.change_recyclerview)
         messageTextView = view.findViewById(R.id.messageTextView)

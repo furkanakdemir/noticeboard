@@ -3,11 +3,13 @@ package net.furkanakdemir.noticeboard
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.OnLifecycleEvent
 import net.furkanakdemir.noticeboard.ui.NoticeBoardActivity
 import net.furkanakdemir.noticeboard.ui.NoticeBoardDialogFragment
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
-import net.furkanakdemir.noticeboard.util.color.NoticeBoardColorProvider
-import net.furkanakdemir.noticeboard.util.io.DefaultFileReader
 
 class NoticeBoard(private val target: FragmentActivity) {
 
@@ -21,16 +23,13 @@ class NoticeBoard(private val target: FragmentActivity) {
     @VisibleForTesting
     var title: String = TITLE_DEFAULT
 
-    init {
-        InternalNoticeBoard.defaultColorProvider = NoticeBoardColorProvider(target)
-        InternalNoticeBoard.fileReader = DefaultFileReader(target)
-        InternalNoticeBoard.setup()
-    }
+    private var observer: NoticeBoardLifeCycleObserver
 
-    fun pin(func: NoticeBoard.() -> Unit): NoticeBoard {
-        this.func()
-        this.pin()
-        return this
+    private val dialogTag = NoticeBoardDialogFragment::class.java.canonicalName
+
+    init {
+        observer = NoticeBoardLifeCycleObserver(target)
+        InternalNoticeBoard.getInstance(target)
     }
 
     fun source(source: Source) {
@@ -50,27 +49,40 @@ class NoticeBoard(private val target: FragmentActivity) {
     }
 
     fun colorProvider(colorProvider: ColorProvider) {
-        InternalNoticeBoard.saveColorProvider(colorProvider)
+        InternalNoticeBoard.getInstance(target).saveColorProvider(colorProvider)
+    }
+
+    fun pin(func: NoticeBoard.() -> Unit): NoticeBoard {
+        this.func()
+        this.pin()
+        return this
     }
 
     private fun pin() {
-
-
-        InternalNoticeBoard.fetchChanges(sourceType)
+        InternalNoticeBoard.getInstance(target).fetchChanges(sourceType)
 
         when (displayOptions) {
             DisplayOptions.ACTIVITY -> target.startActivity(
                 NoticeBoardActivity.createIntent(target, title)
             )
             DisplayOptions.DIALOG -> {
-                val fm = target.supportFragmentManager
+                val fragmentManager = target.supportFragmentManager
                 val noticeBoardDialogFragment = NoticeBoardDialogFragment.newInstance(title)
-                noticeBoardDialogFragment.show(
-                    fm,
-                    NoticeBoardDialogFragment::class.java.canonicalName
-                )
+                noticeBoardDialogFragment.show(fragmentManager, dialogTag)
             }
         }
+    }
+
+    inner class NoticeBoardLifeCycleObserver(lifecycleOwner: LifecycleOwner) : LifecycleObserver {
+        init {
+            lifecycleOwner.lifecycle.addObserver(this)
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        fun onDestroy() {
+            InternalNoticeBoard.clear()
+        }
+
     }
 
     companion object {

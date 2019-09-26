@@ -20,6 +20,14 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+-keepclassmembernames net.furkanakdemir.noticeboard.NoticeBoard
+-keepclassmembernames net.furkanakdemir.noticeboard.Source
+-keepclassmembernames net.furkanakdemir.noticeboard.ChangeType
+-keepclassmembernames net.furkanakdemir.noticeboard.DisplayOptions
+
+-keep class net.furkanakdemir.noticeboard.data.model.** { *; }
+
+
 # JSR 305 annotations are for embedding nullability information.
 -dontwarn javax.annotation.**
 
@@ -88,5 +96,3 @@
 
 # Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
 -dontwarn org.codehaus.mojo.animal_sniffer.*
-
--keep class net.furkanakdemir.noticeboard.data.model.** { *; }
