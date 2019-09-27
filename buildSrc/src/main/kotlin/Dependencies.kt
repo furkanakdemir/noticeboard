@@ -4,16 +4,14 @@ object Versions {
     const val ktlint_plugin = "8.2.0"
     const val dex_count_plugin = "0.8.6"
     const val detekt_plugin = "1.0.1"
+    const val bintray_plugin = "1.8.4"
 
-    const val navigation = "2.1.0-rc01"
     const val lifecycle = "2.1.0"
     const val fragment = "1.1.0-rc04"
     const val constraintlayout = "1.1.3"
     const val appcompat = "1.0.2"
     const val material = "1.0.0"
     const val recyclerview = "1.0.0"
-    const val retrofit = "2.6.0"
-    const val logging_interceptor = "4.1.0"
 
     const val junit = "4.12"
     const val espresso = "3.2.0"
@@ -53,6 +51,7 @@ object Plugins {
     const val ktlint = "org.jlleitschuh.gradle.ktlint"
     const val dex_count = "com.getkeepsafe.dexcount"
     const val detekt = "io.gitlab.arturbosch.detekt"
+    const val bintray = "com.jfrog.bintray"
 
 }
 
@@ -68,9 +67,6 @@ object Deps {
 
     // Kotlin
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin_version}"
-    const val coroutine_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutine}"
-    const val coroutine_android =
-        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutine}"
 
     // Android KTX
     const val core_ktx = "androidx.core:core-ktx:${Versions.core_ktx}"
@@ -90,19 +86,6 @@ object Deps {
     // Lifecycle
     const val lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
 
-    // Navigation
-    const val navigation_fragment_ktx =
-        "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
-    const val navigation_ui_ktx = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
-
-    // Network
-    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-    const val retrofit_converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
-    const val retrofit_adapter_rxjava2 =
-        "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
-    const val logging_interceptor =
-        "com.squareup.okhttp3:logging-interceptor:${Versions.logging_interceptor}"
-
     // Json Library
     const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
 
@@ -112,13 +95,6 @@ object Deps {
 }
 
 object TestDeps {
-
-    // Kotlin
-    const val coroutine_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutine}"
-
-    // Lifecycle
-
-    const val lifecycle_test = "androidx.arch.core:core-testing:${Versions.lifecycle}"
 
     // JUnit
     const val junit = "junit:junit:${Versions.junit}"
@@ -134,16 +110,6 @@ object TestDeps {
     const val test_runner = "androidx.test:runner:${Versions.test_runner}"
     const val test_rules = "androidx.test:rules:${Versions.test_rules}"
 
-    // Assertions
-    const val ext_junit = "androidx.test.ext:junit:${Versions.ext_junit}"
-    const val ext_truth = "androidx.test.ext:truth:${Versions.ext_truth}"
-    const val truth = "com.google.truth:truth:${Versions.truth}"
-
-    // Espresso dependencies
-    const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
-
     // Robolectric
     const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
-
 }
-

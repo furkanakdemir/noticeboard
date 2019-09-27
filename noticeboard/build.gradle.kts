@@ -12,7 +12,7 @@ plugins {
     id(Plugins.dex_count)
     id(Plugins.detekt)
     `maven-publish`
-    id("com.jfrog.bintray") version "1.8.4"
+    id(Plugins.bintray) version Versions.bintray_plugin
 }
 
 android {
@@ -45,6 +45,10 @@ android {
             isIncludeAndroidResources = true
         })
     }
+
+    // TODO replace with https://issuetracker.google.com/issues/72050365 once released.
+    libraryVariants.matching { it.buildType.name == "release" }
+        .all { generateBuildConfigProvider?.get()?.enabled = false }
 }
 
 val developerId = "furkanakdemir"
@@ -55,7 +59,7 @@ val artifactDescription = "Change Log library for Android API 21+"
 
 val publicationName = "noticeboard"
 
-val artifactVersion = "1.0.19"
+val artifactVersion = "1.0.28"
 val vcs = "https://github.com/furkanakdemir/noticeboard"
 
 val androidSourcesJar by tasks.registering(Jar::class) {
@@ -144,9 +148,9 @@ dependencies {
 
     // JUnit
     testImplementation(TestDeps.junit)
-    testImplementation(TestDeps.junit)
 
     // AndroidJUnitRunner and JUnit Rules
+    testImplementation(TestDeps.test_core)
     testImplementation(TestDeps.test_runner)
     testImplementation(TestDeps.test_rules)
 
