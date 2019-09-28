@@ -11,6 +11,7 @@
         android:id="@+id/change_type"
         style="@style/NoticeBoard.Change.Type"
         android:layout_width="0dp"
+        android:fontFamily="@font/montserrat_medium"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/notice_board_spacing_small"
         android:elevation="@dimen/elevation_change_log_change_type"
@@ -28,7 +29,9 @@
         android:paddingStart="@dimen/notice_board_spacing_small"
         android:paddingEnd="@dimen/notice_board_spacing_small"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:fontFamily="@font/montserrat_regular"
         app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/montserrat_regular"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem/random" />
