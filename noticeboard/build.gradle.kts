@@ -15,6 +15,14 @@ plugins {
     id(Plugins.bintray) version Versions.bintray_plugin
 }
 
+val properties = Properties()
+val fis = FileInputStream(rootProject.file("local.properties"))
+properties.load(fis)
+
+val noticeBoardStorePassword: String by lazy { properties.getProperty("storePassword") }
+val noticeBoardStoreKeyAlias: String by lazy { properties.getProperty("keyAlias") }
+val noticeBoardStorePasswordKeyPassword: String by lazy { properties.getProperty("keyPassword") }
+
 android {
     compileSdkVersion(AndroidSdk.sdk_compile)
 
@@ -28,9 +36,18 @@ android {
         consumerProguardFiles("consumer-proguard-rules.pro")
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = rootProject.file("noticeboard.jks")
+            storePassword = noticeBoardStorePassword
+            keyAlias = noticeBoardStoreKeyAlias
+            keyPassword = noticeBoardStorePasswordKeyPassword
+        }
+    }
+
     buildTypes {
         getByName("release") {
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
@@ -165,10 +182,6 @@ publishing {
         }
     }
 }
-
-val properties = Properties()
-val fis = FileInputStream(rootProject.file("local.properties"))
-properties.load(fis)
 
 val bintrayUser: String by lazy { properties.getProperty("bintrayUser") }
 val bintrayKey: String by lazy { properties.getProperty("bintrayKey") }
