@@ -9,7 +9,7 @@ object Versions {
     const val lifecycle = "2.1.0"
     const val fragment = "1.1.0-rc04"
     const val constraintlayout = "1.1.3"
-    const val appcompat = "1.0.2"
+    const val appcompat = "1.1.0"
     const val material = "1.0.0"
     const val recyclerview = "1.0.0"
 
@@ -25,6 +25,7 @@ object Versions {
 
     const val core_ktx = "1.0.2"
     const val fragment_ktx = "1.1.0"
+    const val activity_ktx = "1.0.0"
     const val coroutine = "1.3.0"
     const val mockito_kotlin = "2.1.0"
     const val mockito_core = "2.23.0"
@@ -71,6 +72,7 @@ object Deps {
     // Android KTX
     const val core_ktx = "androidx.core:core-ktx:${Versions.core_ktx}"
     const val fragment_ktx = "androidx.fragment:fragment-ktx:${Versions.fragment_ktx}"
+    const val activity_ktx = "androidx.activity:activity-ktx:${Versions.activity_ktx}"
 
     // AndroidX
     const val constraintlayout =
