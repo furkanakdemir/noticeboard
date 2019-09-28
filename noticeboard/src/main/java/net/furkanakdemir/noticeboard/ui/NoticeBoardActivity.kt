@@ -5,10 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_notice_board.*
 import net.furkanakdemir.noticeboard.InternalNoticeBoard
@@ -22,7 +22,7 @@ internal class NoticeBoardActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var noticeBoardAdapter: NoticeBoardAdapter
 
-    private lateinit var noticeBoardViewModel: NoticeBoardViewModel
+    private val noticeBoardViewModel by viewModels<NoticeBoardViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +32,6 @@ internal class NoticeBoardActivity : AppCompatActivity() {
         setupToolbar()
 
         setupRecyclerView()
-
-        noticeBoardViewModel =
-            ViewModelProviders.of(this).get(NoticeBoardViewModel::class.java)
 
         noticeBoardViewModel.releaseLiveData.observe(this, Observer {
             noticeBoardAdapter.releaseList = it.toMutableList()

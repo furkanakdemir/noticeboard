@@ -6,8 +6,8 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import net.furkanakdemir.noticeboard.InternalNoticeBoard
 import net.furkanakdemir.noticeboard.NoticeBoard.Companion.KEY_TITLE
@@ -21,7 +21,7 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
     private var messageTextView: TextView? = null
     private lateinit var noticeBoardAdapter: NoticeBoardAdapter
 
-    private lateinit var noticeBoardViewModel: NoticeBoardViewModel
+    private val noticeBoardViewModel by viewModels<NoticeBoardViewModel>()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireContext())
@@ -41,9 +41,6 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
     }
 
     private fun setupViewModel() {
-
-        noticeBoardViewModel =
-            ViewModelProviders.of(this).get(NoticeBoardViewModel::class.java)
 
         noticeBoardViewModel.releaseLiveData.observe(this, Observer {
             noticeBoardAdapter.releaseList = it.toMutableList()
