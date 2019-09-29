@@ -1,4 +1,6 @@
-![GitHub](https://img.shields.io/github/license/furkanakdemir/noticeboard)
+![GitHub](https://img.shields.io/github/license/furkanakdemir/noticeboard)  
+
+![NoticeBoard](art/noticeboard_banner.png)
 
 # NoticeBoard
 Change Log library for Android API 21+
