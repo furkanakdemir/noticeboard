@@ -1,19 +1,19 @@
 ![NoticeBoard](art/noticeboard_banner.jpg)
 
-# NoticeBoard
+NoticeBoard
+-------
 
 ![GitHub](https://img.shields.io/github/license/furkanakdemir/noticeboard)
 
 
 NoticeBoard is a changelog library for Android API 21+.
 
+Screenshot
+-------
 
-## Screenshot
 
-
-
-## Download
-
+Download
+-------
 
 ```
 dependencies {
@@ -22,7 +22,8 @@ dependencies {
 
 ```
 
-## Usage
+Usage
+-------
 
 
 Basic usage is the following
@@ -33,7 +34,7 @@ NoticeBoard(this).pin {
 }
 ```
 
-#### Title
+### Title
 
 The title of a noticeboard can be set by
 
@@ -44,7 +45,7 @@ NoticeBoard(this).pin {
 ```
 
 
-#### Display Options
+### Display Options
 
 NoticeBoard can be displayed in two ways
 
@@ -62,7 +63,7 @@ NoticeBoard(this).pin {
 }
 ```
 
-#### Color Provider
+### Color Provider
 
 A color provider can be passed to change change type backgrounds.
 
@@ -88,6 +89,7 @@ class CustomColorProvider : ColorProvider {
 }
 
 ```
+
 Finally
 
 ```java
@@ -99,7 +101,8 @@ NoticeBoard(this).pin {
 
 ```
 
-#### Source Types
+### Source Types
+
 There are currently 3 data source types.
 
 Source  |
@@ -108,7 +111,7 @@ Dynamic |
 Json    |
 Xml     |
 
-##### Dynamic
+#### Dynamic
 
 You can add releases programmatically
 
@@ -133,7 +136,7 @@ NoticeBoard(this).pin {
 }
 ```
 
-##### Json
+#### Json
 
 You can add releases by adding json file to `/assets` folder.
 
@@ -183,7 +186,7 @@ NoticeBoard(this).pin {
 }
 ```
 
-##### Xml
+#### Xml
 
 You can add releases by adding xml file to `/assets` folder.
 
@@ -231,7 +234,8 @@ NoticeBoard(this).pin {
 }
 ```
 
-## Upcoming
+Upcoming
+-------
 
 
 1. Add `Unreleased` section support
