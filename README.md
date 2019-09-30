@@ -25,18 +25,27 @@ dependencies {
 Usage
 -------
 
+The `pin` function is used to show a change log list. It receives a lambda to make clients config their noticeboards.
 
-Basic usage is the following
+Default configs are the following:
+TITLE: NoticeBoard
+DISPLAY_IN: Activity
+SOURCE_TYPE: Dynamic with empty list
 
 ```java
 NoticeBoard(this).pin {
-    ... // configs
+    // configs
+    title(...)
+    displayIn(...)
+    colorProvider(...)
+    source(...)
 }
 ```
+`this` can be `Fragment` or `Activity`
 
 ### Title
 
-The title of a noticeboard can be set by
+The title of a noticeboard can be set by `title` function.
 
 ```java
 NoticeBoard(this).pin {
@@ -44,18 +53,14 @@ NoticeBoard(this).pin {
 }
 ```
 
-
 ### Display Options
 
-NoticeBoard can be displayed in two ways
-
+NoticeBoard can be displayed in two ways.
 
 Display Options  |
 -----------------|
 ACTIVITY         |
 DIALOG           |
-
-
 
 ```java
 NoticeBoard(this).pin {
@@ -70,14 +75,11 @@ A color provider can be passed to change change type backgrounds.
 Override the default color provider
 
 
-```java
+``` java
 class CustomColorProvider(private val context: Context) : NoticeBoardColorProvider(context) {
     override var colorAdded: Int = ContextCompat.getColor(context, R.color.colorAccent)
 }
-
 ```
-
-or
 
 Implement `ColorProvider` interface
 
@@ -90,7 +92,7 @@ class CustomColorProvider : ColorProvider {
 
 ```
 
-Finally
+Finally, a custom color provider can be set by `colorProvider` function.
 
 ```java
 val customColorProvider = CustomColorProvider(this)
@@ -113,7 +115,7 @@ Xml     |
 
 #### Dynamic
 
-You can add releases programmatically
+Save releases by creating dynamically
 
 ```java
 val changes = listOf(
@@ -138,10 +140,9 @@ NoticeBoard(this).pin {
 
 #### Json
 
-You can add releases by adding json file to `/assets` folder.
+Store releases by creating a json file to the `/assets` folder.
 
-JSON format
-
+Here is an example of JSON file
 ```json
 [
   {
@@ -188,9 +189,9 @@ NoticeBoard(this).pin {
 
 #### Xml
 
-You can add releases by adding xml file to `/assets` folder.
+Store releases by creating a xml file to the `/assets` folder.
 
-XML  format
+Here is an example of XML file
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <releases>
