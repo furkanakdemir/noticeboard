@@ -13,4 +13,7 @@
     <dimen name="width_dialog">360dp</dimen>
     <dimen name="height_dialog">600dp</dimen>
 
+    <dimen name="height_list_item_change_log_min">56dp</dimen>
+    <dimen name="elevation_change_log_change_type">4dp</dimen>
+
 </resources>

@@ -121,14 +121,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openDynamic() {
-        val newItems = listOf(
+        val changes = listOf(
             Release(
                 "30 Sep 2019", "1.0.0",
                 listOf(
                     Change("New Login Page", ADDED),
                     Change("Crash in Payment", CHANGED),
-                    Change("Crash in Payment", DEPRECATED),
-                    Change("All banners", REMOVED),
+                    Change("Old theme will be removed", DEPRECATED),
+                    Change("Tutorial page is removed", REMOVED),
                     Change("Crash in Payment", FIXED),
                     Change("HTTPS only requests", SECURITY)
                 )
@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
         NoticeBoard(this).pin {
             displayIn(currentDisplayOptions)
             title(title)
-            source(Source.Dynamic(newItems))
+            source(Source.Dynamic(changes))
             colorProvider(myColorProvider)
         }
     }
