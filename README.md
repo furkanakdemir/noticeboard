@@ -12,6 +12,14 @@ Screenshot
 -------
 
 
+|ACTIVITY|DIALOG|
+|----------|---------|
+|![ACTIVITY](art/noticeboard_activity.png)|![DIALOG](art/noticeboard_dialog.png)|
+
+
+
+
+
 Download
 -------
 
