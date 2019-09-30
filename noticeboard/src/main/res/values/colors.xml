@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="dialogTextColor"></color>
     <color name="noticeBoardColorPrimary">#FF9800</color>
     <color name="noticeBoardColorPrimaryDark">#F57C00</color>
     <color name="noticeBoardColorAccent">#03A9F4</color>
 
     <color name="default_type">#000000</color>
 
-    <color name="added">#4caf50</color>
-    <color name="changed">#2196f3</color>
-    <color name="deprecated">#512da8</color>
-    <color name="removed">#f44336</color>
-    <color name="fixed">#ff5722</color>
-    <color name="security">#00bcd4</color>
+    <color name="added">#4CAF50</color>
+    <color name="changed">#2196F3</color>
+    <color name="deprecated">#512DA8</color>
+    <color name="removed">#F44336</color>
+    <color name="fixed">#009688</color>
+    <color name="security">#00BCD4</color>
 
 
     <color name="notice_board_change_type_text_default">#FFFFFF</color>
