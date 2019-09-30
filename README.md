@@ -64,51 +64,7 @@ NoticeBoard(this).pin {
 
 #### Color Provider
 
-
-Default colors
-<style>
-
-    .colorItem {
-      margin: 4px;padding: 8px;
-      border-radius: 1000px;
-      color:white;
-      font-size:14px
-    }
-
-    .added {
-      background:#4CAF50;
-    }
-
-    .changed {
-      background:#2196F3;
-    }
-
-    .deprecated {
-      background:#512DA8;
-    }
-
-    .removed {
-      background:#F44336;
-    }
-
-    .fixed {
-      background:#009688;
-    }
-
-    .security {
-      background:#00BCD4;
-    }
-</style>
-
-||||||||
-|:----------------------:|:----------------------:|:----------------------:|:----------------------:|:----------------------:|:----------------------:|:----------------------:|
-**Change Type** | <div class="colorItem added">ADDED</div>  | <div class="colorItem changed">CHANGED</div>  | <div class="colorItem deprecated">DEPRECATED</div>  | <div class="colorItem removed">REMOVED</div>  | <div class="colorItem fixed">FIXED</div>  | <div class="colorItem security">SECURITY</div>
-
-
-<div class="tables-end"></div>
-
-
-##### Custom Color Provider
+A color provider can be passed to change change type backgrounds.
 
 Override the default color provider
 
@@ -121,6 +77,7 @@ class CustomColorProvider(private val context: Context) : NoticeBoardColorProvid
 ```
 
 or
+
 Implement `ColorProvider` interface
 
 ```java
@@ -150,15 +107,6 @@ Source  |
 Dynamic |
 Json    |
 Xml     |
-
-val myColorProvider = CustomColorProvider(this)
-
-NoticeBoard(this).pin {
-    displayIn(ACTIVITY)
-    title("NoticeBoard")
-    source(Dynamic(changes))
-    colorProvider(myColorProvider)
-}
 
 ##### Dynamic
 
