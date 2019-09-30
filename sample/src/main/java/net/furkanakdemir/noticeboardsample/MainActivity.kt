@@ -9,11 +9,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
-import net.furkanakdemir.noticeboard.ChangeType
+import net.furkanakdemir.noticeboard.ChangeType.ADDED
+import net.furkanakdemir.noticeboard.ChangeType.CHANGED
+import net.furkanakdemir.noticeboard.ChangeType.DEPRECATED
+import net.furkanakdemir.noticeboard.ChangeType.FIXED
+import net.furkanakdemir.noticeboard.ChangeType.REMOVED
+import net.furkanakdemir.noticeboard.ChangeType.SECURITY
 import net.furkanakdemir.noticeboard.DisplayOptions
 import net.furkanakdemir.noticeboard.NoticeBoard
 import net.furkanakdemir.noticeboard.Source
 import net.furkanakdemir.noticeboard.data.model.Release
+import net.furkanakdemir.noticeboard.data.model.Release.Change
 
 @Suppress("LongMethod", "ComplexMethod", "TooManyFunctions")
 class MainActivity : AppCompatActivity() {
@@ -115,70 +121,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openDynamic() {
-        val newItems = mutableListOf(
+        val newItems = listOf(
             Release(
-                "16 Sep 2019", "2.0.0",
+                "30 Sep 2019", "1.0.0",
                 listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.FIXED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.SECURITY.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.DEPRECATED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.REMOVED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.CHANGED.ordinal
-                    )
-                )
-            ),
-            Release(
-                "16 Sep 2019", "2.0.0",
-                listOf(
-                    Release.Change(
-                        "New Login Page",
-                        ChangeType.ADDED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.FIXED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.SECURITY.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.DEPRECATED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.REMOVED.ordinal
-                    ),
-                    Release.Change(
-                        "Crash in Payment",
-                        ChangeType.CHANGED.ordinal
-                    )
+                    Change("New Login Page", ADDED),
+                    Change("Crash in Payment", CHANGED),
+                    Change("Crash in Payment", DEPRECATED),
+                    Change("All banners", REMOVED),
+                    Change("Crash in Payment", FIXED),
+                    Change("HTTPS only requests", SECURITY)
                 )
             )
         )
 
         val myColorProvider = CustomColorProvider(this)
 
-        NoticeBoard(this@MainActivity).pin {
+        NoticeBoard(this).pin {
             displayIn(currentDisplayOptions)
             title(title)
             source(Source.Dynamic(newItems))
@@ -189,7 +148,7 @@ class MainActivity : AppCompatActivity() {
     private fun openInvalidXml() {
         val filepath = "sample_invalid.xml"
 
-        NoticeBoard(this@MainActivity).pin {
+        NoticeBoard(this).pin {
             source(Source.Xml(filepath))
             title(title)
             displayIn(currentDisplayOptions)
@@ -201,7 +160,7 @@ class MainActivity : AppCompatActivity() {
 
         val filepath = "sample_empty.xml"
 
-        NoticeBoard(this@MainActivity).pin {
+        NoticeBoard(this).pin {
             source(Source.Xml(filepath))
             title(title)
             displayIn(currentDisplayOptions)
@@ -212,7 +171,7 @@ class MainActivity : AppCompatActivity() {
 
         val filepath = "sample_empty_file.xml"
 
-        NoticeBoard(this@MainActivity).pin {
+        NoticeBoard(this).pin {
             source(Source.Xml(filepath))
             title(title)
             displayIn(currentDisplayOptions)
@@ -223,7 +182,7 @@ class MainActivity : AppCompatActivity() {
 
         val filepath = "sample.json"
 
-        NoticeBoard(this@MainActivity).pin {
+        NoticeBoard(this).pin {
             source(Source.Json(filepath))
             title(title)
             displayIn(currentDisplayOptions)
@@ -234,7 +193,7 @@ class MainActivity : AppCompatActivity() {
 
         val filepath = "sample_empty.json"
 
-        NoticeBoard(this@MainActivity).pin {
+        NoticeBoard(this).pin {
             source(Source.Json(filepath))
             title(title)
             displayIn(currentDisplayOptions)
@@ -245,7 +204,7 @@ class MainActivity : AppCompatActivity() {
 
         val filepath = "sample_empty_file.json"
 
-        NoticeBoard(this@MainActivity).pin {
+        NoticeBoard(this).pin {
             source(Source.Json(filepath))
             title(title)
             displayIn(currentDisplayOptions)
@@ -256,7 +215,7 @@ class MainActivity : AppCompatActivity() {
 
         val filepath = "sample_invalid.json"
 
-        NoticeBoard(this@MainActivity).pin {
+        NoticeBoard(this).pin {
             source(Source.Json(filepath))
             title(title)
             displayIn(currentDisplayOptions)
@@ -266,7 +225,7 @@ class MainActivity : AppCompatActivity() {
     private fun openXml() {
         val filepath = "sample.xml"
 
-        NoticeBoard(this@MainActivity).pin {
+        NoticeBoard(this).pin {
             source(Source.Xml(filepath))
             title(title)
             displayIn(currentDisplayOptions)

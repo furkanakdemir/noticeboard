@@ -1,29 +1,31 @@
 [
   {
-    "date": "12 Aug 2019",
-    "version": "1.2.3",
+    "date": "30 Sep 2019",
+    "version": "1.0.0",
     "changes": [
       {
         "type": 0,
-        "description": "Lorem"
+        "description": "New Login Page"
       },
       {
         "type": 1,
-        "description": "Lorem"
-      }
-    ]
-  },
-  {
-    "date": "10 Aug 2019",
-    "version": "1.2.2",
-    "changes": [
+        "description": "Crash in Payment"
+      },
       {
         "type": 2,
-        "description": "Lorem"
+        "description": "Old theme will be removed"
       },
       {
         "type": 3,
-        "description": "Lorem"
+        "description": "Tutorial page is removed"
+      },
+      {
+        "type": 4,
+        "description": "Crash in Payment"
+      },
+      {
+        "type": 5,
+        "description": "HTTPS only requests"
       }
     ]
   }

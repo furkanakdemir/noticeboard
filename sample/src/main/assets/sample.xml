@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <releases>
     <release>
+        <date>30 Sep 2019</date>
+        <version>1.0.0</version>
         <change>
-            <description>Lorem</description>
+            <description>New Login Page</description>
             <type>0</type>
         </change>
         <change>
-            <description>Lorem</description>
+            <description>Crash in Payment</description>
             <type>1</type>
         </change>
-        <date>22 Jun 2019</date>
-        <version>7.8.9</version>
-    </release>
-    <release>
         <change>
-            <description>denied</description>
+            <description>Old theme will be removed</description>
             <type>2</type>
         </change>
         <change>
-            <description>file</description>
+            <description>Tutorial page is removed</description>
             <type>3</type>
         </change>
-        <date>11 Mar 2019</date>
-        <version>4.5.6</version>
+        <change>
+            <description>Crash in Payment</description>
+            <type>4</type>
+        </change>
+        <change>
+            <description>HTTPS only requests</description>
+            <type>5</type>
+        </change>
     </release>
 </releases>

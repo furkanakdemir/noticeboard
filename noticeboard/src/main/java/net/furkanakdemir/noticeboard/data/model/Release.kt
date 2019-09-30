@@ -1,5 +1,7 @@
 package net.furkanakdemir.noticeboard.data.model
 
+import net.furkanakdemir.noticeboard.ChangeType
+
 data class Release(
     val date: String = "",
     val version: String = "",
@@ -9,6 +11,9 @@ data class Release(
         val description: String = "",
         val type: Int = -1
     ) {
+        constructor(description: String = "", type: ChangeType = ChangeType.ADDED) :
+                this(description, type.ordinal)
+
         override fun toString(): String {
             return "$description $type"
         }
