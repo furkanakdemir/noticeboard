@@ -35,10 +35,11 @@ Usage
 
 The `pin` function is used to show a change log list. It receives a lambda to make clients config their noticeboards.
 
-Default configs are the following:
-TITLE: NoticeBoard
-DISPLAY_IN: Activity
-SOURCE_TYPE: Dynamic with empty list
+Default configs are the following:  
+TITLE: NoticeBoard  
+DISPLAY_IN: Activity  
+SOURCE_TYPE: Dynamic with empty list  
+
 
 ```java
 NoticeBoard(this).pin {
@@ -78,7 +79,7 @@ NoticeBoard(this).pin {
 
 ### Color Provider
 
-A color provider can be passed to change change type backgrounds.
+A color provider can be passed to provide the change type backgrounds.
 
 Override the default color provider
 
@@ -89,7 +90,7 @@ class CustomColorProvider(private val context: Context) : NoticeBoardColorProvid
 }
 ```
 
-Implement `ColorProvider` interface
+Or Implement `ColorProvider` interface
 
 ```java
 class CustomColorProvider : ColorProvider {
