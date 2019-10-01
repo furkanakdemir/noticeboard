@@ -153,7 +153,6 @@ class MainActivity : AppCompatActivity() {
             title(title)
             displayIn(currentDisplayOptions)
         }
-
     }
 
     private fun openEmptyArrayXml() {

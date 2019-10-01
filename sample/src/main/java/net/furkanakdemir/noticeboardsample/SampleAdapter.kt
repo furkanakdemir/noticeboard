@@ -37,7 +37,3 @@ class SampleAdapter constructor(val onSampleClick: (String) -> Unit) :
         }
     }
 }
-
-
-
-

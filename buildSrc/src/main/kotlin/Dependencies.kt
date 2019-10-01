@@ -35,7 +35,6 @@ object Versions {
     const val leak_canary = "2.0-beta-3"
 }
 
-
 object Plugins {
 
     const val android_gradle_plugin =
