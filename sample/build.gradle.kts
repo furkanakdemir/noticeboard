@@ -58,4 +58,7 @@ dependencies {
     implementation(Deps.material)
 
     debugImplementation(Deps.leak_canary)
+
+    // JUnit
+    testImplementation(TestDeps.junit)
 }
