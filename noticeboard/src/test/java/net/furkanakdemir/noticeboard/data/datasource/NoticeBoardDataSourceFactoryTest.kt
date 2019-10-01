@@ -28,7 +28,6 @@ class NoticeBoardDataSourceFactoryTest {
     @Mock
     internal lateinit var mapper: ListMapper<ReleaseRaw, Release>
 
-
     @Before
     fun setUp() {
         noticeBoardDataSourceFactory = NoticeBoardDataSourceFactory(fileReader, mapper)

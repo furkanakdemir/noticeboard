@@ -38,5 +38,3 @@ sealed class Result<out R> {
         return (this as? Success<T>)?.data ?: fallback
     }
 }
-
-

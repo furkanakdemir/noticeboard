@@ -48,7 +48,6 @@ class NoticeBoardTest {
         MockitoAnnotations.initMocks(this)
     }
 
-
     @Test
     fun testCreateWithDefaults() {
         val actual = NoticeBoard(activity)

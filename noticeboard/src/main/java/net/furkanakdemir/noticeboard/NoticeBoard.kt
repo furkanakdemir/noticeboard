@@ -84,7 +84,6 @@ class NoticeBoard(private val target: FragmentActivity) {
         fun onDestroy() {
             InternalNoticeBoard.clear()
         }
-
     }
 
     companion object {

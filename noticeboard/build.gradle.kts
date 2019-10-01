@@ -102,7 +102,6 @@ dependencies {
 
 val publicationName = "noticeboard"
 
-
 val androidSourcesJar by tasks.registering(Jar::class) {
     archiveClassifier.set("sources")
     from(android.sourceSets.getByName("main").java.srcDirs)
@@ -123,7 +122,6 @@ val POM_LICENCE_URL: String by project
 val POM_LICENCE_DIST: String by project
 val POM_DEVELOPER_ID: String by project
 val POM_DEVELOPER_NAME: String by project
-
 
 val DEP_GROUP_ID = "groupId"
 val DEP_ARTIFACT_ID = "artifactId"
@@ -163,7 +161,7 @@ publishing {
                     developerConnection.set(POM_SCM_DEV_CONNECTION)
                 }
 
-                //The publication doesn't know about our dependencies, so we have to manually add them to the pom
+                // The publication doesn't know about our dependencies, so we have to manually add them to the pom
                 withXml {
                     val dependenciesNode = asNode().appendNode(DEP_TAG_PARENT)
                     configurations.implementation.get()
