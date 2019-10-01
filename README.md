@@ -3,7 +3,8 @@
 NoticeBoard
 -------
 
-![GitHub](https://img.shields.io/github/license/furkanakdemir/noticeboard)
+![GitHub](https://img.shields.io/github/license/furkanakdemir/noticeboard) 
+![Bintray](https://img.shields.io/bintray/v/furkanakdemir/noticeboard/net.furkanakdemir.noticeboard)
 
 
 NoticeBoard is a changelog library for Android API 21+.
