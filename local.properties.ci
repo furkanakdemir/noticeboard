@@ -1,0 +1,5 @@
+bintrayUser=circleci
+bintrayKey=circleci
+storePassword=circleci
+keyAlias=circleci
+keyPassword=circleci
