@@ -1,4 +1,5 @@
 object Versions {
+
     const val kotlin_version = "1.3.50"
     const val android_gradle_plugin = "3.5.0"
     const val ktlint_plugin = "8.2.0"
@@ -53,10 +54,10 @@ object Plugins {
     const val dex_count = "com.getkeepsafe.dexcount"
     const val detekt = "io.gitlab.arturbosch.detekt"
     const val bintray = "com.jfrog.bintray"
-
 }
 
 object AndroidSdk {
+
     const val sdk_minimum = 21
     const val sdk_compile = 29
     const val sdk_target = 29
@@ -93,7 +94,6 @@ object Deps {
 
     // Leak Canary
     const val leak_canary = "com.squareup.leakcanary:leakcanary-android:${Versions.leak_canary}"
-
 }
 
 object TestDeps {

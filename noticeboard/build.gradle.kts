@@ -1,7 +1,8 @@
 import com.android.build.gradle.internal.dsl.TestOptions
 import com.jfrog.bintray.gradle.BintrayExtension
 import java.io.FileInputStream
-import java.util.*
+import java.util.Date
+import java.util.Properties
 
 plugins {
     id(Plugins.android_library)
@@ -107,41 +108,42 @@ val androidSourcesJar by tasks.registering(Jar::class) {
     from(android.sourceSets.getByName("main").java.srcDirs)
 }
 
-val POM_ARTIFACT_ID: String by project
-val POM_NAME: String by project
-val POM_PACKAGING: String by project
-val GROUP: String by project
-val VERSION_NAME: String by project
-val POM_DESCRIPTION: String by project
-val POM_URL: String by project
-val POM_SCM_URL: String by project
-val POM_SCM_CONNECTION: String by project
-val POM_SCM_DEV_CONNECTION: String by project
-val POM_LICENCE_NAME: String by project
-val POM_LICENCE_URL: String by project
-val POM_LICENCE_DIST: String by project
-val POM_DEVELOPER_ID: String by project
-val POM_DEVELOPER_NAME: String by project
+val pomArtifactId: String by project
+val pomName: String by project
+val pomPackaging: String by project
+val pomDescription: String by project
+val pomUrl: String by project
+val pomScmUrl: String by project
+val pomScmConnection: String by project
+val pomScmDevConnection: String by project
+val pomLicenceName: String by project
+val pomLicenceUrl: String by project
+val pomLicenceDist: String by project
+val pomDeveloperId: String by project
+val pomDeveloperName: String by project
 
-val DEP_GROUP_ID = "groupId"
-val DEP_ARTIFACT_ID = "artifactId"
-val DEP_VERSION = "version"
-val DEP_TAG_PARENT = "dependencies"
-val DEP_TAG_NODE = "dependency"
+val group: String by project
+val versionName: String by project
+
+val depGroupId = "groupId"
+val depArtifactId = "artifactId"
+val depVersion = "version"
+val depTagParent = "dependencies"
+val depTagNode = "dependency"
 
 publishing {
     publications {
         create<MavenPublication>("noticeboard") {
-            groupId = GROUP
-            artifactId = POM_ARTIFACT_ID
-            version = VERSION_NAME
+            groupId = group
+            artifactId = pomArtifactId
+            version = versionName
             artifact("$buildDir/outputs/aar/noticeboard-release.aar")
             artifact(androidSourcesJar.get())
             pom {
-                name.set(POM_NAME)
-                description.set(POM_DESCRIPTION)
-                url.set(POM_URL)
-                packaging = POM_PACKAGING
+                name.set(pomName)
+                description.set(pomDescription)
+                url.set(pomUrl)
+                packaging = pomPackaging
                 licenses {
                     license {
                         name.set("The Apache License, Version 2.0")
@@ -150,28 +152,28 @@ publishing {
                 }
                 developers {
                     developer {
-                        id.set(POM_DEVELOPER_ID)
-                        name.set(POM_DEVELOPER_NAME)
+                        id.set(pomDeveloperId)
+                        name.set(pomDeveloperName)
                     }
                 }
 
                 scm {
-                    url.set(POM_URL)
-                    connection.set(POM_SCM_CONNECTION)
-                    developerConnection.set(POM_SCM_DEV_CONNECTION)
+                    url.set(pomUrl)
+                    connection.set(pomScmConnection)
+                    developerConnection.set(pomScmDevConnection)
                 }
 
                 // The publication doesn't know about our dependencies, so we have to manually add them to the pom
                 withXml {
-                    val dependenciesNode = asNode().appendNode(DEP_TAG_PARENT)
+                    val dependenciesNode = asNode().appendNode(depTagParent)
                     configurations.implementation.get()
                         .allDependencies.withType(ModuleDependency::class.java) {
-                        val dependencyNode = dependenciesNode.appendNode(DEP_TAG_NODE)
+                        val dependencyNode = dependenciesNode.appendNode(depTagNode)
                         with(this) {
                             dependencyNode.apply {
-                                appendNode(DEP_GROUP_ID, group)
-                                appendNode(DEP_ARTIFACT_ID, name)
-                                appendNode(DEP_VERSION, version)
+                                appendNode(depGroupId, group)
+                                appendNode(depArtifactId, name)
+                                appendNode(depVersion, version)
                             }
                         }
                     }
@@ -193,17 +195,17 @@ bintray {
     pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
         repo = "noticeboard"
         name = "net.furkanakdemir.noticeboard"
-        websiteUrl = POM_URL
+        websiteUrl = pomUrl
         githubRepo = "furkanakdemir/noticeboard"
-        vcsUrl = POM_SCM_URL
-        description = POM_DESCRIPTION
+        vcsUrl = pomScmUrl
+        description = pomDescription
         setLabels("kotlin")
         setLicenses("Apache-2.0")
         desc = description
 
         // Configure version
         version.apply {
-            name = VERSION_NAME
+            name = versionName
             released = Date().toString()
         }
     })
