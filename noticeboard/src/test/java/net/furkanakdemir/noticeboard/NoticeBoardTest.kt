@@ -9,6 +9,7 @@ import net.furkanakdemir.noticeboard.util.fakes.FakeColorProvider
 import net.furkanakdemir.noticeboard.util.fakes.TestData.EMPTY
 import net.furkanakdemir.noticeboard.util.fakes.TestData.TEST_FILEPATH
 import net.furkanakdemir.noticeboard.util.fakes.TestData.TEST_TITLE
+import net.furkanakdemir.noticeboard.util.fakes.TestData.TEST_TITLE_OTHER
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.instanceOf
 import org.junit.After
@@ -58,7 +59,7 @@ class NoticeBoardTest {
     }
 
     @Test
-    fun pin() {
+    fun testPin() {
         val actual = NoticeBoard(activity)
         actual.internalNoticeBoard = mock()
         actual.pin { }
@@ -69,7 +70,30 @@ class NoticeBoardTest {
     }
 
     @Test
-    fun source() {
+    fun testMultiPin() {
+        val actual = NoticeBoard(activity)
+
+        actual.internalNoticeBoard = mock()
+        actual.pin { }
+
+        assertThat(actual.displayOptions, Is(DisplayOptions.ACTIVITY))
+        assertThat(actual.sourceType, instanceOf(Source.Dynamic::class.java))
+        verify(actual.internalNoticeBoard).fetchChanges(actual.sourceType)
+
+        actual.pin {
+            source(Source.Json(TEST_FILEPATH))
+            title(TEST_TITLE_OTHER)
+            colorProvider(colorProvider)
+        }
+        assertThat(actual.displayOptions, Is(DisplayOptions.ACTIVITY))
+        assertThat(actual.sourceType, instanceOf(Source.Json::class.java))
+        assertThat(actual.title, Is(TEST_TITLE_OTHER))
+        verify(actual.internalNoticeBoard).saveColorProvider(colorProvider)
+        verify(actual.internalNoticeBoard).fetchChanges(actual.sourceType)
+    }
+
+    @Test
+    fun testSource() {
         val actual = NoticeBoard(activity)
 
         actual.source(Source.Xml(TEST_FILEPATH))
@@ -86,7 +110,7 @@ class NoticeBoardTest {
     }
 
     @Test
-    fun displayIn() {
+    fun testDisplayIn() {
 
         val actual = NoticeBoard(activity)
 
@@ -118,7 +142,7 @@ class NoticeBoardTest {
     }
 
     @Test
-    fun colorProvider() {
+    fun testColorProvider() {
 
         val actual = NoticeBoard(activity)
         actual.internalNoticeBoard = mock()
