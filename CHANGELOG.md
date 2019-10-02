@@ -15,7 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color API
 - More Date formats
 
-## [1.0.0] - 2017-10-02
+## [1.0.1] - 2019-10-02
+### Fixed
+- Multi pin crash
+
+## [1.0.0] - 2019-10-02
 ### Added
 - Dynamic, JSON and XML data sources
 - Activity or Dialog display options

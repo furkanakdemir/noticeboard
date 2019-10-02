@@ -28,7 +28,7 @@ Download
 
 ```
 dependencies {
-    implementation "net.furkanakdemir:noticeboard:1.0.0"
+    implementation "net.furkanakdemir:noticeboard:1.0.1"
 }
 
 ```
