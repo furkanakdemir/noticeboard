@@ -1,10 +1,10 @@
 package net.furkanakdemir.noticeboard.config
 
-import junit.framework.Assert.assertEquals
 import net.furkanakdemir.noticeboard.ChangeType
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
 import net.furkanakdemir.noticeboard.util.fakes.FakeColorProvider
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.hamcrest.CoreMatchers.`is` as Is

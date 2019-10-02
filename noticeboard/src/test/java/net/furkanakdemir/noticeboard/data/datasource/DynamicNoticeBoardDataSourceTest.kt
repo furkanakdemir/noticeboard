@@ -1,7 +1,7 @@
 package net.furkanakdemir.noticeboard.data.datasource
 
-import junit.framework.Assert.assertEquals
 import net.furkanakdemir.noticeboard.util.fakes.TestData.items
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 

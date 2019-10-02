@@ -27,7 +27,7 @@ allprojects {
 
 detekt {
     config =
-        files("/qa/default-detekt-config.yml")
+        files("qa/default-detekt-config.yml")
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {

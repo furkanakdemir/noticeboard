@@ -1,10 +1,10 @@
 package net.furkanakdemir.noticeboard.data.datasource
 
-import junit.framework.Assert.assertEquals
 import net.furkanakdemir.noticeboard.util.fakes.FakeXmlFileReader
 import net.furkanakdemir.noticeboard.util.fakes.TestData.TEST_FILEPATH
 import net.furkanakdemir.noticeboard.util.fakes.TestData.TEST_XML_RELEASE
 import net.furkanakdemir.noticeboard.util.io.FileReader
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
