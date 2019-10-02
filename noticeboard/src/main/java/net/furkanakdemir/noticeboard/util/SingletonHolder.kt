@@ -1,7 +1,6 @@
 package net.furkanakdemir.noticeboard.util
 
-open class SingletonHolder<out T : Any, in A>(creator: (A?) -> T) {
-    private var creator: ((A?) -> T)? = creator
+open class SingletonHolder<out T : Any, in A>(private val creator: (A?) -> T) {
     @Volatile
     private var instance: T? = null
 
@@ -16,9 +15,8 @@ open class SingletonHolder<out T : Any, in A>(creator: (A?) -> T) {
             if (i2 != null) {
                 i2
             } else {
-                val created = creator!!(arg)
+                val created = creator(arg)
                 instance = created
-                creator = null
                 created
             }
         }
