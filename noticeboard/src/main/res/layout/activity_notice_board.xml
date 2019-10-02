@@ -10,7 +10,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        app:theme="@style/NoticeBoardTheme.AppBarOverlay"
+        android:theme="@style/NoticeBoardTheme.AppBarOverlay"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar

@@ -1,6 +1,7 @@
 package net.furkanakdemir.noticeboard.data.datasource
 
 import net.furkanakdemir.noticeboard.data.model.Release
+import net.furkanakdemir.noticeboard.data.model.Release.Change
 import net.furkanakdemir.noticeboard.util.io.FileReader
 import org.xml.sax.SAXException
 import org.xml.sax.helpers.DefaultHandler
@@ -15,7 +16,7 @@ internal class XmlNoticeBoardDataSource(
 
     internal var releaseMap = HashMap<String, String>()
     internal var changeMap = HashMap<String, String>()
-    internal var changeList = mutableListOf<Release.Change>()
+    internal var changeList = mutableListOf<Change>()
 
     @Throws(IOException::class, SAXException::class)
     override fun getReleases(): List<Release> {
@@ -40,44 +41,26 @@ internal class XmlNoticeBoardDataSource(
             ) {
                 currentElement = true
                 currentValue = ""
-                if (localName == KEY_RELEASE) {
+                if (isRelease(localName)) {
                     releaseMap.clear()
                     changeMap.clear()
                     changeList = mutableListOf()
                 }
 
-                if (localName == KEY_CHANGE) {
+                if (isChange(localName)) {
                     changeMap.clear()
                 }
             }
 
             override fun endElement(uri: String, localName: String, qName: String) {
                 currentElement = false
-                if (localName.equals(KEY_DATE, ignoreCase = true))
-                    releaseMap[KEY_DATE] = currentValue
-                else if (localName.equals(KEY_VERSION, ignoreCase = true))
-                    releaseMap[KEY_VERSION] = currentValue
-                else if (localName.equals(KEY_DESCRIPTION, ignoreCase = true))
-                    changeMap[KEY_DESCRIPTION] = currentValue
-                else if (localName.equals(KEY_TYPE, ignoreCase = true))
-                    changeMap[KEY_TYPE] = currentValue
-                else if (localName.equals(KEY_CHANGE, ignoreCase = true)) {
-                    changeList.add(
-                        Release.Change(
-                            changeMap[KEY_DESCRIPTION].orEmpty(),
-                            changeMap[KEY_TYPE]?.toInt()
-                                ?: -1
-                        )
-                    )
-                    changeMap.clear()
-                } else if (localName.equals(KEY_RELEASE, ignoreCase = true)) {
-                    releases.add(
-                        Release(
-                            releaseMap[KEY_DATE].orEmpty(),
-                            releaseMap[KEY_VERSION].orEmpty(),
-                            changeList
-                        )
-                    )
+                when {
+                    isDate(localName) -> releaseMap[KEY_DATE] = currentValue
+                    isVersion(localName) -> releaseMap[KEY_VERSION] = currentValue
+                    isDescription(localName) -> changeMap[KEY_DESCRIPTION] = currentValue
+                    isType(localName) -> changeMap[KEY_TYPE] = currentValue
+                    isChange(localName) -> addChange()
+                    isRelease(localName) -> addRelease(releases)
                 }
             }
 
@@ -94,6 +77,35 @@ internal class XmlNoticeBoardDataSource(
         return releases
     }
 
+    private fun addRelease(releases: MutableList<Release>) {
+
+        val date = releaseMap[KEY_DATE].orEmpty()
+        val version = releaseMap[KEY_VERSION].orEmpty()
+
+        releases.add(Release(date, version, changeList))
+    }
+
+    private fun addChange() {
+
+        val desc = changeMap[KEY_DESCRIPTION].orEmpty()
+        val type = changeMap[KEY_TYPE]?.toInt() ?: TYPE_DEFAULT
+
+        changeList.add(Change(desc, type))
+        changeMap.clear()
+    }
+
+    private fun isRelease(localName: String) = localName.equals(KEY_RELEASE, true)
+
+    private fun isChange(localName: String) = localName.equals(KEY_CHANGE, true)
+
+    private fun isType(localName: String) = localName.equals(KEY_TYPE, true)
+
+    private fun isDescription(localName: String): Boolean = localName.equals(KEY_DESCRIPTION, true)
+
+    private fun isVersion(localName: String) = localName.equals(KEY_VERSION, true)
+
+    private fun isDate(localName: String) = localName.equals(KEY_DATE, true)
+
     companion object {
         private const val KEY_DATE = "date"
         private const val KEY_VERSION = "version"
@@ -101,5 +113,7 @@ internal class XmlNoticeBoardDataSource(
         private const val KEY_TYPE = "type"
         private const val KEY_CHANGE = "change"
         private const val KEY_RELEASE = "release"
+
+        private const val TYPE_DEFAULT = -1
     }
 }
