@@ -50,21 +50,16 @@ internal class InternalNoticeBoard private constructor(context: Context?) {
         return RealListMapper(releaseDomainMapper)
     }
 
-    fun saveColorProvider(colorProvider: ColorProvider) {
+    fun saveColorProvider(colorProvider: ColorProvider) =
         configRepository.saveColorProvider(colorProvider)
-    }
 
-    fun fetchChanges(sourceType: Source) {
-        noticeBoardRepository.fetchChanges(sourceType)
-    }
+    fun fetchChanges(sourceType: Source) = noticeBoardRepository.fetchChanges(sourceType)
 
-    fun getColorProvider(): ColorProvider {
-        return configRepository.getColorProvider()
-    }
+    fun getColorProvider(): ColorProvider = configRepository.getColorProvider()
 
-    fun getChanges(): Result<List<Release>> {
-        return noticeBoardRepository.getChanges()
-    }
+    fun getChanges(): Result<List<Release>> = noticeBoardRepository.getChanges()
+
+    fun setDefaultColorProvider() = configRepository.saveColorProvider(defaultColorProvider)
 
     companion object : SingletonHolder<InternalNoticeBoard, Context>(::InternalNoticeBoard)
 }

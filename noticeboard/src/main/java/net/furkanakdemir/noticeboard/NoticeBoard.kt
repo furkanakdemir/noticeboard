@@ -17,11 +17,11 @@ class NoticeBoard(private val target: FragmentActivity) {
             this(fragmentTarget.requireActivity())
 
     @VisibleForTesting
-    var sourceType: Source = Source.Dynamic()
+    lateinit var sourceType: Source
     @VisibleForTesting
-    var displayOptions: DisplayOptions = DisplayOptions.ACTIVITY
+    lateinit var displayOptions: DisplayOptions
     @VisibleForTesting
-    var title: String = TITLE_DEFAULT
+    lateinit var title: String
 
     private val observer: NoticeBoardLifeCycleObserver
 
@@ -33,6 +33,14 @@ class NoticeBoard(private val target: FragmentActivity) {
     init {
         observer = NoticeBoardLifeCycleObserver(target)
         internalNoticeBoard = InternalNoticeBoard.getInstance(target)
+        initialize()
+    }
+
+    private fun initialize() {
+        sourceType = Source.Dynamic()
+        displayOptions = DisplayOptions.ACTIVITY
+        title = TITLE_DEFAULT
+        internalNoticeBoard.setDefaultColorProvider()
     }
 
     fun source(source: Source) {
@@ -56,6 +64,7 @@ class NoticeBoard(private val target: FragmentActivity) {
     }
 
     fun pin(func: NoticeBoard.() -> Unit) {
+        initialize()
         this.func()
         this.pin()
     }
