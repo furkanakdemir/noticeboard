@@ -24,7 +24,7 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
     private val noticeBoardViewModel by viewModels<NoticeBoardViewModel>()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder = AlertDialog.Builder(requireContext())
+        val builder = AlertDialog.Builder(requireContext(), R.style.NoticeBoard_Dialog)
 
         val title = arguments?.getString(KEY_TITLE, TITLE_DEFAULT)
 

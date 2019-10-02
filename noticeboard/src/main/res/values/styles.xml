@@ -4,6 +4,7 @@
         <item name="colorPrimary">@color/noticeBoardColorPrimary</item>
         <item name="colorPrimaryDark">@color/noticeBoardColorPrimaryDark</item>
         <item name="colorAccent">@color/noticeBoardColorAccent</item>
+
     </style>
 
     <style name="NoticeBoardTheme.NoActionBar">
@@ -18,6 +19,29 @@
     <style name="NoticeBoard" />
 
 
+    <!-- Toolbar -->
+
+    <style name="NoticeBoard.Toolbar">
+        <item name="fontFamily">@font/montserrat_medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Message -->
+
+    <style name="NoticeBoard.Message">
+        <item name="fontFamily">@font/montserrat_medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Dialog -->
+
+    <style name="NoticeBoard.Dialog" parent="@style/ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="fontFamily">@font/montserrat_medium</item>
+        <item name="android:colorAccent">@color/noticeBoardColorAccent</item>
+        <item name="colorAccent">@color/noticeBoardColorAccent</item>
+    </style>
+
+
     <!-- Header Styles-->
 
     <style name="NoticeBoard.Header" />
@@ -29,10 +53,9 @@
     </style>
 
     <style name="NoticeBoard.Header.Date">
-
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6
         </item>
-
+        <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
 
     <style name="NoticeBoard.Header.Version">
@@ -55,6 +78,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/notice_board_change_type_text_default</item>
         <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
 
     <style name="NoticeBoard.Change.Description">

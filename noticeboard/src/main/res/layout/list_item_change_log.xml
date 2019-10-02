@@ -11,7 +11,6 @@
         android:id="@+id/change_type"
         style="@style/NoticeBoard.Change.Type"
         android:layout_width="0dp"
-        android:fontFamily="@font/montserrat_medium"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/notice_board_spacing_small"
         android:elevation="@dimen/elevation_change_log_change_type"
@@ -29,9 +28,7 @@
         android:paddingStart="@dimen/notice_board_spacing_small"
         android:paddingEnd="@dimen/notice_board_spacing_small"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:fontFamily="@font/montserrat_regular"
         app:layout_constraintEnd_toEndOf="parent"
-        android:fontFamily="@font/montserrat_regular"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem/random" />
@@ -41,5 +38,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="96dp" />
+        app:layout_constraintGuide_begin="@dimen/guideline_list_item_change_log_start" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
+            app:titleTextAppearance="@style/NoticeBoard.Toolbar"
             app:popupTheme="@style/NoticeBoardTheme.PopupOverlay" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -47,6 +48,7 @@
             android:id="@+id/messageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/NoticeBoard.Message"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
