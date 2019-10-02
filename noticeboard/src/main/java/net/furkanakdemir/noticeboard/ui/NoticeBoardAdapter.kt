@@ -1,10 +1,11 @@
 package net.furkanakdemir.noticeboard.ui
 
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
 import net.furkanakdemir.noticeboard.R
 import net.furkanakdemir.noticeboard.core.BaseViewHolder
@@ -73,11 +74,9 @@ internal class NoticeBoardAdapter(val colorProvider: ColorProvider) :
             itemView.findViewById<TextView>(R.id.change_type).text = item.type.name
 
             val colorId = colorProvider.getChangeTypeBackgroundColor(item.type)
-
-            DrawableCompat.setTint(
-                itemView.findViewById<TextView>(R.id.change_type).background,
-                colorId
-            )
+            val changeTypeTextView = itemView.findViewById<TextView>(R.id.change_type)
+            changeTypeTextView.background.colorFilter =
+                PorterDuffColorFilter(colorId, PorterDuff.Mode.SRC_IN)
         }
     }
 }
