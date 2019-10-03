@@ -1,4 +1,4 @@
-version: 1
+version: 2.1
 jobs:
   build:
     working_directory: ~/code
@@ -10,14 +10,14 @@ jobs:
       - checkout
       - run: cp local.properties.ci local.properties
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: jars-{{ checksum "build.gradle.kts" }}{{ checksum  "buildSrc/src/main/kotlin/Dependencies.kt" }}-{{ checksum  "app/build.gradle.kts" }}
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: jars-{{ checksum "build.gradle.kts" }}{{ checksum  "buildSrc/src/main/kotlin/Dependencies.kt" }}-{{ checksum  "app/build.gradle.kts" }}
       - run:
           name: Build Debug
           command: ./gradlew assembleDebug
