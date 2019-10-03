@@ -143,8 +143,6 @@ val changes = listOf(
             )
         )
 
-val myColorProvider = CustomColorProvider(this)
-
 NoticeBoard(this).pin {
     source(Dynamic(changes))
 }
