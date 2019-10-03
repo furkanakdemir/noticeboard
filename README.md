@@ -1,4 +1,4 @@
-![NoticeBoard](art/noticeboard_banner.jpg)
+![NoticeBoard](art/noticeboard_banner.png)
 
 NoticeBoard
 -------
