@@ -4,4 +4,4 @@
 /.idea/
 /captures
 /build
-noticeboard.jks
+*.keystore

@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id(Plugins.android_application)
     kotlin(Plugins.kotlin_android)
@@ -19,6 +22,25 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    val properties = Properties()
+    val fis = FileInputStream(rootProject.file("local.properties"))
+    properties.load(fis)
+
+    signingConfigs {
+        getByName("debug") {
+            storeFile = rootProject.file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+        create("release") {
+            storeFile = rootProject.file("release.keystore")
+            storePassword = properties.getProperty("sampleStorePassword")
+            keyAlias = properties.getProperty("sampleKeyAlias")
+            keyPassword = properties.getProperty("sampleKeyPassword")
+        }
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
@@ -27,18 +49,7 @@ android {
                 getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             )
 
-            isDebuggable = true
-
-            signingConfig = signingConfigs.getByName("debug")
-        }
-    }
-
-    signingConfigs {
-        getByName("debug") {
-            storeFile = rootProject.file("debug.keystore")
-            storePassword = "android"
-            keyAlias = "androiddebugkey"
-            keyPassword = "android"
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
