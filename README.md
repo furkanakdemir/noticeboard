@@ -267,6 +267,11 @@ If you've found an error in the library or sample, please file an issue.
 
 Patches are encouraged, and may be submitted by forking this project and submitting a pull request.
 
+If you contributed to `noticeboard` but your name is not in the list, please feel free to add yourself to it!
+
+- [Furkan Akdemir](https://github.com/furkanakdemir) - Maintainer
+- [Nuh Koca](https://github.com/nuhkoca) - Collaborator, CI Improvements
+
 
 License
 -------
