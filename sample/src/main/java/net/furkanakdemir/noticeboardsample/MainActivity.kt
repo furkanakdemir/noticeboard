@@ -16,12 +16,23 @@ import net.furkanakdemir.noticeboard.ChangeType.SECURITY
 import net.furkanakdemir.noticeboard.DisplayOptions
 import net.furkanakdemir.noticeboard.NoticeBoard
 import net.furkanakdemir.noticeboard.Source
+import net.furkanakdemir.noticeboard.Source.Dynamic
 import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.data.model.Release.Change
+import net.furkanakdemir.noticeboard.util.color.ColorProvider
+import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.EMPTY_ARRAY_JSON
+import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.EMPTY_ARRAY_XML
+import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.EMPTY_JSON
+import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.EMPTY_XML
+import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.INVALID_JSON
+import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.INVALID_XML
+import net.furkanakdemir.noticeboardsample.MainActivity.ValidSourceType.DYNAMIC
+import net.furkanakdemir.noticeboardsample.MainActivity.ValidSourceType.JSON
+import net.furkanakdemir.noticeboardsample.MainActivity.ValidSourceType.XML
 import net.furkanakdemir.noticeboardsample.SampleItem.Header
 import net.furkanakdemir.noticeboardsample.SampleItem.Sample
 
-@Suppress("LongMethod", "ComplexMethod", "TooManyFunctions")
+@Suppress("TooManyFunctions")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var displayOptionsDialog: AlertDialog
@@ -89,24 +100,38 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
 
-        sampleAdapter = SampleAdapter {
-            when (it.title) {
-                ValidSourceType.DYNAMIC.type -> openDynamic()
-                ValidSourceType.XML.type -> openXml()
-                ValidSourceType.JSON.type -> openJson()
-                InvalidSourceType.EMPTY_JSON.type -> openEmptyFileJson()
-                InvalidSourceType.EMPTY_ARRAY_JSON.type -> openEmptyArrayJson()
-                InvalidSourceType.INVALID_JSON.type -> openInvalidJson()
-                InvalidSourceType.EMPTY_XML.type -> openEmptyFileXml()
-                InvalidSourceType.EMPTY_ARRAY_XML.type -> openEmptyArrayXml()
-                InvalidSourceType.INVALID_XML.type -> openInvalidXml()
-            }
-        }
+        setupSampleAdapter()
 
         recyclerView = findViewById<RecyclerView>(R.id.main_recyclerview).apply {
             setHasFixedSize(true)
             adapter = sampleAdapter
             addItemDecoration(CustomItemDecoration(context))
+        }
+    }
+
+    private fun setupSampleAdapter() {
+        sampleAdapter = SampleAdapter {
+            showIfValid(it)
+            showIfInvalid(it)
+        }
+    }
+
+    private fun showIfInvalid(it: SampleItem) {
+        when (it.title) {
+            EMPTY_JSON.type -> showEmptyFileJson()
+            EMPTY_ARRAY_JSON.type -> showEmptyArrayJson()
+            INVALID_JSON.type -> showInvalidJson()
+            EMPTY_XML.type -> showEmptyFileXml()
+            EMPTY_ARRAY_XML.type -> showEmptyArrayXml()
+            INVALID_XML.type -> showInvalidXml()
+        }
+    }
+
+    private fun showIfValid(it: SampleItem) {
+        when (it.title) {
+            DYNAMIC.type -> showDynamic()
+            XML.type -> showValidXml()
+            JSON.type -> showValidJson()
         }
     }
 
@@ -128,114 +153,56 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = TITLE_NOTICEBOARD_SAMPLE
     }
 
-    private fun openDynamic() {
-        val changes = listOf(
-            Release(
-                "30 Sep 2019", "1.0.0",
-                listOf(
-                    Change("New Login Page", ADDED),
-                    Change("Crash in Payment", CHANGED),
-                    Change("Old theme will be removed", DEPRECATED),
-                    Change("Tutorial page is removed", REMOVED),
-                    Change("Crash in Payment", FIXED),
-                    Change("HTTPS only requests", SECURITY)
-                )
+    private fun showDynamic() {
+        val changes = createChanges()
+        val customColorProvider = CustomColorProvider(this)
+
+        pinNoticeBoard(Dynamic(changes), customColorProvider)
+    }
+
+    private fun createChanges(): List<Release> = listOf(
+        Release(
+            "30 Sep 2019", "1.0.0",
+            listOf(
+                Change("New Login Page", ADDED),
+                Change("Crash in Payment", CHANGED),
+                Change("Old theme will be removed", DEPRECATED),
+                Change("Tutorial page is removed", REMOVED),
+                Change("Crash in Payment", FIXED),
+                Change("HTTPS only requests", SECURITY)
             )
         )
+    )
 
-        val myColorProvider = CustomColorProvider(this)
+    private fun showValidXml() = showXmlWithFilepath("sample.xml")
 
+    private fun showInvalidXml() = showXmlWithFilepath("sample_invalid.xml")
+
+    private fun showEmptyArrayXml() = showXmlWithFilepath("sample_empty.xml")
+
+    private fun showEmptyFileXml() = showXmlWithFilepath("sample_empty_file.xml")
+
+    private fun showValidJson() = showJsonWithFilepath("sample.json")
+
+    private fun showEmptyArrayJson() = showJsonWithFilepath("sample_empty.json")
+
+    private fun showEmptyFileJson() = showJsonWithFilepath("sample_empty_file.json")
+
+    private fun showInvalidJson() = showJsonWithFilepath("sample_invalid.json")
+
+    private fun showXmlWithFilepath(filepath: String) = pinNoticeBoard(Source.Xml(filepath))
+
+    private fun showJsonWithFilepath(filepath: String) = pinNoticeBoard(Source.Json(filepath))
+
+
+    private fun pinNoticeBoard(source: Source, colorProvider: ColorProvider? = null) {
         NoticeBoard(this).pin {
             displayIn(currentDisplayOptions)
             title(title)
-            source(Source.Dynamic(changes))
-            colorProvider(myColorProvider)
-        }
-    }
-
-    private fun openInvalidXml() {
-        val filepath = "sample_invalid.xml"
-
-        NoticeBoard(this).pin {
-            source(Source.Xml(filepath))
-            title(title)
-            displayIn(currentDisplayOptions)
-        }
-    }
-
-    private fun openEmptyArrayXml() {
-
-        val filepath = "sample_empty.xml"
-
-        NoticeBoard(this).pin {
-            source(Source.Xml(filepath))
-            title(title)
-            displayIn(currentDisplayOptions)
-        }
-    }
-
-    private fun openEmptyFileXml() {
-
-        val filepath = "sample_empty_file.xml"
-
-        NoticeBoard(this).pin {
-            source(Source.Xml(filepath))
-            title(title)
-            displayIn(currentDisplayOptions)
-        }
-    }
-
-    private fun openJson() {
-
-        val filepath = "sample.json"
-
-        NoticeBoard(this).pin {
-            source(Source.Json(filepath))
-            title(title)
-            displayIn(currentDisplayOptions)
-        }
-    }
-
-    private fun openEmptyArrayJson() {
-
-        val filepath = "sample_empty.json"
-
-        NoticeBoard(this).pin {
-            source(Source.Json(filepath))
-            title(title)
-            displayIn(currentDisplayOptions)
-        }
-    }
-
-    private fun openEmptyFileJson() {
-
-        val filepath = "sample_empty_file.json"
-
-        NoticeBoard(this).pin {
-            source(Source.Json(filepath))
-            title(title)
-            displayIn(currentDisplayOptions)
-        }
-    }
-
-    private fun openInvalidJson() {
-
-        val filepath = "sample_invalid.json"
-
-        NoticeBoard(this).pin {
-            source(Source.Json(filepath))
-            title(title)
-            displayIn(currentDisplayOptions)
-        }
-    }
-
-    private fun openXml() {
-        val filepath = "sample.xml"
-
-        NoticeBoard(this).pin {
-            source(Source.Xml(filepath))
-            title(title)
-            displayIn(currentDisplayOptions)
+            source(source)
+            colorProvider?.let {
+                colorProvider(it)
+            }
         }
     }
 

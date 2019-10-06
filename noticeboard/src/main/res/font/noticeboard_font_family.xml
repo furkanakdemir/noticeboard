@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<font-family xmlns:app="http://schemas.android.com/apk/res-auto"
+<font-family xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <font
         android:font="@font/montserrat_medium"
@@ -7,7 +8,8 @@
         android:fontWeight="500"
         app:font="@font/montserrat_regular"
         app:fontStyle="normal"
-        app:fontWeight="400" />
+        app:fontWeight="400"
+        tools:ignore="UnusedAttribute" />
 
     <font
         android:font="@font/montserrat_medium"
@@ -15,6 +17,7 @@
         android:fontWeight="500"
         app:font="@font/montserrat_medium"
         app:fontStyle="normal"
-        app:fontWeight="500" />
+        app:fontWeight="500"
+        tools:ignore="UnusedAttribute" />
 
 </font-family>
