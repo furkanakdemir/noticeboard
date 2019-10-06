@@ -3,10 +3,8 @@ package net.furkanakdemir.noticeboardsample
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.LinearLayout.VERTICAL
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import net.furkanakdemir.noticeboard.ChangeType.ADDED
@@ -20,6 +18,8 @@ import net.furkanakdemir.noticeboard.NoticeBoard
 import net.furkanakdemir.noticeboard.Source
 import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.data.model.Release.Change
+import net.furkanakdemir.noticeboardsample.SampleItem.Header
+import net.furkanakdemir.noticeboardsample.SampleItem.Sample
 
 @Suppress("LongMethod", "ComplexMethod", "TooManyFunctions")
 class MainActivity : AppCompatActivity() {
@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupToolbar()
         setupRecyclerView()
+
+        createSamples()
 
         buildDisplayOptionsDialog()
     }
@@ -88,28 +90,34 @@ class MainActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
 
         sampleAdapter = SampleAdapter {
-            when (it) {
-                SourceType.DYNAMIC.type -> openDynamic()
-                SourceType.XML.type -> openXml()
-                SourceType.JSON.type -> openJson()
-                SourceType.EMPTY_JSON.type -> openEmptyFileJson()
-                SourceType.EMPTY_ARRAY_JSON.type -> openEmptyArrayJson()
-                SourceType.INVALID_JSON.type -> openInvalidJson()
-                SourceType.EMPTY_XML.type -> openEmptyFileXml()
-                SourceType.EMPTY_ARRAY_XML.type -> openEmptyArrayXml()
-                SourceType.INVALID_XML.type -> openInvalidXml()
+            when (it.title) {
+                ValidSourceType.DYNAMIC.type -> openDynamic()
+                ValidSourceType.XML.type -> openXml()
+                ValidSourceType.JSON.type -> openJson()
+                InvalidSourceType.EMPTY_JSON.type -> openEmptyFileJson()
+                InvalidSourceType.EMPTY_ARRAY_JSON.type -> openEmptyArrayJson()
+                InvalidSourceType.INVALID_JSON.type -> openInvalidJson()
+                InvalidSourceType.EMPTY_XML.type -> openEmptyFileXml()
+                InvalidSourceType.EMPTY_ARRAY_XML.type -> openEmptyArrayXml()
+                InvalidSourceType.INVALID_XML.type -> openInvalidXml()
             }
         }
 
         recyclerView = findViewById<RecyclerView>(R.id.main_recyclerview).apply {
             setHasFixedSize(true)
             adapter = sampleAdapter
-            addItemDecoration(DividerItemDecoration(context, VERTICAL))
+            addItemDecoration(CustomItemDecoration(context))
         }
+    }
 
-        sampleAdapter.samples = SourceType.values().map {
-            it.type
-        }.toMutableList()
+    private fun createSamples() {
+        val samples = mutableListOf<SampleItem>()
+        samples.add(Header("Valid Samples"))
+        samples.addAll(ValidSourceType.values().map { Sample(it.type) })
+        samples.add(Header("Invalid Samples"))
+        samples.addAll(InvalidSourceType.values().map { Sample(it.type) })
+
+        sampleAdapter.samples = samples
     }
 
     private fun setupToolbar() {
@@ -248,15 +256,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    enum class SourceType(val type: String) {
+    enum class ValidSourceType(val type: String) {
         DYNAMIC("Dynamic"),
         XML("Xml"),
-        JSON("Json"),
-        EMPTY_JSON("Empty Json"),
-        EMPTY_ARRAY_JSON("Empty Array Json"),
-        INVALID_JSON("Invalid Json"),
-        EMPTY_XML("Empty Xml"),
-        EMPTY_ARRAY_XML("Empty Array Xml"),
-        INVALID_XML("Invalid Xml")
+        JSON("Json")
+    }
+
+    enum class InvalidSourceType(val type: String) {
+        EMPTY_JSON("Empty Json File"),
+        EMPTY_ARRAY_JSON("Empty Array in Json File"),
+        INVALID_JSON("Invalid format in Json File"),
+        EMPTY_XML("Empty Xml File"),
+        EMPTY_ARRAY_XML("Empty Array in Xml File"),
+        INVALID_XML("Invalid format in Xml File")
     }
 }
