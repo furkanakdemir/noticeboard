@@ -11,7 +11,19 @@ NoticeBoard
 
 
 
-NoticeBoard is a changelog library for Android API 21+.
+NoticeBoard is a changelog library for Android API 21+. It helps developers display the history of changes in their applications.
+
+It shows a list of `Release` which contains a list of `Change`. 
+
+It receives a source of changes and config. 
+
+You can find a sample code of NoticeBoard in this repository.  
+
+`NoticeBoardSample` app is now available on Google Play.
+
+[![Google Play](art/google-play-badge.png)](https://play.google.com/store/apps/details?id=net.furkanakdemir.noticeboardsample)
+ 
+
 
 Screenshot
 -------
@@ -20,8 +32,6 @@ Screenshot
 |ACTIVITY|DIALOG|
 |----------|---------|
 |![ACTIVITY](art/noticeboard_activity.png)|![DIALOG](art/noticeboard_dialog.png)|
-
-
 
 
 
@@ -116,6 +126,19 @@ NoticeBoard(this).pin {
 }
 
 ```
+
+### Change Types
+
+There are currently 6 built-in change types.
+
+Change Type | Enum
+------------|------------
+ADDED       |0
+CHANGED     |1
+DEPRECATED  |2
+REMOVED     |3
+FIXED       |4
+SECURITY    |5
 
 ### Source Types
 
