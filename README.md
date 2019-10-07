@@ -21,7 +21,7 @@ You can find a sample code of NoticeBoard in this repository.
 
 `NoticeBoardSample` app is now available on Google Play.
 
-[![Google Play](art/google-play-badge.png)](https://play.google.com/store/apps/details?id=net.furkanakdemir.noticeboardsample)
+<a href="https://play.google.com/store/apps/details?id=net.furkanakdemir.noticeboardsample"><img src="art/google-play-badge.png" width="323"></a>
  
 
 
