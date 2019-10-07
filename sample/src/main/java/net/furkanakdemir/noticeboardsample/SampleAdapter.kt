@@ -39,7 +39,6 @@ class SampleAdapter constructor(val onSampleClick: (SampleItem) -> Unit) :
         }
     }
 
-
     override fun getItemCount(): Int = samples.size
 
     override fun getItemViewType(position: Int): Int {

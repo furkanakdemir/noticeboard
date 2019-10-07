@@ -193,8 +193,7 @@ class MainActivity : AppCompatActivity() {
     private fun showXmlWithFilepath(filepath: String) = pinNoticeBoard(Source.Xml(filepath))
 
     private fun showJsonWithFilepath(filepath: String) = pinNoticeBoard(Source.Json(filepath))
-
-
+    
     private fun pinNoticeBoard(source: Source, colorProvider: ColorProvider? = null) {
         NoticeBoard(this).pin {
             displayIn(currentDisplayOptions)
