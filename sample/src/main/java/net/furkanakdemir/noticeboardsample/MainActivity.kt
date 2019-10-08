@@ -15,10 +15,12 @@ import net.furkanakdemir.noticeboard.ChangeType.REMOVED
 import net.furkanakdemir.noticeboard.ChangeType.SECURITY
 import net.furkanakdemir.noticeboard.DisplayOptions
 import net.furkanakdemir.noticeboard.NoticeBoard
+import net.furkanakdemir.noticeboard.Position.NONE
 import net.furkanakdemir.noticeboard.Source
 import net.furkanakdemir.noticeboard.Source.Dynamic
 import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.data.model.Release.Change
+import net.furkanakdemir.noticeboard.data.model.UnRelease
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
 import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.EMPTY_ARRAY_JSON
 import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.EMPTY_ARRAY_XML
@@ -26,6 +28,7 @@ import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.EMPTY_
 import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.EMPTY_XML
 import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.INVALID_JSON
 import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.INVALID_XML
+import net.furkanakdemir.noticeboardsample.MainActivity.Options.UNRELEASED
 import net.furkanakdemir.noticeboardsample.MainActivity.ValidSourceType.DYNAMIC
 import net.furkanakdemir.noticeboardsample.MainActivity.ValidSourceType.JSON
 import net.furkanakdemir.noticeboardsample.MainActivity.ValidSourceType.XML
@@ -62,10 +65,10 @@ class MainActivity : AppCompatActivity() {
             getString(R.string.action_display_dialog)
         )
 
-        builderSingle.setSingleChoiceItems(menuItems, 0) { dialog, which ->
+        builderSingle.setSingleChoiceItems(menuItems, INDEX_FIRST) { dialog, which ->
             currentDisplayOptions = when (which) {
-                0 -> DisplayOptions.ACTIVITY
-                1 -> DisplayOptions.DIALOG
+                INDEX_FIRST -> DisplayOptions.ACTIVITY
+                INDEX_SECOND -> DisplayOptions.DIALOG
                 else -> throw IllegalArgumentException("Invalid index $which")
             }
 
@@ -113,6 +116,7 @@ class MainActivity : AppCompatActivity() {
         sampleAdapter = SampleAdapter {
             showIfValid(it)
             showIfInvalid(it)
+            showIfOptions(it)
         }
     }
 
@@ -135,8 +139,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun showIfOptions(it: SampleItem) {
+        when (it.title) {
+            UNRELEASED.type -> showUnreleased()
+        }
+    }
+
     private fun createSamples() {
         val samples = mutableListOf<SampleItem>()
+        samples.add(Header("Options Samples"))
+        samples.addAll(Options.values().map { Sample(it.type) })
         samples.add(Header("Valid Samples"))
         samples.addAll(ValidSourceType.values().map { Sample(it.type) })
         samples.add(Header("Invalid Samples"))
@@ -174,6 +186,48 @@ class MainActivity : AppCompatActivity() {
         )
     )
 
+    private fun createWithUnreleasedChanges(): List<Release> = listOf(
+        Release(
+            "30 Sep 2019", "1.0.0",
+            listOf(
+                Change("New Login Page", ADDED),
+                Change("Crash in Payment", CHANGED),
+                Change("Old theme will be removed", DEPRECATED),
+                Change("Tutorial page is removed", REMOVED),
+                Change("Crash in Payment", FIXED),
+                Change("HTTPS only requests", SECURITY)
+            )
+        ),
+        UnRelease(
+            changes = listOf(
+                Change("New Login Page", ADDED),
+                Change("Crash in Payment", CHANGED),
+                Change("Old theme will be removed", DEPRECATED),
+                Change("Tutorial page is removed", REMOVED),
+                Change("Crash in Payment", FIXED),
+                Change("HTTPS only requests", SECURITY)
+            )
+        ),
+        UnRelease(
+            changes = listOf(
+                Change("New Login Page", ADDED),
+                Change("Crash in Payment", CHANGED),
+                Change("HTTPS only requests", SECURITY)
+            )
+        ),
+        Release(
+            "30 Sep 2019", "1.0.0",
+            listOf(
+                Change("New Login Page", ADDED),
+                Change("Crash in Payment", CHANGED),
+                Change("Old theme will be removed", DEPRECATED),
+                Change("Tutorial page is removed", REMOVED),
+                Change("Crash in Payment", FIXED),
+                Change("HTTPS only requests", SECURITY)
+            )
+        )
+    )
+
     private fun showValidXml() = showXmlWithFilepath("sample.xml")
 
     private fun showInvalidXml() = showXmlWithFilepath("sample_invalid.xml")
@@ -193,7 +247,16 @@ class MainActivity : AppCompatActivity() {
     private fun showXmlWithFilepath(filepath: String) = pinNoticeBoard(Source.Xml(filepath))
 
     private fun showJsonWithFilepath(filepath: String) = pinNoticeBoard(Source.Json(filepath))
-    
+
+    private fun showUnreleased() {
+        NoticeBoard(this).pin {
+            displayIn(currentDisplayOptions)
+            title(title)
+            source(Dynamic(createWithUnreleasedChanges()))
+            unreleasedPosition(NONE)
+        }
+    }
+
     private fun pinNoticeBoard(source: Source, colorProvider: ColorProvider? = null) {
         NoticeBoard(this).pin {
             displayIn(currentDisplayOptions)
@@ -211,6 +274,9 @@ class MainActivity : AppCompatActivity() {
         private const val TEXT_DISPLAY_OPTIONS_DIALOG_CLOSE = "Close"
 
         private const val TITLE_NOTICEBOARD = "Change Logs"
+
+        private const val INDEX_FIRST = 0
+        private const val INDEX_SECOND = 1
     }
 
     override fun onBackPressed() {
@@ -235,5 +301,9 @@ class MainActivity : AppCompatActivity() {
         EMPTY_XML("Empty Xml File"),
         EMPTY_ARRAY_XML("Empty Array in Xml File"),
         INVALID_XML("Invalid format in Xml File")
+    }
+
+    enum class Options(val type: String) {
+        UNRELEASED("Show unreleased section"),
     }
 }

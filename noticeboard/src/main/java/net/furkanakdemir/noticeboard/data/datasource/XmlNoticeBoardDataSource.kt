@@ -1,5 +1,6 @@
 package net.furkanakdemir.noticeboard.data.datasource
 
+import net.furkanakdemir.noticeboard.ChangeType
 import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.data.model.Release.Change
 import net.furkanakdemir.noticeboard.util.io.FileReader
@@ -90,7 +91,7 @@ internal class XmlNoticeBoardDataSource(
         val desc = changeMap[KEY_DESCRIPTION].orEmpty()
         val type = changeMap[KEY_TYPE]?.toInt() ?: TYPE_DEFAULT
 
-        changeList.add(Change(desc, type))
+        changeList.add(Change(desc, ChangeType.of(type)))
         changeMap.clear()
     }
 

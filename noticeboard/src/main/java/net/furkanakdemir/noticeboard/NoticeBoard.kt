@@ -1,5 +1,6 @@
 package net.furkanakdemir.noticeboard
 
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -7,6 +8,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
+import net.furkanakdemir.noticeboard.Position.BOTTOM
+import net.furkanakdemir.noticeboard.Position.NONE
+import net.furkanakdemir.noticeboard.Position.TOP
 import net.furkanakdemir.noticeboard.ui.NoticeBoardActivity
 import net.furkanakdemir.noticeboard.ui.NoticeBoardDialogFragment
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
@@ -49,6 +53,15 @@ class NoticeBoard(private val target: FragmentActivity) {
 
     fun displayIn(displayOptions: DisplayOptions) {
         this.displayOptions = displayOptions
+    }
+
+    fun unreleasedPosition(position: Position) {
+        when (position) {
+            TOP, BOTTOM, NONE -> internalNoticeBoard.setUnreleasedPosition(position)
+            else -> {
+                Log.d(TAG, "Invalid position for Unreleased Section $position")
+            }
+        }
     }
 
     fun title(text: String) {
@@ -98,5 +111,7 @@ class NoticeBoard(private val target: FragmentActivity) {
     companion object {
         const val TITLE_DEFAULT = "NoticeBoard"
         const val KEY_TITLE = "KEY_TITLE"
+
+        const val TAG = "NoticeBoard"
     }
 }

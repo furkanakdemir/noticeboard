@@ -11,7 +11,8 @@ import net.furkanakdemir.noticeboard.util.mapper.Mapper
 
 internal class NoticeBoardViewModel : ViewModel() {
 
-    private val viewMapper: Mapper<List<Release>, List<NoticeBoardItem>> = ReleaseViewMapper()
+    private val viewMapper: Mapper<List<Release>, List<NoticeBoardItem>> =
+        ReleaseViewMapper(InternalNoticeBoard.getInstance().getUnreleasedPosition())
 
     private val _releaseLiveData = MutableLiveData<List<NoticeBoardItem>>()
     val releaseLiveData: LiveData<List<NoticeBoardItem>>
