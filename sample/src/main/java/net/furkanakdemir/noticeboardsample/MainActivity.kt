@@ -7,27 +7,22 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
-import net.furkanakdemir.noticeboard.ChangeType.ADDED
-import net.furkanakdemir.noticeboard.ChangeType.CHANGED
-import net.furkanakdemir.noticeboard.ChangeType.DEPRECATED
-import net.furkanakdemir.noticeboard.ChangeType.FIXED
-import net.furkanakdemir.noticeboard.ChangeType.REMOVED
-import net.furkanakdemir.noticeboard.ChangeType.SECURITY
 import net.furkanakdemir.noticeboard.DisplayOptions
 import net.furkanakdemir.noticeboard.NoticeBoard
-import net.furkanakdemir.noticeboard.Position.NONE
+import net.furkanakdemir.noticeboard.Position.TOP
 import net.furkanakdemir.noticeboard.Source
 import net.furkanakdemir.noticeboard.Source.Dynamic
-import net.furkanakdemir.noticeboard.data.model.Release
-import net.furkanakdemir.noticeboard.data.model.Release.Change
-import net.furkanakdemir.noticeboard.data.model.UnRelease
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
+import net.furkanakdemir.noticeboardsample.DataGenerator.createChanges
+import net.furkanakdemir.noticeboardsample.DataGenerator.createWithUnreleasedChanges
 import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.EMPTY_ARRAY_JSON
 import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.EMPTY_ARRAY_XML
 import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.EMPTY_JSON
 import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.EMPTY_XML
 import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.INVALID_JSON
 import net.furkanakdemir.noticeboardsample.MainActivity.InvalidSourceType.INVALID_XML
+import net.furkanakdemir.noticeboardsample.MainActivity.Options.COLOR
+import net.furkanakdemir.noticeboardsample.MainActivity.Options.TITLE
 import net.furkanakdemir.noticeboardsample.MainActivity.Options.UNRELEASED
 import net.furkanakdemir.noticeboardsample.MainActivity.ValidSourceType.DYNAMIC
 import net.furkanakdemir.noticeboardsample.MainActivity.ValidSourceType.JSON
@@ -43,7 +38,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sampleAdapter: SampleAdapter
 
     private var currentDisplayOptions: DisplayOptions = DisplayOptions.ACTIVITY
-    private var title: String = TITLE_NOTICEBOARD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,16 +136,18 @@ class MainActivity : AppCompatActivity() {
     private fun showIfOptions(it: SampleItem) {
         when (it.title) {
             UNRELEASED.type -> showUnreleased()
+            COLOR.type -> showCustomColorProvider()
+            TITLE.type -> showCustomTitle()
         }
     }
 
     private fun createSamples() {
         val samples = mutableListOf<SampleItem>()
-        samples.add(Header("Options Samples"))
+        samples.add(Header(TITLE_OPTIONS))
         samples.addAll(Options.values().map { Sample(it.type) })
-        samples.add(Header("Valid Samples"))
+        samples.add(Header(TITLE_VALID_SAMPLES))
         samples.addAll(ValidSourceType.values().map { Sample(it.type) })
-        samples.add(Header("Invalid Samples"))
+        samples.add(Header(TITLE_INVALID_SAMPLES))
         samples.addAll(InvalidSourceType.values().map { Sample(it.type) })
 
         sampleAdapter.samples = samples
@@ -167,66 +163,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun showDynamic() {
         val changes = createChanges()
-        val customColorProvider = CustomColorProvider(this)
-
-        pinNoticeBoard(Dynamic(changes), customColorProvider)
+        pinNoticeBoard(Dynamic(changes))
     }
-
-    private fun createChanges(): List<Release> = listOf(
-        Release(
-            "30 Sep 2019", "1.0.0",
-            listOf(
-                Change("New Login Page", ADDED),
-                Change("Crash in Payment", CHANGED),
-                Change("Old theme will be removed", DEPRECATED),
-                Change("Tutorial page is removed", REMOVED),
-                Change("Crash in Payment", FIXED),
-                Change("HTTPS only requests", SECURITY)
-            )
-        )
-    )
-
-    private fun createWithUnreleasedChanges(): List<Release> = listOf(
-        Release(
-            "30 Sep 2019", "1.0.0",
-            listOf(
-                Change("New Login Page", ADDED),
-                Change("Crash in Payment", CHANGED),
-                Change("Old theme will be removed", DEPRECATED),
-                Change("Tutorial page is removed", REMOVED),
-                Change("Crash in Payment", FIXED),
-                Change("HTTPS only requests", SECURITY)
-            )
-        ),
-        UnRelease(
-            changes = listOf(
-                Change("New Login Page", ADDED),
-                Change("Crash in Payment", CHANGED),
-                Change("Old theme will be removed", DEPRECATED),
-                Change("Tutorial page is removed", REMOVED),
-                Change("Crash in Payment", FIXED),
-                Change("HTTPS only requests", SECURITY)
-            )
-        ),
-        UnRelease(
-            changes = listOf(
-                Change("New Login Page", ADDED),
-                Change("Crash in Payment", CHANGED),
-                Change("HTTPS only requests", SECURITY)
-            )
-        ),
-        Release(
-            "30 Sep 2019", "1.0.0",
-            listOf(
-                Change("New Login Page", ADDED),
-                Change("Crash in Payment", CHANGED),
-                Change("Old theme will be removed", DEPRECATED),
-                Change("Tutorial page is removed", REMOVED),
-                Change("Crash in Payment", FIXED),
-                Change("HTTPS only requests", SECURITY)
-            )
-        )
-    )
 
     private fun showValidXml() = showXmlWithFilepath("sample.xml")
 
@@ -251,26 +189,46 @@ class MainActivity : AppCompatActivity() {
     private fun showUnreleased() {
         NoticeBoard(this).pin {
             displayIn(currentDisplayOptions)
-            title(title)
             source(Dynamic(createWithUnreleasedChanges()))
-            unreleasedPosition(NONE)
+            unreleasedPosition(TOP)
         }
     }
 
-    private fun pinNoticeBoard(source: Source, colorProvider: ColorProvider? = null) {
+    private fun showCustomColorProvider() {
+        val customColorProvider = CustomColorProvider(this)
+        val source = Dynamic(createChanges())
+        pinNoticeBoard(source, customColorProvider)
+    }
+
+    private fun showCustomTitle() {
+        val source = Dynamic(createChanges())
+        pinNoticeBoard(source, title = TITLE_NOTICEBOARD)
+    }
+
+    private fun pinNoticeBoard(
+        source: Source,
+        colorProvider: ColorProvider? = null,
+        title: String? = null
+    ) {
         NoticeBoard(this).pin {
             displayIn(currentDisplayOptions)
-            title(title)
             source(source)
             colorProvider?.let {
                 colorProvider(it)
+            }
+            title?.let {
+                title(title)
             }
         }
     }
 
     companion object {
+        private const val TITLE_OPTIONS = "Options"
+        private const val TITLE_VALID_SAMPLES = "Valid Samples"
+        private const val TITLE_INVALID_SAMPLES = "Invalid Samples"
         private const val TITLE_NOTICEBOARD_SAMPLE = "NoticeBoards"
         private const val TITLE_DISPLAY_OPTIONS_DIALOG = "Display Options"
+
         private const val TEXT_DISPLAY_OPTIONS_DIALOG_CLOSE = "Close"
 
         private const val TITLE_NOTICEBOARD = "Change Logs"
@@ -304,6 +262,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     enum class Options(val type: String) {
-        UNRELEASED("Show unreleased section"),
+        UNRELEASED("Unreleased Section"),
+        COLOR("Custom Color"),
+        TITLE("Custom Title"),
     }
 }
