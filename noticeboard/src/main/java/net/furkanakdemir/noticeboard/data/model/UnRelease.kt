@@ -10,6 +10,6 @@ class UnRelease(
     }
 
     companion object {
-        private const val TITLE_UNRELEASED_DEFAULT = "Unreleased"
+        internal const val TITLE_UNRELEASED_DEFAULT = "Unreleased"
     }
 }
