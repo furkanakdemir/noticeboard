@@ -2,10 +2,10 @@ package net.furkanakdemir.noticeboard.data.datasource
 
 import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.data.model.ReleaseRaw
+import net.furkanakdemir.noticeboard.util.fakes.TestData.TEST_RELEASES
 import net.furkanakdemir.noticeboard.util.fakes.TestData.TEST_SOURCE_DYNAMIC
 import net.furkanakdemir.noticeboard.util.fakes.TestData.TEST_SOURCE_JSON
 import net.furkanakdemir.noticeboard.util.fakes.TestData.TEST_SOURCE_XML
-import net.furkanakdemir.noticeboard.util.fakes.TestData.items
 import net.furkanakdemir.noticeboard.util.io.FileReader
 import net.furkanakdemir.noticeboard.util.mapper.ListMapper
 import org.hamcrest.CoreMatchers.instanceOf
@@ -39,7 +39,7 @@ class NoticeBoardDataSourceFactoryTest {
         val actual = noticeBoardDataSourceFactory.createDataSource(TEST_SOURCE_DYNAMIC)
 
         assertThat(actual, instanceOf(DynamicNoticeBoardDataSource::class.java))
-        assertEquals(actual.getReleases(), items)
+        assertEquals(actual.getReleases(), TEST_RELEASES)
     }
 
     @Test

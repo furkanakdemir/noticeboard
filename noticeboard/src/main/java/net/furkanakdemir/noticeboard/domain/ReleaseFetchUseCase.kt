@@ -1,4 +1,4 @@
-package net.furkanakdemir.noticeboard.ui
+package net.furkanakdemir.noticeboard.domain
 
 import net.furkanakdemir.noticeboard.InternalNoticeBoard
 import net.furkanakdemir.noticeboard.Position.BOTTOM
@@ -17,35 +17,31 @@ internal class ReleaseFetchUseCase {
 
         if (result is Success) {
             val releases = result.data.toMutableList()
+            val releasedItems = releases.filter { it.isReleased }.toMutableList()
+            val unreleasedChanges = releases.filter { !it.isReleased }.flatMap { it.changes }
 
-            if (!releases.isNullOrEmpty()) {
-                val releasedItems = releases.filter { it.isReleased }.toMutableList()
+            if (!unreleasedChanges.isNullOrEmpty()) {
 
                 val title =
                     releases.firstOrNull { !it.isReleased }?.date ?: TITLE_UNRELEASED_DEFAULT
 
-                val changes = releases.filter { !it.isReleased }.flatMap { it.changes }
+                val unrelease = UnRelease(title, unreleasedChanges)
 
-                if (changes.isNotEmpty()) {
-
-                    val unrelease = UnRelease(title, changes)
-
-                    val resultReleases = when (unreleasedPosition) {
-                        TOP -> {
-                            releasedItems.add(INDEX_START, unrelease)
-                            releasedItems
-                        }
-                        BOTTOM -> {
-                            releasedItems.add(unrelease)
-                            releasedItems
-                        }
-                        else -> {
-                            releases
-                        }
+                val resultReleases = when (unreleasedPosition) {
+                    TOP -> {
+                        releasedItems.add(INDEX_START, unrelease)
+                        releasedItems
                     }
-
-                    return Success(resultReleases)
+                    BOTTOM -> {
+                        releasedItems.add(unrelease)
+                        releasedItems
+                    }
+                    else -> {
+                        releases
+                    }
                 }
+
+                return Success(resultReleases)
             }
         }
 

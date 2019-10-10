@@ -2,6 +2,7 @@ package net.furkanakdemir.noticeboard.config
 
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
 
+@Suppress("UNCHECKED_CAST")
 internal class NoticeBoardConfigRepository constructor(defaultColorProvider: ColorProvider) :
     ConfigRepository {
 

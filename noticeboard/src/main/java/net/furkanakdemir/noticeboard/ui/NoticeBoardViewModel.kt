@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import net.furkanakdemir.noticeboard.data.model.Release
+import net.furkanakdemir.noticeboard.domain.ReleaseFetchUseCase
 import net.furkanakdemir.noticeboard.result.Event
 import net.furkanakdemir.noticeboard.result.Result
 import net.furkanakdemir.noticeboard.util.mapper.Mapper

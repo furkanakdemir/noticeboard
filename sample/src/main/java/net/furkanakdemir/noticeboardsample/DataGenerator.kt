@@ -17,7 +17,7 @@ object DataGenerator {
             "30 Sep 2019", "1.0.0",
             listOf(
                 Change("New Login Page", ADDED),
-                Change("Crash in Payment", CHANGED),
+                Change("Toolbar in Checkout", CHANGED),
                 Change("Old theme will be removed", DEPRECATED),
                 Change("Tutorial page is removed", REMOVED),
                 Change("Crash in Payment", FIXED),
@@ -31,7 +31,7 @@ object DataGenerator {
             "30 Sep 2019", "1.0.0",
             listOf(
                 Change("New Login Page", ADDED),
-                Change("Crash in Payment", CHANGED),
+                Change("Toolbar in Checkout", CHANGED),
                 Change("Old theme will be removed", DEPRECATED),
                 Change("Tutorial page is removed", REMOVED),
                 Change("Crash in Payment", FIXED),
@@ -42,7 +42,7 @@ object DataGenerator {
             "Upcoming",
             listOf(
                 Change("New Login Page", ADDED),
-                Change("Crash in Payment", CHANGED),
+                Change("Toolbar in Checkout", CHANGED),
                 Change("Old theme will be removed", DEPRECATED),
                 Change("Tutorial page is removed", REMOVED),
                 Change("Crash in Payment", FIXED),
@@ -53,7 +53,7 @@ object DataGenerator {
             "30 Sep 2019", "1.0.0",
             listOf(
                 Change("New Login Page", ADDED),
-                Change("Crash in Payment", CHANGED),
+                Change("Toolbar in Checkout", CHANGED),
                 Change("Old theme will be removed", DEPRECATED),
                 Change("Tutorial page is removed", REMOVED),
                 Change("Crash in Payment", FIXED),
@@ -63,7 +63,7 @@ object DataGenerator {
         UnRelease(
             changes = listOf(
                 Change("New Login Page", ADDED),
-                Change("Crash in Payment", CHANGED),
+                Change("Toolbar in Checkout", CHANGED),
                 Change("HTTPS only requests", SECURITY)
             )
         )

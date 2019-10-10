@@ -9,7 +9,7 @@ open class Release(
     open val changes: List<Change> = emptyList(),
     internal val isReleased: Boolean = true
 ) {
-    class Change(val description: String = "", val type: ChangeType = UNRELEASED) {
+    data class Change(val description: String = "", val type: ChangeType = UNRELEASED) {
         override fun toString(): String {
             return "$description $type"
         }

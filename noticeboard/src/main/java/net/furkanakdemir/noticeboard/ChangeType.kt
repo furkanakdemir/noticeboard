@@ -12,5 +12,4 @@ enum class ChangeType(val type: Int) {
     companion object {
         fun of(type: Int) = values().firstOrNull { it.type == type } ?: UNRELEASED
     }
-
 }

@@ -79,12 +79,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_display_options -> {
-                showDisplayOptionsDialog()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+        return if (item.itemId == R.id.action_display_options) {
+            showDisplayOptionsDialog()
+            true
+        } else {
+            super.onOptionsItemSelected(item)
         }
     }
 

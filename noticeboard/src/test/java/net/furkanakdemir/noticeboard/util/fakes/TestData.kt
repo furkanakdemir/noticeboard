@@ -1,40 +1,93 @@
 package net.furkanakdemir.noticeboard.util.fakes
 
-import net.furkanakdemir.noticeboard.ChangeType
-import net.furkanakdemir.noticeboard.Source
+import net.furkanakdemir.noticeboard.ChangeType.ADDED
+import net.furkanakdemir.noticeboard.ChangeType.CHANGED
+import net.furkanakdemir.noticeboard.ChangeType.DEPRECATED
+import net.furkanakdemir.noticeboard.ChangeType.FIXED
+import net.furkanakdemir.noticeboard.ChangeType.REMOVED
+import net.furkanakdemir.noticeboard.ChangeType.SECURITY
+import net.furkanakdemir.noticeboard.Source.Dynamic
+import net.furkanakdemir.noticeboard.Source.Json
+import net.furkanakdemir.noticeboard.Source.Xml
 import net.furkanakdemir.noticeboard.data.model.Release
+import net.furkanakdemir.noticeboard.data.model.Release.Change
+import net.furkanakdemir.noticeboard.data.model.UnRelease
+import net.furkanakdemir.noticeboard.ui.NoticeBoardItem
+import net.furkanakdemir.noticeboard.ui.NoticeBoardItem.ChangeItem
+import net.furkanakdemir.noticeboard.ui.NoticeBoardItem.ReleaseHeader
+import net.furkanakdemir.noticeboard.ui.NoticeBoardItem.UnreleasedHeader
+import net.furkanakdemir.noticeboard.ui.NoticeBoardItem.UnreleasedItem
 
 object TestData {
 
-    internal val items = listOf(
-        Release(
-            "16 Sep 2019", "2.0.0", listOf(
-                Release.Change(
-                    "New Login Page",
-                    ChangeType.ADDED.ordinal
-                ),
-                Release.Change(
-                    "Crash in Payment",
-                    ChangeType.FIXED.ordinal
-                ),
-                Release.Change(
-                    "Crash in Payment",
-                    ChangeType.SECURITY.ordinal
-                ),
-                Release.Change(
-                    "Crash in Payment",
-                    ChangeType.DEPRECATED.ordinal
-                ),
-                Release.Change(
-                    "Crash in Payment",
-                    ChangeType.REMOVED.ordinal
-                ),
-                Release.Change(
-                    "Crash in Payment",
-                    ChangeType.CHANGED.ordinal
-                )
-            )
+    internal const val EMPTY = ""
+    internal const val TEST_VERSION = "2.0.0"
+    internal const val TEST_DATE = "16 Sep 2019"
+    internal const val TEST_TITLE = "TEST_TITLE"
+    internal const val TEST_TITLE_OTHER = "TEST_TITLE_OTHER"
+    internal const val TEST_FILEPATH = "TEST_FILEPATH"
+
+    internal val TEST_CHANGES = listOf(
+        Change("New Login Page", ADDED),
+        Change("Toolbar in Checkout", CHANGED),
+        Change("Old theme will be removed", DEPRECATED),
+        Change("Tutorial page is removed", REMOVED),
+        Change("Crash in Payment", FIXED),
+        Change("HTTPS only requests", SECURITY)
+    )
+
+    internal val TEST_RELEASES = listOf(Release(TEST_DATE, TEST_VERSION, TEST_CHANGES))
+    internal val TEST_RELEASES_WITH_UNRELEASED = listOf(
+        Release(TEST_DATE, TEST_VERSION, listOf(Change("New Login Page", ADDED))),
+        UnRelease(TEST_TITLE, listOf(Change("New Login Page", ADDED)))
+    )
+
+    internal val TEST_CHANGE_ITEMS = listOf(
+        ChangeItem(ADDED, "New Login Page"),
+        ChangeItem(CHANGED, "Toolbar in Checkout"),
+        ChangeItem(DEPRECATED, "Old theme will be removed"),
+        ChangeItem(REMOVED, "Tutorial page is removed"),
+        ChangeItem(FIXED, "Crash in Payment"),
+        ChangeItem(SECURITY, "HTTPS only requests")
+    )
+
+    internal val TEST_UNRELEASED_CHANGE_ITEMS = listOf(
+        UnreleasedItem("New Login Page"),
+        UnreleasedItem("Toolbar in Checkout"),
+        UnreleasedItem("Old theme will be removed"),
+        UnreleasedItem("Tutorial page is removed"),
+        UnreleasedItem("Crash in Payment"),
+        UnreleasedItem("HTTPS only requests")
+    )
+
+    internal val TEST_NOTICEBOARD_ITEMS: List<NoticeBoardItem> =
+        listOf(
+            ReleaseHeader(TEST_DATE, TEST_VERSION)
+        ).plus(
+            TEST_CHANGE_ITEMS
         )
+
+    internal val TEST_NOTICEBOARD_ITEMS_WITH_UNRELEASED: List<NoticeBoardItem> =
+        listOf(
+            ReleaseHeader(TEST_DATE, TEST_VERSION),
+            ChangeItem(ADDED, "New Login Page"),
+            UnreleasedHeader(TEST_TITLE),
+            UnreleasedItem("New Login Page")
+        )
+
+    internal val TEST_RELEASES_UNRELEASED = listOf(
+        UnRelease(TEST_TITLE, listOf(Change("New Login Page", ADDED))),
+        Release(TEST_DATE, TEST_VERSION, listOf(Change("New Login Page", ADDED)))
+    )
+    internal val TEST_RELEASES_UNRELEASED_BOTTOM = listOf(
+        Release(TEST_DATE, TEST_VERSION, listOf(Change("New Login Page", ADDED))),
+        UnRelease(TEST_TITLE, listOf(Change("New Login Page", ADDED)))
+    )
+    internal val TEST_RELEASES_UNRELEASED_NONE = listOf(
+        Release(TEST_DATE, TEST_VERSION, listOf(Change("New Login Page", ADDED))),
+        UnRelease(TEST_TITLE, listOf(Change("New Login Page", ADDED))),
+        Release(TEST_DATE, TEST_VERSION, listOf(Change("New Login Page", ADDED))),
+        UnRelease(TEST_TITLE, listOf(Change("New Login Page", ADDED)))
     )
 
     internal const val TEST_XML_STRING = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" +
@@ -100,8 +153,8 @@ object TestData {
         "12 Aug 2019",
         "1.2.3",
         listOf(
-            Release.Change("Lorem", 0),
-            Release.Change("Lorem", 1)
+            Change("Lorem", ADDED),
+            Change("Lorem", CHANGED)
         )
     )
 
@@ -109,18 +162,16 @@ object TestData {
         "22 Jun 2019",
         "7.8.9",
         listOf(
-            Release.Change("Lorem", 0),
-            Release.Change("Lorem", 1)
+            Change("Lorem", ADDED),
+            Change("Lorem", CHANGED)
         )
     )
 
-    internal const val TEST_FILEPATH = "TEST_FILEPATH"
-    internal val TEST_SOURCE_DYNAMIC_EMPTY = Source.Dynamic(emptyList())
-    internal val TEST_SOURCE_DYNAMIC = Source.Dynamic(items)
-    internal val TEST_SOURCE_JSON = Source.Json(TEST_FILEPATH)
-    internal val TEST_SOURCE_XML = Source.Xml(TEST_FILEPATH)
+    internal val TEST_SOURCE_DYNAMIC = Dynamic(TEST_RELEASES)
+    internal val TEST_SOURCE_JSON = Json(TEST_FILEPATH)
+    internal val TEST_SOURCE_XML = Xml(TEST_FILEPATH)
 
-    internal const val TEST_TITLE = "TEST_TITLE"
-    internal const val TEST_TITLE_OTHER = "TEST_TITLE_OTHER"
-    internal const val EMPTY = ""
+    internal val TEST_SOURCE_DYNAMIC_UNRELEASED_DEFAULT = Dynamic(TEST_RELEASES_UNRELEASED)
+    internal val TEST_SOURCE_DYNAMIC_UNRELEASED_BOTTOM = Dynamic(TEST_RELEASES_UNRELEASED_BOTTOM)
+    internal val TEST_SOURCE_DYNAMIC_UNRELEASED_NONE = Dynamic(TEST_RELEASES_UNRELEASED_NONE)
 }
