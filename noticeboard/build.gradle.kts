@@ -9,9 +9,7 @@ plugins {
     kotlin(Plugins.kotlin_android)
     kotlin(Plugins.kotlin_android_extensions)
     kotlin(Plugins.kapt)
-    id(Plugins.ktlint)
     id(Plugins.dex_count)
-    id(Plugins.detekt)
     `maven-publish`
     id(Plugins.bintray) version Versions.bintray_plugin
 }

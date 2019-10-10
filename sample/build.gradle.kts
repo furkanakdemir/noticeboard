@@ -6,8 +6,6 @@ plugins {
     kotlin(Plugins.kotlin_android)
     kotlin(Plugins.kotlin_android_extensions)
     kotlin(Plugins.kapt)
-    id(Plugins.dex_count)
-    id(Plugins.detekt)
 }
 
 android {
