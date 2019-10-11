@@ -276,7 +276,6 @@ object TestData {
             "  }\n" +
             "]"
 
-
     internal const val TEST_JSON_WITH_UNRELEASED_STRING = "[\n" +
             "  {\n" +
             "    \"date\": \"30 Sep 2019\",\n" +

@@ -20,7 +20,7 @@ jobs:
           key: jars-{{ checksum "build.gradle.kts" }}{{ checksum  "buildSrc/src/main/kotlin/Dependencies.kt" }}-{{ checksum  "sample/build.gradle.kts" }}
       - run:
           name: Check Quality
-          command: ./gradlew lint ktlintCheck detekt
+          command: ./gradlew lintDebug ktlintCheck detekt
       - run:
           name: Build Debug
           command: ./gradlew assembleDebug
