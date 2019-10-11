@@ -3,6 +3,7 @@ package net.furkanakdemir.noticeboard.data.datasource
 import net.furkanakdemir.noticeboard.ChangeType
 import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.data.model.Release.Change
+import net.furkanakdemir.noticeboard.data.model.UnRelease
 import net.furkanakdemir.noticeboard.util.io.FileReader
 import org.xml.sax.SAXException
 import org.xml.sax.helpers.DefaultHandler
@@ -58,6 +59,7 @@ internal class XmlNoticeBoardDataSource(
                 when {
                     isDate(localName) -> releaseMap[KEY_DATE] = currentValue
                     isVersion(localName) -> releaseMap[KEY_VERSION] = currentValue
+                    isReleased(localName) -> releaseMap[KEY_RELEASED] = currentValue
                     isDescription(localName) -> changeMap[KEY_DESCRIPTION] = currentValue
                     isType(localName) -> changeMap[KEY_TYPE] = currentValue
                     isChange(localName) -> addChange()
@@ -82,8 +84,13 @@ internal class XmlNoticeBoardDataSource(
 
         val date = releaseMap[KEY_DATE].orEmpty()
         val version = releaseMap[KEY_VERSION].orEmpty()
+        val isReleased = releaseMap[KEY_RELEASED]?.toBoolean() ?: true
 
-        releases.add(Release(date, version, changeList))
+        if (isReleased) {
+            releases.add(Release(date, version, changeList))
+        } else {
+            releases.add(UnRelease(date, changeList))
+        }
     }
 
     private fun addChange() {
@@ -107,6 +114,8 @@ internal class XmlNoticeBoardDataSource(
 
     private fun isDate(localName: String) = localName.equals(KEY_DATE, true)
 
+    private fun isReleased(localName: String) = localName.equals(KEY_RELEASED, true)
+
     companion object {
         private const val KEY_DATE = "date"
         private const val KEY_VERSION = "version"
@@ -114,6 +123,7 @@ internal class XmlNoticeBoardDataSource(
         private const val KEY_TYPE = "type"
         private const val KEY_CHANGE = "change"
         private const val KEY_RELEASE = "release"
+        private const val KEY_RELEASED = "released"
 
         private const val TYPE_DEFAULT = -1
     }

@@ -5,6 +5,7 @@ import net.furkanakdemir.noticeboard.data.mapper.ReleaseDomainMapper
 import net.furkanakdemir.noticeboard.data.model.Release
 import net.furkanakdemir.noticeboard.data.model.ReleaseRaw
 import net.furkanakdemir.noticeboard.util.fakes.FakeJsonFileReader
+import net.furkanakdemir.noticeboard.util.fakes.TestData.EMPTY
 import net.furkanakdemir.noticeboard.util.fakes.TestData.TEST_FILEPATH
 import net.furkanakdemir.noticeboard.util.fakes.TestData.TEST_JSON_RELEASE
 import net.furkanakdemir.noticeboard.util.fakes.TestData.TEST_JSON_STRING
@@ -27,10 +28,8 @@ class JsonNoticeBoardDataSourceTest {
 
     @Before
     fun setUp() {
-
         val domainMapper = ReleaseDomainMapper(RealListMapper(ChangeDomainMapper()))
         mapper = RealListMapper(domainMapper)
-
     }
 
     @Test
@@ -57,7 +56,7 @@ class JsonNoticeBoardDataSourceTest {
         assertThat(actual[0].isReleased, Is(TEST_JSON_RELEASE.isReleased))
 
         assertThat(actual[1].date, Is(TEST_JSON_UNRELEASE.date))
-        assertThat(actual[1].version, Is(TEST_JSON_UNRELEASE.version))
+        assertThat(actual[1].version, Is(EMPTY))
         assertThat(actual[1].changes, Is(TEST_JSON_UNRELEASE.changes))
         assertThat(actual[1].isReleased, Is(TEST_JSON_UNRELEASE.isReleased))
 
@@ -67,7 +66,7 @@ class JsonNoticeBoardDataSourceTest {
         assertThat(actual[2].isReleased, Is(TEST_JSON_RELEASE.isReleased))
 
         assertThat(actual[3].date, Is(TEST_JSON_UNRELEASE.date))
-        assertThat(actual[3].version, Is(TEST_JSON_UNRELEASE.version))
+        assertThat(actual[3].version, Is(EMPTY))
         assertThat(actual[3].changes, Is(TEST_JSON_UNRELEASE.changes))
         assertThat(actual[3].isReleased, Is(TEST_JSON_UNRELEASE.isReleased))
     }

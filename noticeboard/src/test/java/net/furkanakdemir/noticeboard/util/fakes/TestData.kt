@@ -92,32 +92,155 @@ object TestData {
     )
 
     internal const val TEST_XML_STRING = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" +
-            "    <releases>\n" +
-            "        <release>\n" +
-            "            <change>\n" +
-            "                <description>Lorem</description>\n" +
-            "                <type>0</type>\n" +
-            "            </change>\n" +
-            "            <change>\n" +
-            "                <description>Lorem</description>\n" +
-            "                <type>1</type>\n" +
-            "            </change>\n" +
-            "            <date>22 Jun 2019</date>\n" +
-            "            <version>7.8.9</version>\n" +
-            "        </release>\n" +
-            "        <release>\n" +
-            "            <change>\n" +
-            "                <description>denied</description>\n" +
-            "                <type>2</type>\n" +
-            "            </change>\n" +
-            "            <change>\n" +
-            "                <description>file</description>\n" +
-            "                <type>3</type>\n" +
-            "            </change>\n" +
-            "            <date>11 Mar 2019</date>\n" +
-            "            <version>4.5.6</version>\n" +
-            "        </release>\n" +
-            "    </releases>"
+            "<releases>\n" +
+            "    <release>\n" +
+            "        <date>30 Sep 2019</date>\n" +
+            "        <version>1.0.0</version>\n" +
+            "        <change>\n" +
+            "            <description>New Login Page</description>\n" +
+            "            <type>0</type>\n" +
+            "        </change>\n" +
+            "        <change>\n" +
+            "            <description>Toolbar in Checkout</description>\n" +
+            "            <type>1</type>\n" +
+            "        </change>\n" +
+            "        <change>\n" +
+            "            <description>Old theme will be removed</description>\n" +
+            "            <type>2</type>\n" +
+            "        </change>\n" +
+            "        <change>\n" +
+            "            <description>Tutorial page is removed</description>\n" +
+            "            <type>3</type>\n" +
+            "        </change>\n" +
+            "        <change>\n" +
+            "            <description>Crash in Payment</description>\n" +
+            "            <type>4</type>\n" +
+            "        </change>\n" +
+            "        <change>\n" +
+            "            <description>HTTPS only requests</description>\n" +
+            "            <type>5</type>\n" +
+            "        </change>\n" +
+            "    </release>\n" +
+            "</releases>"
+
+    internal const val TEST_XML_WITH_UNRELEASED_STRING =
+        "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" +
+                "<releases>\n" +
+                "    <release>\n" +
+                "        <date>30 Sep 2019</date>\n" +
+                "        <version>1.0.0</version>\n" +
+                "        <released>true</released>\n" +
+                "        <change>\n" +
+                "            <description>New Login Page</description>\n" +
+                "            <type>0</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Toolbar in Checkout</description>\n" +
+                "            <type>1</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Old theme will be removed</description>\n" +
+                "            <type>2</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Tutorial page is removed</description>\n" +
+                "            <type>3</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Crash in Payment</description>\n" +
+                "            <type>4</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>HTTPS only requests</description>\n" +
+                "            <type>5</type>\n" +
+                "        </change>\n" +
+                "    </release>\n" +
+                "    <release>\n" +
+                "        <date>Unreleased</date>\n" +
+                "        <released>false</released>\n" +
+                "        <change>\n" +
+                "            <description>New Login Page</description>\n" +
+                "            <type>0</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Toolbar in Checkout</description>\n" +
+                "            <type>1</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Old theme will be removed</description>\n" +
+                "            <type>2</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Tutorial page is removed</description>\n" +
+                "            <type>3</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Crash in Payment</description>\n" +
+                "            <type>4</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>HTTPS only requests</description>\n" +
+                "            <type>5</type>\n" +
+                "        </change>\n" +
+                "    </release>\n" +
+                "    <release>\n" +
+                "        <date>30 Sep 2019</date>\n" +
+                "        <version>1.0.0</version>\n" +
+                "        <released>true</released>\n" +
+                "        <change>\n" +
+                "            <description>New Login Page</description>\n" +
+                "            <type>0</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Toolbar in Checkout</description>\n" +
+                "            <type>1</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Old theme will be removed</description>\n" +
+                "            <type>2</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Tutorial page is removed</description>\n" +
+                "            <type>3</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Crash in Payment</description>\n" +
+                "            <type>4</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>HTTPS only requests</description>\n" +
+                "            <type>5</type>\n" +
+                "        </change>\n" +
+                "    </release>\n" +
+                "    <release>\n" +
+                "        <date>Unreleased</date>\n" +
+                "        <released>false</released>\n" +
+                "        <change>\n" +
+                "            <description>New Login Page</description>\n" +
+                "            <type>0</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Toolbar in Checkout</description>\n" +
+                "            <type>1</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Old theme will be removed</description>\n" +
+                "            <type>2</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Tutorial page is removed</description>\n" +
+                "            <type>3</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>Crash in Payment</description>\n" +
+                "            <type>4</type>\n" +
+                "        </change>\n" +
+                "        <change>\n" +
+                "            <description>HTTPS only requests</description>\n" +
+                "            <type>5</type>\n" +
+                "        </change>\n" +
+                "    </release>\n" +
+                "</releases>"
 
     internal const val TEST_JSON_STRING = "[\n" +
             "  {\n" +
@@ -282,17 +405,10 @@ object TestData {
             "]"
 
     internal val TEST_JSON_RELEASE = Release(TEST_DATE, TEST_VERSION, TEST_CHANGES)
-
     internal val TEST_JSON_UNRELEASE = UnRelease(TEST_UNRELEASED_TITLE, TEST_CHANGES)
 
-    internal val TEST_XML_RELEASE = Release(
-        "22 Jun 2019",
-        "7.8.9",
-        listOf(
-            Change("Lorem", ADDED),
-            Change("Lorem", CHANGED)
-        )
-    )
+    internal val TEST_XML_RELEASE = Release(TEST_DATE, TEST_VERSION, TEST_CHANGES)
+    internal val TEST_XML_UNRELEASE = UnRelease(TEST_UNRELEASED_TITLE, TEST_CHANGES)
 
     internal val TEST_SOURCE_DYNAMIC = Dynamic(TEST_RELEASES)
     internal val TEST_SOURCE_JSON = Json(TEST_FILEPATH)
