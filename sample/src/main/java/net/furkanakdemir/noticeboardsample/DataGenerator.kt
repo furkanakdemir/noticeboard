@@ -41,12 +41,10 @@ object DataGenerator {
         UnRelease(
             "Upcoming",
             listOf(
-                Change("New Login Page", ADDED),
-                Change("Toolbar in Checkout", CHANGED),
-                Change("Old theme will be removed", DEPRECATED),
-                Change("Tutorial page is removed", REMOVED),
-                Change("Crash in Payment", FIXED),
-                Change("HTTPS only requests", SECURITY)
+                Change("Dark Theme"),
+                Change("Support Android 10"),
+                Change("Support tablets and watches")
+
             )
         ),
         Release(
@@ -57,13 +55,6 @@ object DataGenerator {
                 Change("Old theme will be removed", DEPRECATED),
                 Change("Tutorial page is removed", REMOVED),
                 Change("Crash in Payment", FIXED),
-                Change("HTTPS only requests", SECURITY)
-            )
-        ),
-        UnRelease(
-            changes = listOf(
-                Change("New Login Page", ADDED),
-                Change("Toolbar in Checkout", CHANGED),
                 Change("HTTPS only requests", SECURITY)
             )
         )
