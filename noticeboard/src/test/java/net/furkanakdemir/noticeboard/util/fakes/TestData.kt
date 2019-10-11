@@ -21,11 +21,12 @@ import net.furkanakdemir.noticeboard.ui.NoticeBoardItem.UnreleasedItem
 object TestData {
 
     internal const val EMPTY = ""
-    internal const val TEST_VERSION = "2.0.0"
-    internal const val TEST_DATE = "16 Sep 2019"
+    internal const val TEST_VERSION = "1.0.0"
+    internal const val TEST_DATE = "30 Sep 2019"
     internal const val TEST_TITLE = "TEST_TITLE"
     internal const val TEST_TITLE_OTHER = "TEST_TITLE_OTHER"
     internal const val TEST_FILEPATH = "TEST_FILEPATH"
+    internal const val TEST_UNRELEASED_TITLE = "Unreleased"
 
     internal val TEST_CHANGES = listOf(
         Change("New Login Page", ADDED),
@@ -120,43 +121,169 @@ object TestData {
 
     internal const val TEST_JSON_STRING = "[\n" +
             "  {\n" +
-            "    \"date\": \"12 Aug 2019\",\n" +
-            "    \"version\": \"1.2.3\",\n" +
+            "    \"date\": \"30 Sep 2019\",\n" +
+            "    \"version\": \"1.0.0\",\n" +
+            "    \"released\": true,\n" +
             "    \"changes\": [\n" +
             "      {\n" +
             "        \"type\": 0,\n" +
-            "        \"description\": \"Lorem\"\n" +
+            "        \"description\": \"New Login Page\"\n" +
             "      },\n" +
             "      {\n" +
             "        \"type\": 1,\n" +
-            "        \"description\": \"Lorem\"\n" +
-            "      }\n" +
-            "    ]\n" +
-            "  },\n" +
-            "  {\n" +
-            "    \"date\": \"10 Aug 2019\",\n" +
-            "    \"version\": \"1.2.2\",\n" +
-            "    \"changes\": [\n" +
+            "        \"description\": \"Toolbar in Checkout\"\n" +
+            "      },\n" +
             "      {\n" +
             "        \"type\": 2,\n" +
-            "        \"description\": \"Lorem\"\n" +
+            "        \"description\": \"Old theme will be removed\"\n" +
             "      },\n" +
             "      {\n" +
             "        \"type\": 3,\n" +
-            "        \"description\": \"Lorem\"\n" +
+            "        \"description\": \"Tutorial page is removed\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 4,\n" +
+            "        \"description\": \"Crash in Payment\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 5,\n" +
+            "        \"description\": \"HTTPS only requests\"\n" +
             "      }\n" +
             "    ]\n" +
             "  }\n" +
             "]"
 
-    internal val TEST_JSON_RELEASE = Release(
-        "12 Aug 2019",
-        "1.2.3",
-        listOf(
-            Change("Lorem", ADDED),
-            Change("Lorem", CHANGED)
-        )
-    )
+
+    internal const val TEST_JSON_WITH_UNRELEASED_STRING = "[\n" +
+            "  {\n" +
+            "    \"date\": \"30 Sep 2019\",\n" +
+            "    \"version\": \"1.0.0\",\n" +
+            "    \"released\": true,\n" +
+            "    \"changes\": [\n" +
+            "      {\n" +
+            "        \"type\": 0,\n" +
+            "        \"description\": \"New Login Page\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 1,\n" +
+            "        \"description\": \"Toolbar in Checkout\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 2,\n" +
+            "        \"description\": \"Old theme will be removed\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 3,\n" +
+            "        \"description\": \"Tutorial page is removed\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 4,\n" +
+            "        \"description\": \"Crash in Payment\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 5,\n" +
+            "        \"description\": \"HTTPS only requests\"\n" +
+            "      }\n" +
+            "    ]\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"date\": \"Unreleased\",\n" +
+            "    \"version\": \"1.0.0\",\n" +
+            "    \"released\": false,\n" +
+            "    \"changes\": [\n" +
+            "      {\n" +
+            "        \"type\": 0,\n" +
+            "        \"description\": \"New Login Page\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 1,\n" +
+            "        \"description\": \"Toolbar in Checkout\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 2,\n" +
+            "        \"description\": \"Old theme will be removed\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 3,\n" +
+            "        \"description\": \"Tutorial page is removed\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 4,\n" +
+            "        \"description\": \"Crash in Payment\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 5,\n" +
+            "        \"description\": \"HTTPS only requests\"\n" +
+            "      }\n" +
+            "    ]\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"date\": \"30 Sep 2019\",\n" +
+            "    \"version\": \"1.0.0\",\n" +
+            "    \"released\": true,\n" +
+            "    \"changes\": [\n" +
+            "      {\n" +
+            "        \"type\": 0,\n" +
+            "        \"description\": \"New Login Page\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 1,\n" +
+            "        \"description\": \"Toolbar in Checkout\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 2,\n" +
+            "        \"description\": \"Old theme will be removed\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 3,\n" +
+            "        \"description\": \"Tutorial page is removed\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 4,\n" +
+            "        \"description\": \"Crash in Payment\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 5,\n" +
+            "        \"description\": \"HTTPS only requests\"\n" +
+            "      }\n" +
+            "    ]\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"date\": \"Unreleased\",\n" +
+            "    \"version\": \"1.0.0\",\n" +
+            "    \"released\": false,\n" +
+            "    \"changes\": [\n" +
+            "      {\n" +
+            "        \"type\": 0,\n" +
+            "        \"description\": \"New Login Page\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 1,\n" +
+            "        \"description\": \"Toolbar in Checkout\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 2,\n" +
+            "        \"description\": \"Old theme will be removed\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 3,\n" +
+            "        \"description\": \"Tutorial page is removed\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 4,\n" +
+            "        \"description\": \"Crash in Payment\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"type\": 5,\n" +
+            "        \"description\": \"HTTPS only requests\"\n" +
+            "      }\n" +
+            "    ]\n" +
+            "  }\n" +
+            "]"
+
+    internal val TEST_JSON_RELEASE = Release(TEST_DATE, TEST_VERSION, TEST_CHANGES)
+
+    internal val TEST_JSON_UNRELEASE = UnRelease(TEST_UNRELEASED_TITLE, TEST_CHANGES)
 
     internal val TEST_XML_RELEASE = Release(
         "22 Jun 2019",
