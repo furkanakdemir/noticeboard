@@ -13,7 +13,7 @@ NoticeBoard
 
 NoticeBoard is a changelog library for Android API 21+. It helps developers display the history of changes in their applications.
 
-It shows a list of `Release` which contains a list of `Change`. 
+It shows a list of `Release` or `UnRelease` which contains a list of `Change`. 
 
 It receives a source of changes and config. 
 
@@ -127,6 +127,35 @@ NoticeBoard(this).pin {
 
 ```
 
+### Unreleased Section  
+
+An unreleased section can be added to a noticeboard.  
+
+`UnRelease` can be created dynamically  
+
+or  
+
+`released` field can be set to false in JSON or XML file. (default: true)
+
+The position of the unreleased section can be configured. (default: TOP)
+
+If `TOP` or `BOTTOM` is selected, all of the unreleased items are merged into one list.  
+If `NONE` is selected, the items remains as it is.  
+
+Position  |
+----------|
+TOP       |
+BOTTOM    |
+NONE      |
+
+
+```java
+NoticeBoard(this).pin {
+    unreleasedPosition(BOTTOM)
+}
+
+```
+
 ### Change Types
 
 There are currently 6 built-in change types.
@@ -159,7 +188,7 @@ val changes = listOf(
             Release("30 Sep 2019", "1.0.0",
                 listOf(
                     Change("New Login Page", ADDED),
-                    Change("Crash in Payment", CHANGED),
+                    Change("Toolbar in Checkout", CHANGED),
                     Change("Old theme will be removed", DEPRECATED),
                     Change("Tutorial page is removed", REMOVED),
                     Change("Crash in Payment", FIXED),
@@ -173,6 +202,8 @@ NoticeBoard(this).pin {
 }
 ```
 
+
+
 #### Json
 
 Store releases by creating a json file to the `/assets` folder.
@@ -183,6 +214,7 @@ Here is an example of JSON file
   {
     "date": "30 Sep 2019",
     "version": "1.0.0",
+    "released": true,
     "changes": [
       {
         "type": 0,
@@ -190,7 +222,7 @@ Here is an example of JSON file
       },
       {
         "type": 1,
-        "description": "Crash in Payment"
+        "description": "Toolbar in Checkout"
       },
       {
         "type": 2,
@@ -233,12 +265,13 @@ Here is an example of XML file
     <release>
         <date>30 Sep 2019</date>
         <version>1.0.0</version>
+        <released>true</released>
         <change>
             <description>New Login Page</description>
             <type>0</type>
         </change>
         <change>
-            <description>Crash in Payment</description>
+            <description>Toolbar in Checkout</description>
             <type>1</type>
         </change>
         <change>
@@ -272,17 +305,14 @@ NoticeBoard(this).pin {
 
 Upcoming
 -------
-
-
-1. Add `Unreleased` section support
-2. Add `Known Issues` section support
-3. Add showing rules ( only once, always )
-4. Add a custom change types
-5. Add `MarkdownDataSource` support
-6. Add remote data support
-7. Add a GOTO button
-8. Enhance Color API
-9. New Date formats
+1. Add `Known Issues` section support
+2. Add showing rules ( only once, always )
+3. Add a custom change types
+4. Add `MarkdownDataSource` support
+5. Add remote data support
+6. Add a GOTO button
+7. Enhance Color API
+8. New Date formats
 
 Contribution
 -------
