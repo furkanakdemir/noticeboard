@@ -137,16 +137,16 @@ or
 
 `released` field can be set to false in JSON or XML file. (default: true)
 
-The position of the unreleased section can be configured. (default: TOP)
-
-If `TOP` or `BOTTOM` is selected, all of the unreleased items are merged into one list.  
-If `NONE` is selected, the items remains as it is.  
+The position of the unreleased section can be configured. (default: TOP)  
 
 Position  |
 ----------|
 TOP       |
 BOTTOM    |
 NONE      |
+
+If `TOP` or `BOTTOM` is selected, all of the unreleased items are merged into one list.  
+If `NONE` is selected, the items remains as it is.  
 
 
 ```java
