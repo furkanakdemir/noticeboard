@@ -1,19 +1,15 @@
 package net.furkanakdemir.noticeboard.data.model
 
 import net.furkanakdemir.noticeboard.ChangeType
+import net.furkanakdemir.noticeboard.ChangeType.UNRELEASED
 
-data class Release(
+open class Release(
     val date: String = "",
     val version: String = "",
-    val changes: List<Change> = emptyList()
+    open val changes: List<Change> = emptyList(),
+    internal val isReleased: Boolean = true
 ) {
-    data class Change(
-        val description: String = "",
-        val type: Int = -1
-    ) {
-        constructor(description: String = "", type: ChangeType = ChangeType.ADDED) :
-                this(description, type.ordinal)
-
+    data class Change(val description: String = "", val type: ChangeType = UNRELEASED) {
         override fun toString(): String {
             return "$description $type"
         }

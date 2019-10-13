@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<releases>
+    <release>
+        <date>30 Sep 2019</date>
+        <version>1.0.0</version>
+        <released>true</released>
+        <change>
+            <description>New Login Page</description>
+            <type>0</type>
+        </change>
+        <change>
+            <description>Toolbar in Checkout</description>
+            <type>1</type>
+        </change>
+        <change>
+            <description>Old theme will be removed</description>
+            <type>2</type>
+        </change>
+        <change>
+            <description>Tutorial page is removed</description>
+            <type>3</type>
+        </change>
+        <change>
+            <description>Crash in Payment</description>
+            <type>4</type>
+        </change>
+        <change>
+            <description>HTTPS only requests</description>
+            <type>5</type>
+        </change>
+    </release>
+    <release>
+        <date>Unreleased</date>
+        <version>1.0.0</version>
+        <released>false</released>
+        <change>
+            <description>New Login Page</description>
+        </change>
+        <change>
+            <description>Toolbar in Checkout</description>
+        </change>
+        <change>
+            <description>Old theme will be removed</description>
+        </change>
+        <change>
+            <description>Tutorial page is removed</description>
+        </change>
+        <change>
+            <description>Crash in Payment</description>
+        </change>
+        <change>
+            <description>HTTPS only requests</description>
+        </change>
+    </release>
+    <release>
+        <date>30 Sep 2019</date>
+        <version>1.0.0</version>
+        <released>true</released>
+        <change>
+            <description>New Login Page</description>
+            <type>0</type>
+        </change>
+        <change>
+            <description>Toolbar in Checkout</description>
+            <type>1</type>
+        </change>
+        <change>
+            <description>Old theme will be removed</description>
+            <type>2</type>
+        </change>
+        <change>
+            <description>Tutorial page is removed</description>
+            <type>3</type>
+        </change>
+        <change>
+            <description>Crash in Payment</description>
+            <type>4</type>
+        </change>
+        <change>
+            <description>HTTPS only requests</description>
+            <type>5</type>
+        </change>
+    </release>
+    <release>
+        <date>Unreleased</date>
+        <version>1.0.0</version>
+        <released>false</released>
+        <change>
+            <description>New Login Page</description>
+        </change>
+        <change>
+            <description>Toolbar in Checkout</description>
+        </change>
+        <change>
+            <description>Old theme will be removed</description>
+        </change>
+        <change>
+            <description>Tutorial page is removed</description>
+        </change>
+        <change>
+            <description>Crash in Payment</description>
+        </change>
+        <change>
+            <description>HTTPS only requests</description>
+        </change>
+    </release>
+</releases>

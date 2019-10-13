@@ -1,7 +1,9 @@
 package net.furkanakdemir.noticeboard
 
 import android.content.Context
+import net.furkanakdemir.noticeboard.Position.TOP
 import net.furkanakdemir.noticeboard.config.ConfigRepository
+import net.furkanakdemir.noticeboard.config.ConfigRepository.Companion.KEY_RELEASED_POSITION
 import net.furkanakdemir.noticeboard.config.NoticeBoardConfigRepository
 import net.furkanakdemir.noticeboard.data.datasource.NoticeBoardDataSourceFactory
 import net.furkanakdemir.noticeboard.data.mapper.ChangeDomainMapper
@@ -60,6 +62,11 @@ internal class InternalNoticeBoard private constructor(context: Context?) {
     fun getChanges(): Result<List<Release>> = noticeBoardRepository.getChanges()
 
     fun setDefaultColorProvider() = configRepository.saveColorProvider(defaultColorProvider)
+
+    fun getUnreleasedPosition(): Position = configRepository.getConfig(KEY_RELEASED_POSITION, TOP)
+
+    fun setUnreleasedPosition(position: Position) =
+        configRepository.setConfig(KEY_RELEASED_POSITION, position)
 
     companion object : SingletonHolder<InternalNoticeBoard, Context>(::InternalNoticeBoard)
 }

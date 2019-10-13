@@ -1,23 +1,28 @@
 package net.furkanakdemir.noticeboard.ui
 
-import net.furkanakdemir.noticeboard.ChangeType
 import net.furkanakdemir.noticeboard.data.model.Release
+import net.furkanakdemir.noticeboard.ui.NoticeBoardItem.ReleaseHeader
+import net.furkanakdemir.noticeboard.ui.NoticeBoardItem.UnreleasedHeader
 import net.furkanakdemir.noticeboard.util.mapper.Mapper
 
-internal class ReleaseViewMapper :
-    Mapper<List<Release>, List<NoticeBoardItem>> {
+internal class ReleaseViewMapper : Mapper<List<Release>, List<NoticeBoardItem>> {
+
+    private val changeViewMapper = ChangeViewMapper()
+    private val unreleaseChangeViewMapper = UnreleaseChangeViewMapper()
+
     override fun map(input: List<Release>): List<NoticeBoardItem> {
         val items = mutableListOf<NoticeBoardItem>()
 
         input.forEach {
 
-            items += NoticeBoardItem.ReleaseHeader(it.date, it.version)
+            if (it.isReleased) {
+                items += ReleaseHeader(it.date, it.version)
 
-            it.changes.forEach { change ->
-                items += NoticeBoardItem.ChangeItem(
-                    ChangeType.values()[change.type],
-                    change.description
-                )
+                items.addAll(changeViewMapper.map(it.changes))
+            } else {
+                items += UnreleasedHeader(it.date)
+
+                items.addAll(unreleaseChangeViewMapper.map(it.changes))
             }
         }
 

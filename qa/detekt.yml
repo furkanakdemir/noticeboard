@@ -21,16 +21,13 @@ console-reports:
     - 'ProjectStatisticsReport'
     - 'ComplexityReport'
     - 'NotificationReport'
-  #  - 'FindingsReport'
-  #  - 'BuildFailureReport'
+    - 'FindingsReport'
+    - 'BuildFailureReport'
 
 output-reports:
   active: true
   exclude:
-    #  - 'HtmlOutputReport'
     - 'TxtOutputReport'
-    - 'XmlOutputReport'
-
 
 comments:
   active: true
@@ -467,7 +464,7 @@ style:
     ignoreCompanionObjectPropertyDeclaration: true
     ignoreAnnotation: false
     ignoreNamedArgument: true
-    ignoreEnums: false
+    ignoreEnums: true
     ignoreRanges: false
   MandatoryBracesIfStatements:
     active: false

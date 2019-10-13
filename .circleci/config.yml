@@ -19,14 +19,16 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle.kts" }}{{ checksum  "buildSrc/src/main/kotlin/Dependencies.kt" }}-{{ checksum  "sample/build.gradle.kts" }}
       - run:
+          name: Check Quality
+          command: ./gradlew lintDebug ktlintDebugCheck detekt
+      - run:
           name: Build Debug
           command: ./gradlew assembleDebug
       - run:
           name: Run Tests
-          command: ./gradlew lint test
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+          command: ./gradlew test
+      - store_artifacts:
           path: sample/build/reports
           destination: reports
-      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+      - store_test_results:
           path: sample/build/test-results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
