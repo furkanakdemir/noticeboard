@@ -36,27 +36,21 @@
     "released": false,
     "changes": [
       {
-        "type": 0,
         "description": "New Login Page"
       },
       {
-        "type": 1,
         "description": "Crash in Payment"
       },
       {
-        "type": 2,
         "description": "Old theme will be removed"
       },
       {
-        "type": 3,
         "description": "Tutorial page is removed"
       },
       {
-        "type": 4,
         "description": "Crash in Payment"
       },
       {
-        "type": 5,
         "description": "HTTPS only requests"
       }
     ]
@@ -98,27 +92,21 @@
     "released": false,
     "changes": [
       {
-        "type": 0,
         "description": "New Login Page"
       },
       {
-        "type": 1,
         "description": "Crash in Payment"
       },
       {
-        "type": 2,
         "description": "Old theme will be removed"
       },
       {
-        "type": 3,
         "description": "Tutorial page is removed"
       },
       {
-        "type": 4,
         "description": "Crash in Payment"
       },
       {
-        "type": 5,
         "description": "HTTPS only requests"
       }
     ]
