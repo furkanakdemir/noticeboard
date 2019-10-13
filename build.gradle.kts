@@ -43,6 +43,7 @@ subprojects {
     detekt {
         config = files("$rootDir/qa/detekt.yml")
         parallel = true
+        autoCorrect = true
 
         reports {
             xml {
