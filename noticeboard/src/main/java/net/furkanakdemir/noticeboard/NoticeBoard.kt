@@ -13,6 +13,7 @@ import net.furkanakdemir.noticeboard.DisplayOptions.DIALOG
 import net.furkanakdemir.noticeboard.Position.BOTTOM
 import net.furkanakdemir.noticeboard.Position.NONE
 import net.furkanakdemir.noticeboard.Position.TOP
+import net.furkanakdemir.noticeboard.ShowRule.Always
 import net.furkanakdemir.noticeboard.Source.Dynamic
 import net.furkanakdemir.noticeboard.ui.NoticeBoardActivity
 import net.furkanakdemir.noticeboard.ui.NoticeBoardDialogFragment
@@ -29,6 +30,8 @@ class NoticeBoard(private val target: FragmentActivity) {
     lateinit var displayOptions: DisplayOptions
     @VisibleForTesting
     lateinit var title: String
+    @VisibleForTesting
+    lateinit var showRule: ShowRule
 
     private val observer: NoticeBoardLifeCycleObserver
 
@@ -47,6 +50,7 @@ class NoticeBoard(private val target: FragmentActivity) {
         title = TITLE_DEFAULT
         displayOptions = ACTIVITY
         sourceType = Dynamic()
+        showRule = Always()
         internalNoticeBoard.setDefaultColorProvider()
         internalNoticeBoard.setUnreleasedPosition(TOP)
     }
@@ -80,6 +84,10 @@ class NoticeBoard(private val target: FragmentActivity) {
         internalNoticeBoard.saveColorProvider(colorProvider)
     }
 
+    fun showRule(showRule: ShowRule) {
+        this.showRule = showRule
+    }
+
     fun pin(func: NoticeBoard.() -> Unit) {
         initialize()
         this.func()
@@ -89,15 +97,22 @@ class NoticeBoard(private val target: FragmentActivity) {
     private fun pin() {
         internalNoticeBoard.fetchChanges(sourceType)
 
-        when (displayOptions) {
-            ACTIVITY -> target.startActivity(
-                NoticeBoardActivity.createIntent(target, title)
-            )
-            DIALOG -> {
-                val fragmentManager = target.supportFragmentManager
-                val noticeBoardDialogFragment = NoticeBoardDialogFragment.newInstance(title)
-                noticeBoardDialogFragment.show(fragmentManager, dialogTag)
+        val numberOfPin = internalNoticeBoard.getNumberOfPin()
+        if (numberOfPin < showRule.number) {
+            when (displayOptions) {
+                ACTIVITY -> target.startActivity(
+                    NoticeBoardActivity.createIntent(target, title)
+                )
+                DIALOG -> {
+                    val fragmentManager = target.supportFragmentManager
+                    val noticeBoardDialogFragment = NoticeBoardDialogFragment.newInstance(title)
+                    noticeBoardDialogFragment.show(fragmentManager, dialogTag)
+                }
             }
+
+            internalNoticeBoard.increaseNumberOfPin()
+        } else {
+            Log.i(TAG, "Maximum number of pin: $numberOfPin")
         }
     }
 
