@@ -19,6 +19,7 @@ import net.furkanakdemir.noticeboard.ui.NoticeBoardActivity
 import net.furkanakdemir.noticeboard.ui.NoticeBoardDialogFragment
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
 
+@Suppress("TooManyFunctions")
 class NoticeBoard(private val target: FragmentActivity) {
 
     constructor(fragmentTarget: Fragment) :

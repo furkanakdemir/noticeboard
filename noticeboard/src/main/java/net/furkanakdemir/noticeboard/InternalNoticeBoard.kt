@@ -24,6 +24,7 @@ import net.furkanakdemir.noticeboard.util.mapper.RealListMapper
 import net.furkanakdemir.noticeboard.util.preference.PreferenceHelper
 import net.furkanakdemir.noticeboard.util.preference.SharedPreferenceHelper
 
+@Suppress("TooManyFunctions")
 internal class InternalNoticeBoard private constructor(context: Context?) {
 
     private var noticeBoardRepository: NoticeBoardRepository
