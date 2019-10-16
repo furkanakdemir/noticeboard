@@ -8,9 +8,9 @@ import net.furkanakdemir.noticeboardsample.util.DataGenerator
 
 class ShowLimitedActivity : BaseSampleActivity() {
 
-    override fun getDescription(): Int = R.string.description_xml
+    override fun getDescription(): Int = R.string.description_show_rule_limited
 
-    override fun getToolbarTitle(): Int = R.string.title_xml
+    override fun getToolbarTitle(): Int = R.string.title_show_rule_limited
 
     override fun buttonAction() {
         val changes = DataGenerator.createChanges()
@@ -18,6 +18,6 @@ class ShowLimitedActivity : BaseSampleActivity() {
     }
 
     companion object {
-        private const val NUMBER_OF_SHOW = 5
+        private const val NUMBER_OF_SHOW = 3
     }
 }

@@ -1,28 +1,71 @@
 <resources>
     <string name="app_name">NoticeBoardSample</string>
+    <string name="title_main">NoticeBoards</string>
     <string name="action_display_activity">Activity</string>
     <string name="action_display_dialog">Dialog</string>
     <string name="action_display_options">Display Options</string>
+    <string name="dialog_display_options_close">Close</string>
     <string name="noticeboard_pin">Pin</string>
 
-    <string name="description_dynamic">This sample shows how to construct a noticeboard dynamically</string>
-    <string name="title_dynamic">Dynamic</string>
 
-    <string name="description_xml">This sample shows how to construct a noticeboard from a Xml file</string>
-    <string name="title_xml">Xml</string>
+    <!-- Samples -->
 
-    <string name="description_json">This sample shows how to construct a noticeboard from a Json file</string>
-    <string name="title_json">Json</string>
-
-    <string name="description_custom_title">This sample shows how to config the title of a noticeboard</string>
-    <string name="title_custom_title">Custom Title</string>
+    <string name="title_samples">Samples</string>
 
     <string name="title_source_type">Source Types</string>
-
     <string name="title_sample_title">Custom Title</string>
-    <string name="custom_title">Changelogs</string>
-    <string name="dialog_display_options_close">Close</string>
     <string name="title_show_rule">Show Rules</string>
-    <string name="title_samples">Samples</string>
-    <string name="title_main">NoticeBoards</string>
+
+    <!-- Source Types -->
+    <string name="description_dynamic">This sample shows a noticeboard created dynamically.</string>
+    <string name="title_dynamic">Dynamic</string>
+
+    <string name="description_xml">This sample shows a noticeboard created from a Xml file.</string>
+    <string name="title_xml">Xml</string>
+
+    <string name="description_json">This sample shows a noticeboard created from a Json file.</string>
+    <string name="title_json">Json</string>
+
+    <!-- Custom Title -->
+    <string name="description_custom_title">This sample shows a noticeboard that has a custom title.</string>
+    <string name="title_custom_title">Custom Title</string>
+    <string name="custom_title">Changelogs</string>
+
+    <!-- Empty -->
+    <string name="description_dynamic_empty">This sample shows an empty noticeboard created dynamically.</string>
+    <string name="title_dynamic_empty">Dynamic Empty</string>
+
+    <string name="description_xml_empty">This sample shows an empty noticeboard created from a Xml file.</string>
+    <string name="title_xml_empty">Xml Empty</string>
+
+    <string name="description_json_empty">This sample shows an empty noticeboard created from a Json file.</string>
+    <string name="title_json_empty">Json Empty</string>
+
+    <!-- Invalid -->
+    <string name="description_xml_invalid">This sample shows a noticeboard created from an invalid Xml file.</string>
+    <string name="title_xml_invalid">Xml Invalid</string>
+
+    <string name="description_json_invalid">This sample shows a noticeboard created from an invalid Json file.</string>
+    <string name="title_json_invalid">Json Invalid</string>
+
+
+    <!-- Unreleased -->
+    <string name="description_unreleased_top">This sample shows a noticeboard with an unreleased section at top.</string>
+    <string name="title_unreleased_top">Top</string>
+
+    <string name="description_unreleased_bottom">This sample shows a noticeboard with an unreleased section at bottom.</string>
+    <string name="title_unreleased_bottom">Bottom</string>
+
+    <string name="description_unreleased_none">This sample shows a noticeboard with an unreleased section as not merged.</string>
+    <string name="title_unreleased_none">None</string>
+
+    <!-- Show Rule -->
+    <string name="description_show_rule_always">This sample shows a noticeboard all the time.</string>
+    <string name="title_show_rule_always">Always</string>
+
+    <string name="description_show_rule_limited">This sample shows a noticeboard a limited number of times(3).</string>
+    <string name="title_show_rule_limited">Limited</string>
+
+    <string name="description_show_rule_once">This sample shows a noticeboard only once.</string>
+    <string name="title_show_rule_once">Once</string>
 </resources>

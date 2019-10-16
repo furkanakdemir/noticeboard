@@ -8,9 +8,9 @@ import net.furkanakdemir.noticeboardsample.util.DataGenerator
 
 class UnreleasedBottomActivity : BaseSampleActivity() {
 
-    override fun getDescription(): Int = R.string.description_xml
+    override fun getDescription(): Int = R.string.description_unreleased_bottom
 
-    override fun getToolbarTitle(): Int = R.string.title_xml
+    override fun getToolbarTitle(): Int = R.string.title_unreleased_bottom
 
     override fun buttonAction() {
         val changes = DataGenerator.createWithUnreleasedChanges()

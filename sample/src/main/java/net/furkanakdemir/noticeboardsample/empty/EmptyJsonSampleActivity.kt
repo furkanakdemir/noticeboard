@@ -6,9 +6,9 @@ import net.furkanakdemir.noticeboardsample.base.BaseSampleActivity
 
 class EmptyJsonSampleActivity : BaseSampleActivity() {
 
-    override fun getDescription(): Int = R.string.description_json
+    override fun getDescription(): Int = R.string.description_json_empty
 
-    override fun getToolbarTitle(): Int = R.string.title_json
+    override fun getToolbarTitle(): Int = R.string.title_json_empty
 
     override fun buttonAction() {
         val filepath = "sample_empty.json"

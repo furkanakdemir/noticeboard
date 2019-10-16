@@ -1,9 +1,11 @@
 package net.furkanakdemir.noticeboardsample.main
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
+import net.furkanakdemir.noticeboard.R.string
 import net.furkanakdemir.noticeboardsample.R
 import net.furkanakdemir.noticeboardsample.R.id
 import net.furkanakdemir.noticeboardsample.R.layout
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         setupToolbar()
         setupRecyclerView()
         createMainMenu()
+        clearPreferences()
     }
 
     private fun setupRecyclerView() {
@@ -98,6 +101,12 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.setDisplayShowHomeEnabled(false)
         supportActionBar?.title = getString(R.string.title_main)
+    }
+
+    private fun clearPreferences() {
+        val sharedPreferences =
+            getSharedPreferences(getString(string.preference_file_key), Context.MODE_PRIVATE)
+        sharedPreferences.edit().clear().apply()
     }
 
     override fun onBackPressed() {

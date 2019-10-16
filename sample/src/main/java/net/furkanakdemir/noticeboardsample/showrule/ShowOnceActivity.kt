@@ -8,9 +8,9 @@ import net.furkanakdemir.noticeboardsample.util.DataGenerator
 
 class ShowOnceActivity : BaseSampleActivity() {
 
-    override fun getDescription(): Int = R.string.description_xml
+    override fun getDescription(): Int = R.string.description_show_rule_once
 
-    override fun getToolbarTitle(): Int = R.string.title_xml
+    override fun getToolbarTitle(): Int = R.string.title_show_rule_once
 
     override fun buttonAction() {
         val changes = DataGenerator.createChanges()

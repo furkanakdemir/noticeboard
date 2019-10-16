@@ -28,24 +28,24 @@
     <TextView
         android:id="@+id/descriptionTextView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:padding="16dp"
+        android:layout_height="0dp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
         tools:text="@tools:sample/lorem/random"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/baseAppBarLayout" />
 
     <Button
         android:id="@+id/pinButton"
         android:layout_width="128dp"
-        android:layout_height="64dp"
-        android:textSize="24sp"
-        android:layout_margin="64dp"
+        android:layout_height="wrap_content"
         android:text="@string/noticeboard_pin"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/baseAppBarLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
