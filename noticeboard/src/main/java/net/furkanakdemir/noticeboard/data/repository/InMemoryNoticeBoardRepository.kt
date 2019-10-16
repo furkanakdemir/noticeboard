@@ -25,6 +25,8 @@ internal class InMemoryNoticeBoardRepository(
             Result.Error(e)
         } catch (e: SAXException) {
             Result.Error(e)
+        } catch (e: IllegalArgumentException) {
+            Result.Error(e)
         }
     }
 }

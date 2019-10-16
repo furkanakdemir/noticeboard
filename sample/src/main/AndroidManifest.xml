@@ -9,18 +9,41 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".base.BaseSampleActivity" />
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".main.MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".invalid.InvalidJsonSampleActivity" />
+        <activity android:name=".invalid.InvalidXmlSampleActivity" />
+        <activity android:name=".empty.EmptyXmlSampleActivity" />
+        <activity android:name=".empty.EmptyDynamicSampleActivity" />
+        <activity android:name=".empty.EmptyJsonSampleActivity" />
+        <activity android:name=".title.CustomTitleSampleActivity" />
+
+        <activity android:name=".sourcetype.SourceTypeActivity" />
+        <activity android:name=".sourcetype.DynamicSampleActivity" />
+        <activity android:name=".sourcetype.JsonSampleActivity" />
+        <activity android:name=".sourcetype.XmlSampleActivity" />
+        <activity android:name=".empty.EmptyActivity" />
+        <activity android:name=".invalid.InvalidActivity" />
+        <activity android:name=".title.TitleSampleActivity" />
+        <activity android:name=".unreleased.UnreleasedSampleActivity" />
+        <activity android:name=".unreleased.UnreleasedTopActivity" />
+        <activity android:name=".unreleased.UnreleasedNoneActivity" />
+        <activity android:name=".unreleased.UnreleasedBottomActivity" />
+        <activity android:name=".color.ColorSampleActivity" />
+        <activity android:name=".showrule.ShowRuleSampleActivity" />
+        <activity android:name=".showrule.ShowAlwaysActivity" />
+        <activity android:name=".showrule.ShowLimitedActivity" />
+        <activity android:name=".showrule.ShowOnceActivity" />
     </application>
 
 </manifest>

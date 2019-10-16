@@ -5,13 +5,17 @@
     android:layout_width="match_parent"
     android:clipChildren="false"
     android:layout_height="match_parent"
-    tools:context=".main.MainActivity">
+    tools:context=".base.BaseListSampleActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/baseListAppBarLayout"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
-        android:layout_height="wrap_content">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <include layout="@layout/layout_toolbar" />
 
@@ -23,7 +27,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/main_recyclerview"
+            android:id="@+id/baseListRecyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -36,6 +40,5 @@
             tools:listitem="@layout/list_item_sample" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

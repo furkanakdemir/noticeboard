@@ -21,13 +21,17 @@ import net.furkanakdemir.noticeboard.util.io.FileReader
 import net.furkanakdemir.noticeboard.util.mapper.ListMapper
 import net.furkanakdemir.noticeboard.util.mapper.Mapper
 import net.furkanakdemir.noticeboard.util.mapper.RealListMapper
+import net.furkanakdemir.noticeboard.util.preference.PreferenceHelper
+import net.furkanakdemir.noticeboard.util.preference.SharedPreferenceHelper
 
+@Suppress("TooManyFunctions")
 internal class InternalNoticeBoard private constructor(context: Context?) {
 
     private var noticeBoardRepository: NoticeBoardRepository
     private var configRepository: ConfigRepository
 
     private val defaultColorProvider: ColorProvider = NoticeBoardColorProvider(context)
+    private val preferenceHelper: PreferenceHelper
 
     init {
         requireNotNull(context) { "Context cannot be null" }
@@ -35,6 +39,7 @@ internal class InternalNoticeBoard private constructor(context: Context?) {
 
         noticeBoardRepository = InMemoryNoticeBoardRepository(factory)
         configRepository = NoticeBoardConfigRepository(defaultColorProvider)
+        preferenceHelper = SharedPreferenceHelper(context)
     }
 
     private fun buildDataSourceFactory(context: Context): NoticeBoardDataSourceFactory {
@@ -67,6 +72,16 @@ internal class InternalNoticeBoard private constructor(context: Context?) {
 
     fun setUnreleasedPosition(position: Position) =
         configRepository.setConfig(KEY_RELEASED_POSITION, position)
+
+    fun getNumberOfPin(): Int = preferenceHelper.getPins()
+
+    fun increaseNumberOfPin() = preferenceHelper.increase()
+
+    fun resetNumberOfPin() = preferenceHelper.reset()
+
+    fun setTag(tag: String) {
+        preferenceHelper.setTag(tag)
+    }
 
     companion object : SingletonHolder<InternalNoticeBoard, Context>(::InternalNoticeBoard)
 }

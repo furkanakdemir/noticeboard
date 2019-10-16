@@ -1,13 +1,15 @@
-package net.furkanakdemir.noticeboardsample
+package net.furkanakdemir.noticeboardsample.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import net.furkanakdemir.noticeboardsample.SampleAdapter.BaseViewHolder
-import net.furkanakdemir.noticeboardsample.SampleItem.Header
-import net.furkanakdemir.noticeboardsample.SampleItem.Sample
+import net.furkanakdemir.noticeboardsample.R
+import net.furkanakdemir.noticeboardsample.ui.SampleAdapter.BaseViewHolder
+import net.furkanakdemir.noticeboardsample.ui.SampleItem.Header
+import net.furkanakdemir.noticeboardsample.ui.SampleItem.Main
+import net.furkanakdemir.noticeboardsample.ui.SampleItem.Sample
 
 class SampleAdapter constructor(val onSampleClick: (SampleItem) -> Unit) :
     RecyclerView.Adapter<BaseViewHolder<SampleItem>>() {
@@ -24,13 +26,21 @@ class SampleAdapter constructor(val onSampleClick: (SampleItem) -> Unit) :
             VIEW_TYPE_HEADER -> {
                 HeaderViewHolder(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.list_item_header, parent, false)
+                        .inflate(
+                            R.layout.list_item_header,
+                            parent,
+                            false
+                        )
                 )
             }
             VIEW_TYPE_SAMPLE -> {
                 SampleViewHolder(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.list_item_sample, parent, false)
+                        .inflate(
+                            R.layout.list_item_sample,
+                            parent,
+                            false
+                        )
                 )
             }
             else -> {
@@ -45,6 +55,7 @@ class SampleAdapter constructor(val onSampleClick: (SampleItem) -> Unit) :
         return when (samples[position]) {
             is Sample -> VIEW_TYPE_SAMPLE
             is Header -> VIEW_TYPE_HEADER
+            is Main -> VIEW_TYPE_SAMPLE
         }
     }
 

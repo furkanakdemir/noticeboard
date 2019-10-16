@@ -27,6 +27,7 @@ object TestData {
     internal const val TEST_TITLE_OTHER = "TEST_TITLE_OTHER"
     internal const val TEST_FILEPATH = "TEST_FILEPATH"
     internal const val TEST_UNRELEASED_TITLE = "Unreleased"
+    internal const val TAG_CUSTOM = "TAG_CUSTOM"
 
     internal val TEST_CHANGES = listOf(
         Change("New Login Page", ADDED),

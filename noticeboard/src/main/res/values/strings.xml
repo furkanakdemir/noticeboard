@@ -2,4 +2,5 @@
     <string name="title_activity_notice_board">NoticeBoardActivity</string>
     <string name="dialog_notice_board_close">Close</string>
     <string name="noticeboard_empty_list">Empty</string>
+    <string name="preference_file_key">noticeboard_preferences</string>
 </resources>
