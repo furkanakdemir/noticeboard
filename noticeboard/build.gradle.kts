@@ -28,8 +28,6 @@ android {
     defaultConfig {
         minSdkVersion(AndroidSdk.sdk_minimum)
         targetSdkVersion(AndroidSdk.sdk_target)
-        versionCode = AndroidSdk.version_code
-        versionName = AndroidSdk.version_name
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         consumerProguardFiles("consumer-proguard-rules.pro")
