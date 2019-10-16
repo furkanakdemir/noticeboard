@@ -3,4 +3,26 @@
     <string name="action_display_activity">Activity</string>
     <string name="action_display_dialog">Dialog</string>
     <string name="action_display_options">Display Options</string>
+    <string name="noticeboard_pin">Pin</string>
+
+    <string name="description_dynamic">This sample shows how to construct a noticeboard dynamically</string>
+    <string name="title_dynamic">Dynamic</string>
+
+    <string name="description_xml">This sample shows how to construct a noticeboard from a Xml file</string>
+    <string name="title_xml">Xml</string>
+
+    <string name="description_json">This sample shows how to construct a noticeboard from a Json file</string>
+    <string name="title_json">Json</string>
+
+    <string name="description_custom_title">This sample shows how to config the title of a noticeboard</string>
+    <string name="title_custom_title">Custom Title</string>
+
+    <string name="title_source_type">Source Types</string>
+
+    <string name="title_sample_title">Custom Title</string>
+    <string name="custom_title">Changelogs</string>
+    <string name="dialog_display_options_close">Close</string>
+    <string name="title_show_rule">Show Rules</string>
+    <string name="title_samples">Samples</string>
+    <string name="title_main">NoticeBoards</string>
 </resources>
