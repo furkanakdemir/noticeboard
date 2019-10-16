@@ -1,4 +1,4 @@
-package net.furkanakdemir.noticeboardsample
+package net.furkanakdemir.noticeboardsample.util
 
 import net.furkanakdemir.noticeboard.ChangeType.ADDED
 import net.furkanakdemir.noticeboard.ChangeType.CHANGED
