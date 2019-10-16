@@ -10,10 +10,8 @@ internal class SharedPreferenceHelper(context: Context) : PreferenceHelper {
     private var sharedPref: SharedPreferences
     private var tag: String = "NoticeBoard"
 
-
     private val buildKey: String
         get() = "${KEY_NUMBER_OF_PIN}_$tag"
-
 
     init {
         val fileKey = context.getString(R.string.preference_file_key)

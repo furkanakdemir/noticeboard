@@ -3,9 +3,9 @@ package net.furkanakdemir.noticeboardsample.base
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_base_sample.*
 import net.furkanakdemir.noticeboard.DisplayOptions
 import net.furkanakdemir.noticeboard.DisplayOptions.ACTIVITY
@@ -19,16 +19,15 @@ import net.furkanakdemir.noticeboard.Source
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
 import net.furkanakdemir.noticeboardsample.R
 
-abstract class BaseSampleActivity : AppCompatActivity() {
+@Suppress("LongParameterList")
+abstract class BaseSampleActivity : BaseToolbarActivity() {
 
     private lateinit var displayOptionsDialog: AlertDialog
     private var currentDisplayOptions: DisplayOptions = ACTIVITY
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_base_sample)
 
-        setupToolbar()
         buildDisplayOptionsDialog()
 
         descriptionTextView.text = getString(getDescription())
@@ -39,26 +38,16 @@ abstract class BaseSampleActivity : AppCompatActivity() {
     abstract fun getDescription(): Int
 
     @StringRes
-    abstract fun getToolbarTitle(): Int
+    abstract override fun getToolbarTitle(): Int
 
     abstract fun buttonAction()
 
-    private fun setupToolbar() {
-        setSupportActionBar(baseSampleToolbar)
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-        supportActionBar?.title = getString(getToolbarTitle())
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
-    }
+    @LayoutRes
+    override fun layoutResId(): Int = R.layout.activity_base_sample
 
     private fun buildDisplayOptionsDialog() {
         val builderSingle = AlertDialog.Builder(this)
-        builderSingle.setTitle(R.string.dialog_display_options_close)
+        builderSingle.setTitle(R.string.action_display_options)
 
         val menuItems = arrayOf(
             getString(R.string.action_display_activity),
@@ -78,7 +67,7 @@ abstract class BaseSampleActivity : AppCompatActivity() {
             dialog.dismiss()
         }
 
-        builderSingle.setNegativeButton(TEXT_DISPLAY_OPTIONS_DIALOG_CLOSE, null)
+        builderSingle.setNegativeButton(getString(R.string.dialog_display_options_close), null)
         displayOptionsDialog = builderSingle.create()
     }
 
@@ -131,8 +120,6 @@ abstract class BaseSampleActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val TEXT_DISPLAY_OPTIONS_DIALOG_CLOSE = "Close"
-
         private const val INDEX_FIRST = 0
         private const val INDEX_SECOND = 1
     }

@@ -9,22 +9,19 @@ import net.furkanakdemir.noticeboardsample.ui.SampleItem
 import net.furkanakdemir.noticeboardsample.ui.SampleItem.Sample
 import net.furkanakdemir.noticeboardsample.util.ext.launch
 
-
 class EmptyActivity : BaseListSampleActivity() {
 
     override fun createSamples(): List<SampleItem> = Empty.values().map { Sample(it.type) }
 
     override fun getToolbarTitle(): Int = R.string.title_source_type
 
-    override fun getOnClickListener(): (SampleItem) -> Unit =
-        {
-            when (it.title) {
-                EMPTY_DYNAMIC.type -> showEmptyDynamic()
-                EMPTY_JSON.type -> showEmptyJson()
-                EMPTY_XML.type -> showEmptyXml()
-            }
+    override fun getOnClickListener(): (SampleItem) -> Unit = {
+        when (it.title) {
+            EMPTY_DYNAMIC.type -> showEmptyDynamic()
+            EMPTY_JSON.type -> showEmptyJson()
+            EMPTY_XML.type -> showEmptyXml()
         }
-
+    }
 
     private fun showEmptyXml() = launch<EmptyXmlSampleActivity>()
 

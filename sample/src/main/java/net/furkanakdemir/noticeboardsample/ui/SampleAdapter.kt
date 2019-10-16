@@ -5,8 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import net.furkanakdemir.noticeboardsample.R.id
-import net.furkanakdemir.noticeboardsample.R.layout
+import net.furkanakdemir.noticeboardsample.R
 import net.furkanakdemir.noticeboardsample.ui.SampleAdapter.BaseViewHolder
 import net.furkanakdemir.noticeboardsample.ui.SampleItem.Header
 import net.furkanakdemir.noticeboardsample.ui.SampleItem.Main
@@ -28,7 +27,7 @@ class SampleAdapter constructor(val onSampleClick: (SampleItem) -> Unit) :
                 HeaderViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(
-                            layout.list_item_header,
+                            R.layout.list_item_header,
                             parent,
                             false
                         )
@@ -38,7 +37,7 @@ class SampleAdapter constructor(val onSampleClick: (SampleItem) -> Unit) :
                 SampleViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(
-                            layout.list_item_sample,
+                            R.layout.list_item_sample,
                             parent,
                             false
                         )
@@ -74,13 +73,13 @@ class SampleAdapter constructor(val onSampleClick: (SampleItem) -> Unit) :
 
     class SampleViewHolder(itemView: View) : BaseViewHolder<SampleItem>(itemView) {
         override fun bind(item: SampleItem) {
-            itemView.findViewById<TextView>(id.sample).text = item.title
+            itemView.findViewById<TextView>(R.id.sample).text = item.title
         }
     }
 
     class HeaderViewHolder(itemView: View) : BaseViewHolder<SampleItem>(itemView) {
         override fun bind(item: SampleItem) {
-            itemView.findViewById<TextView>(id.header).text = item.title
+            itemView.findViewById<TextView>(R.id.header).text = item.title
         }
     }
 

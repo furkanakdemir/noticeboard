@@ -9,15 +9,13 @@ import net.furkanakdemir.noticeboardsample.ui.SampleItem
 import net.furkanakdemir.noticeboardsample.ui.SampleItem.Sample
 import net.furkanakdemir.noticeboardsample.util.ext.launch
 
-
 class SourceTypeActivity : BaseListSampleActivity() {
 
     override fun createSamples(): List<SampleItem> = SourceType.values().map { Sample(it.type) }
 
     override fun getToolbarTitle(): Int = R.string.title_source_type
 
-    override fun getOnClickListener(): (SampleItem) -> Unit =
-        {
+    override fun getOnClickListener(): (SampleItem) -> Unit = {
             when (it.title) {
                 DYNAMIC.type -> showDynamic()
                 XML.type -> showValidXml()

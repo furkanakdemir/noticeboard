@@ -9,27 +9,23 @@ import net.furkanakdemir.noticeboardsample.unreleased.UnreleasedSampleActivity.U
 import net.furkanakdemir.noticeboardsample.unreleased.UnreleasedSampleActivity.Unreleased.TOP
 import net.furkanakdemir.noticeboardsample.util.ext.launch
 
-
 class UnreleasedSampleActivity : BaseListSampleActivity() {
 
     override fun createSamples(): List<SampleItem> = Unreleased.values().map { Sample(it.type) }
 
     override fun getToolbarTitle(): Int = R.string.title_source_type
 
-    override fun getOnClickListener(): (SampleItem) -> Unit =
-        {
-            when (it.title) {
-                TOP.type -> showTop()
-                BOTTOM.type -> showBottom()
-                NONE.type -> showNone()
-            }
+    override fun getOnClickListener(): (SampleItem) -> Unit = {
+        when (it.title) {
+            TOP.type -> showTop()
+            BOTTOM.type -> showBottom()
+            NONE.type -> showNone()
         }
-
+    }
 
     private fun showTop() = launch<UnreleasedTopActivity>()
     private fun showBottom() = launch<UnreleasedBottomActivity>()
     private fun showNone() = launch<UnreleasedNoneActivity>()
-
 
     enum class Unreleased(val type: String) {
         TOP("Top"),
