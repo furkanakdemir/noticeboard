@@ -77,6 +77,17 @@ NoticeBoard(this).pin {
 }
 ```
 
+### Tag
+
+The tag of a noticeboard can be set by `tag` function.  
+It can be used to reset the number of noticeboard display after an update.
+
+```java
+NoticeBoard(this).pin {
+    tag(versionCode)
+}
+```
+
 ### Display Options
 
 NoticeBoard can be displayed in two ways.
@@ -89,6 +100,24 @@ DIALOG           |
 ```java
 NoticeBoard(this).pin {
     displayIn(ACTIVITY)
+}
+```
+
+### Show Rules
+
+The show rule of a noticeboard can be set by `showRule` function.
+
+Show Rules |
+-----------|
+Once       |
+Always     |
+Limited    |
+
+```java
+NoticeBoard(this).pin {
+    showRule(Once)
+    showRule(Always)
+    showRule(Limited(3))
 }
 ```
 
