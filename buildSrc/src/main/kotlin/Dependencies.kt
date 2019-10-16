@@ -60,8 +60,8 @@ object AndroidSdk {
     const val sdk_minimum = 21
     const val sdk_compile = 29
     const val sdk_target = 29
-    const val version_code = 10001
-    const val version_name = "1.0.1"
+    const val version_code = 10002
+    const val version_name = "1.0.2"
 }
 
 object Deps {
