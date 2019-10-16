@@ -73,9 +73,15 @@ internal class InternalNoticeBoard private constructor(context: Context?) {
     fun setUnreleasedPosition(position: Position) =
         configRepository.setConfig(KEY_RELEASED_POSITION, position)
 
-    fun getNumberOfPin(): Int = preferenceHelper.getNumberOfPin()
+    fun getNumberOfPin(): Int = preferenceHelper.getPins()
 
-    fun increaseNumberOfPin() = preferenceHelper.increaseNumberOfPin()
+    fun increaseNumberOfPin() = preferenceHelper.increase()
+
+    fun resetNumberOfPin() = preferenceHelper.reset()
+
+    fun setTag(tag: String) {
+        preferenceHelper.setTag(tag)
+    }
 
     companion object : SingletonHolder<InternalNoticeBoard, Context>(::InternalNoticeBoard)
 }

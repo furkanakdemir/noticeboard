@@ -1,6 +1,8 @@
 package net.furkanakdemir.noticeboard.util.preference
 
 internal interface PreferenceHelper {
-    fun getNumberOfPin(): Int
-    fun increaseNumberOfPin()
+    fun getPins(): Int
+    fun increase()
+    fun reset()
+    fun setTag(tag: String)
 }

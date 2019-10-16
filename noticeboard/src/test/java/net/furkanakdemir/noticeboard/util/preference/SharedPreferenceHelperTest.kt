@@ -1,6 +1,7 @@
 package net.furkanakdemir.noticeboard.util.preference
 
 import androidx.test.core.app.ApplicationProvider
+import net.furkanakdemir.noticeboard.util.fakes.TestData.TAG_CUSTOM
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -21,7 +22,7 @@ class SharedPreferenceHelperTest {
     @Test
     fun testGetNumberOfPin() {
 
-        val actual = preferenceHelper.getNumberOfPin()
+        val actual = preferenceHelper.getPins()
         val expected = 0
 
         assertThat(actual, Is(expected))
@@ -30,10 +31,10 @@ class SharedPreferenceHelperTest {
     @Test
     fun testIncreaseNumberOfPin() {
 
-        preferenceHelper.increaseNumberOfPin()
+        preferenceHelper.increase()
 
         val expected = 1
-        val actual = preferenceHelper.getNumberOfPin()
+        val actual = preferenceHelper.getPins()
 
         assertThat(actual, Is(expected))
     }
@@ -41,14 +42,40 @@ class SharedPreferenceHelperTest {
     @Test
     fun testMultiIncreaseNumberOfPin() {
 
-        preferenceHelper.increaseNumberOfPin()
-        preferenceHelper.increaseNumberOfPin()
-        preferenceHelper.increaseNumberOfPin()
-        preferenceHelper.increaseNumberOfPin()
+        preferenceHelper.increase()
+        preferenceHelper.increase()
+        preferenceHelper.increase()
+        preferenceHelper.increase()
 
         val expected = 4
-        val actual = preferenceHelper.getNumberOfPin()
+        val actual = preferenceHelper.getPins()
 
         assertThat(actual, Is(expected))
+    }
+
+    @Test
+    fun testResetNumberOfPin() {
+
+        preferenceHelper.increase()
+        preferenceHelper.increase()
+        preferenceHelper.reset()
+        val expected = 0
+        val actual = preferenceHelper.getPins()
+
+        assertThat(actual, Is(expected))
+    }
+
+    @Test
+    fun testSetTag() {
+        preferenceHelper.increase()
+        val expected = 1
+        val actual = preferenceHelper.getPins()
+        assertThat(actual, Is(expected))
+
+        preferenceHelper.setTag(TAG_CUSTOM)
+        preferenceHelper.increase()
+        val expectedOther = 1
+        val actualOther = preferenceHelper.getPins()
+        assertThat(actualOther, Is(expectedOther))
     }
 }

@@ -33,6 +33,8 @@ class NoticeBoard(private val target: FragmentActivity) {
     lateinit var title: String
     @VisibleForTesting
     lateinit var showRule: ShowRule
+    @VisibleForTesting
+    lateinit var tag: String
 
     private val observer: NoticeBoardLifeCycleObserver
 
@@ -51,9 +53,11 @@ class NoticeBoard(private val target: FragmentActivity) {
         title = TITLE_DEFAULT
         displayOptions = ACTIVITY
         sourceType = Dynamic()
-        showRule = Always()
+        showRule = Always
+        tag = TAG_DEFAULT
         internalNoticeBoard.setDefaultColorProvider()
         internalNoticeBoard.setUnreleasedPosition(TOP)
+        internalNoticeBoard.setTag(TAG_DEFAULT)
     }
 
     fun source(source: Source) {
@@ -81,6 +85,14 @@ class NoticeBoard(private val target: FragmentActivity) {
         }
     }
 
+    fun tag(text: String) {
+        tag = if (text.isEmpty()) {
+            TAG_DEFAULT
+        } else {
+            text
+        }
+    }
+
     fun colorProvider(colorProvider: ColorProvider) {
         internalNoticeBoard.saveColorProvider(colorProvider)
     }
@@ -97,6 +109,7 @@ class NoticeBoard(private val target: FragmentActivity) {
 
     private fun pin() {
         internalNoticeBoard.fetchChanges(sourceType)
+        internalNoticeBoard.setTag(tag)
 
         val numberOfPin = internalNoticeBoard.getNumberOfPin()
         if (numberOfPin < showRule.number) {
@@ -130,6 +143,7 @@ class NoticeBoard(private val target: FragmentActivity) {
 
     companion object {
         const val TITLE_DEFAULT = "NoticeBoard"
+        const val TAG_DEFAULT = "NoticeBoard"
         const val KEY_TITLE = "KEY_TITLE"
 
         const val TAG = "NoticeBoard"

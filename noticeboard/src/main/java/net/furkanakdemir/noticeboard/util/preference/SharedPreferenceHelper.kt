@@ -8,21 +8,32 @@ import net.furkanakdemir.noticeboard.R
 internal class SharedPreferenceHelper(context: Context) : PreferenceHelper {
 
     private var sharedPref: SharedPreferences
+    private var tag: String = "NoticeBoard"
+
+
+    private val buildKey: String
+        get() = "${KEY_NUMBER_OF_PIN}_$tag"
+
 
     init {
         val fileKey = context.getString(R.string.preference_file_key)
         sharedPref = context.getSharedPreferences(fileKey, MODE_PRIVATE)
     }
 
-    override fun getNumberOfPin(): Int = sharedPref.getInt(
-        KEY_NUMBER_OF_PIN,
-        NUMBER_NOT_USED
-    )
+    override fun getPins(): Int = sharedPref.getInt(buildKey, NUMBER_NOT_USED)
 
-    override fun increaseNumberOfPin() {
-        var numberOfPin = getNumberOfPin()
+    override fun increase() {
+        var numberOfPin = getPins()
         numberOfPin++
-        sharedPref.edit().putInt(KEY_NUMBER_OF_PIN, numberOfPin).apply()
+        sharedPref.edit().putInt(buildKey, numberOfPin).apply()
+    }
+
+    override fun reset() {
+        sharedPref.edit().putInt(buildKey, NUMBER_NOT_USED).apply()
+    }
+
+    override fun setTag(tag: String) {
+        this.tag = tag
     }
 
     companion object {
