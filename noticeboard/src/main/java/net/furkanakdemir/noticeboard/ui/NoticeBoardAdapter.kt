@@ -97,7 +97,6 @@ internal class NoticeBoardAdapter(val colorProvider: ColorProvider) :
             descriptionTextView.text = item.description
             descriptionTextView.setTextColor(descriptionColorId)
 
-
             val changeTypeColorRes = colorProvider.getChangeTypeBackgroundColor(item.type)
             val colorId = ContextCompat.getColor(itemView.context, changeTypeColorRes)
 
