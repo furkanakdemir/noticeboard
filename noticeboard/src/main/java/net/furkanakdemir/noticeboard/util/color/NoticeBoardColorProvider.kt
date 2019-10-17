@@ -36,6 +36,9 @@ open class NoticeBoardColorProvider : ColorProvider {
     @ColorRes
     protected open var colorBackground = R.color.background_default
 
+    @ColorRes
+    protected open var colorDescriptionText = R.color.notice_board_description_text_default
+
 
     override fun getChangeTypeBackgroundColor(changeType: ChangeType): Int {
 
@@ -51,4 +54,6 @@ open class NoticeBoardColorProvider : ColorProvider {
     }
 
     override fun getBackgroundColor(): Int = colorBackground
+
+    override fun getDescriptionColor(): Int = colorDescriptionText
 }

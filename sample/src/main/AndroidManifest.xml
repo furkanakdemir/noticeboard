@@ -52,6 +52,7 @@
         <activity android:name=".color.ChangeTypeColorActivity" />
         <activity android:name=".color.BackgroundColorActivity" />
         <activity android:name=".color.DescriptionColorActivity" />
+        <activity android:name=".color.TitleColorActivity" />
     </application>
 
 </manifest>

@@ -1,6 +1,6 @@
 package net.furkanakdemir.noticeboard.ui
 
-import android.graphics.PorterDuff
+import android.graphics.PorterDuff.Mode
 import android.graphics.PorterDuffColorFilter
 import android.view.LayoutInflater
 import android.view.View
@@ -89,16 +89,21 @@ internal class NoticeBoardAdapter(val colorProvider: ColorProvider) :
     inner class ChangeViewHolder(itemView: View) :
         BaseViewHolder<ChangeItem>(itemView) {
         override fun bind(item: ChangeItem) {
-            itemView.findViewById<TextView>(R.id.change_description).text = item.description
-            itemView.findViewById<TextView>(R.id.change_type).text = item.type.name
 
-            val colorId = ContextCompat.getColor(
-                itemView.context,
-                colorProvider.getChangeTypeBackgroundColor(item.type)
-            )
+            val descriptionColorRes = colorProvider.getDescriptionColor()
+            val descriptionColorId = ContextCompat.getColor(itemView.context, descriptionColorRes)
+
+            val descriptionTextView = itemView.findViewById<TextView>(R.id.change_description)
+            descriptionTextView.text = item.description
+            descriptionTextView.setTextColor(descriptionColorId)
+
+
+            val changeTypeColorRes = colorProvider.getChangeTypeBackgroundColor(item.type)
+            val colorId = ContextCompat.getColor(itemView.context, changeTypeColorRes)
+
             val changeTypeTextView = itemView.findViewById<TextView>(R.id.change_type)
-            changeTypeTextView.background.colorFilter =
-                PorterDuffColorFilter(colorId, PorterDuff.Mode.SRC_IN)
+            changeTypeTextView.text = item.type.name
+            changeTypeTextView.background.colorFilter = PorterDuffColorFilter(colorId, Mode.SRC_IN)
         }
     }
 

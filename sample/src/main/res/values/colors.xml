@@ -7,5 +7,6 @@
     <color name="ic_launcher_background">#FFFFFF</color>
     <color name="colorDivider">#20000000</color>
 
-    <color name="colorBackgroundCustom">#c1d5e0</color>
+    <color name="colorBackgroundCustom">#C1D5E0</color>
+    <color name="colorDescriptionCustom">#303F9F</color>
 </resources>

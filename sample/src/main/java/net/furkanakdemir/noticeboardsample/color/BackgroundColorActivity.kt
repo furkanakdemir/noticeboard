@@ -8,9 +8,9 @@ import net.furkanakdemir.noticeboardsample.util.DataGenerator
 
 class BackgroundColorActivity : BaseSampleActivity() {
 
-    override fun getDescription(): Int = R.string.description_custom_color_change_type
+    override fun getDescription(): Int = R.string.description_custom_color_background
 
-    override fun getToolbarTitle(): Int = R.string.title_custom_color_change_type
+    override fun getToolbarTitle(): Int = R.string.title_custom_color_background
 
     override fun buttonAction() {
         val customColorProvider = CustomBackgroundColorProvider()
