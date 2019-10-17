@@ -30,7 +30,7 @@ internal class InternalNoticeBoard private constructor(context: Context?) {
     private var noticeBoardRepository: NoticeBoardRepository
     private var configRepository: ConfigRepository
 
-    private val defaultColorProvider: ColorProvider = NoticeBoardColorProvider(context)
+    private val defaultColorProvider: ColorProvider = NoticeBoardColorProvider()
     private val preferenceHelper: PreferenceHelper
 
     init {

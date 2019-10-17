@@ -9,9 +9,11 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import net.furkanakdemir.noticeboard.DialogNoticeBoardBehavior
 import net.furkanakdemir.noticeboard.InternalNoticeBoard
 import net.furkanakdemir.noticeboard.NoticeBoard.Companion.KEY_TITLE
 import net.furkanakdemir.noticeboard.NoticeBoard.Companion.TITLE_DEFAULT
+import net.furkanakdemir.noticeboard.NoticeBoardBehavior
 import net.furkanakdemir.noticeboard.R
 import net.furkanakdemir.noticeboard.result.EventObserver
 
@@ -20,6 +22,9 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
     private var recyclerView: RecyclerView? = null
     private var messageTextView: TextView? = null
     private lateinit var noticeBoardAdapter: NoticeBoardAdapter
+
+    private lateinit var noticeBoardBehavior: NoticeBoardBehavior
+    private val colorProvider = InternalNoticeBoard.getInstance().getColorProvider()
 
     private val noticeBoardViewModel by viewModels<NoticeBoardViewModel>()
 
@@ -37,9 +42,12 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
 
         setupViewModel()
 
-        return builder.create()
-    }
+        val dialog = builder.create()
+        noticeBoardBehavior = DialogNoticeBoardBehavior(dialog)
+        noticeBoardBehavior.setBackgroundColor(colorProvider.getBackgroundColor())
 
+        return dialog
+    }
     private fun setupViewModel() {
 
         noticeBoardViewModel.releaseLiveData.observe(this, Observer {
@@ -57,7 +65,7 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
 
     private fun buildView(): View? {
         val view = requireActivity().layoutInflater.inflate(R.layout.dialog_notice_board, null)
-        noticeBoardAdapter = NoticeBoardAdapter(InternalNoticeBoard.getInstance().getColorProvider())
+        noticeBoardAdapter = NoticeBoardAdapter(colorProvider)
 
         recyclerView = view.findViewById(R.id.change_recyclerview)
         messageTextView = view.findViewById(R.id.messageTextView)

@@ -16,4 +16,6 @@
 
     <color name="notice_board_change_type_text_default">#FFFFFF</color>
 
+    <color name="background_default">#FFFFFF</color>
+
 </resources>

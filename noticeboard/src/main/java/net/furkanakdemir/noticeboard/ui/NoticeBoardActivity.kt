@@ -8,11 +8,14 @@ import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_notice_board.*
+import net.furkanakdemir.noticeboard.ActivityNoticeBoardBehavior
 import net.furkanakdemir.noticeboard.InternalNoticeBoard
 import net.furkanakdemir.noticeboard.NoticeBoard.Companion.KEY_TITLE
+import net.furkanakdemir.noticeboard.NoticeBoardBehavior
 import net.furkanakdemir.noticeboard.R
 import net.furkanakdemir.noticeboard.result.EventObserver
 
@@ -21,6 +24,9 @@ internal class NoticeBoardActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var noticeBoardAdapter: NoticeBoardAdapter
+    private lateinit var noticeBoardBehavior: NoticeBoardBehavior
+
+    private val colorProvider = InternalNoticeBoard.getInstance(this).getColorProvider()
 
     private val noticeBoardViewModel by viewModels<NoticeBoardViewModel>()
 
@@ -29,7 +35,11 @@ internal class NoticeBoardActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_notice_board)
 
+        noticeBoardBehavior = ActivityNoticeBoardBehavior(contentLayout)
+
         setupToolbar()
+
+        setupColors()
 
         setupRecyclerView()
 
@@ -46,6 +56,11 @@ internal class NoticeBoardActivity : AppCompatActivity() {
         noticeBoardViewModel.getChanges()
     }
 
+    private fun setupColors() {
+        val backgroundColorId = colorProvider.getBackgroundColor()
+        noticeBoardBehavior.setBackgroundColor(ContextCompat.getColor(this, backgroundColorId))
+    }
+
     private fun showMessage() {
         messageTextView.visibility = VISIBLE
         recyclerView.visibility = GONE
@@ -57,7 +72,7 @@ internal class NoticeBoardActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        noticeBoardAdapter = NoticeBoardAdapter(InternalNoticeBoard.getInstance(this).getColorProvider())
+        noticeBoardAdapter = NoticeBoardAdapter(colorProvider)
 
         recyclerView = findViewById<RecyclerView>(R.id.change_recyclerview).apply {
             setHasFixedSize(true)

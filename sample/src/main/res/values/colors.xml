@@ -6,4 +6,6 @@
 
     <color name="ic_launcher_background">#FFFFFF</color>
     <color name="colorDivider">#20000000</color>
+
+    <color name="colorBackgroundCustom">#c1d5e0</color>
 </resources>
