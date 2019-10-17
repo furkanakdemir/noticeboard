@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_notice_board.*
 import net.furkanakdemir.noticeboard.ActivityNoticeBoardBehavior
+import net.furkanakdemir.noticeboard.DisplayOptions.ACTIVITY
 import net.furkanakdemir.noticeboard.InternalNoticeBoard
 import net.furkanakdemir.noticeboard.NoticeBoard.Companion.KEY_TITLE
 import net.furkanakdemir.noticeboard.NoticeBoardBehavior
@@ -35,12 +36,10 @@ internal class NoticeBoardActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_notice_board)
 
-        noticeBoardBehavior = ActivityNoticeBoardBehavior(contentLayout)
+        noticeBoardBehavior = ActivityNoticeBoardBehavior(this)
 
         setupToolbar()
-
         setupColors()
-
         setupRecyclerView()
 
         noticeBoardViewModel.releaseLiveData.observe(this, Observer {
@@ -58,7 +57,9 @@ internal class NoticeBoardActivity : AppCompatActivity() {
 
     private fun setupColors() {
         val backgroundColorId = colorProvider.getBackgroundColor()
+        val titleColorId = colorProvider.getTitleColor(ACTIVITY)
         noticeBoardBehavior.setBackgroundColor(ContextCompat.getColor(this, backgroundColorId))
+        noticeBoardBehavior.setTitleColor(ContextCompat.getColor(this, titleColorId))
     }
 
     private fun showMessage() {
@@ -90,7 +91,7 @@ internal class NoticeBoardActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        supportActionBar?.title = title
+        noticeBoardBehavior.setTitleText(title)
     }
 
     override fun onSupportNavigateUp(): Boolean {

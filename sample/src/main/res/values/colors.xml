@@ -9,4 +9,5 @@
 
     <color name="colorBackgroundCustom">#C1D5E0</color>
     <color name="colorDescriptionCustom">#303F9F</color>
+    <color name="colorTitleCustom">#2e7d32</color>
 </resources>

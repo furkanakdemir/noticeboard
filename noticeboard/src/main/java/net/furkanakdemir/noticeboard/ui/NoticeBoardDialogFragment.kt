@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import net.furkanakdemir.noticeboard.DialogNoticeBoardBehavior
+import net.furkanakdemir.noticeboard.DisplayOptions.DIALOG
 import net.furkanakdemir.noticeboard.InternalNoticeBoard
 import net.furkanakdemir.noticeboard.NoticeBoard.Companion.KEY_TITLE
 import net.furkanakdemir.noticeboard.NoticeBoard.Companion.TITLE_DEFAULT
@@ -31,7 +33,7 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireContext(), R.style.NoticeBoard_Dialog)
 
-        val title = arguments?.getString(KEY_TITLE, TITLE_DEFAULT)
+        val title = arguments?.getString(KEY_TITLE, TITLE_DEFAULT).orEmpty()
 
         builder.setTitle(title).setPositiveButton(
             getString(R.string.dialog_notice_board_close)
@@ -40,14 +42,25 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
         val view = buildView()
         builder.setView(view)
 
+        val titleRootView =
+            requireActivity().layoutInflater.inflate(R.layout.layout_title_dialog, null)
+        val titleTextView = titleRootView.findViewById<TextView>(R.id.titleDialogTextView)
+
+        builder.setCustomTitle(titleRootView)
+
         setupViewModel()
 
         val dialog = builder.create()
-        noticeBoardBehavior = DialogNoticeBoardBehavior(dialog)
+        noticeBoardBehavior = DialogNoticeBoardBehavior(dialog, titleTextView)
         noticeBoardBehavior.setBackgroundColor(colorProvider.getBackgroundColor())
+
+        val titleColorId = colorProvider.getTitleColor(DIALOG)
+        noticeBoardBehavior.setTitleColor(ContextCompat.getColor(requireActivity(), titleColorId))
+        noticeBoardBehavior.setTitleText(title)
 
         return dialog
     }
+
     private fun setupViewModel() {
 
         noticeBoardViewModel.releaseLiveData.observe(this, Observer {

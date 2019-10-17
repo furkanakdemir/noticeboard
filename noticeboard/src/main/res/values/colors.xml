@@ -5,7 +5,8 @@
     <color name="noticeBoardColorPrimaryDark">#BF3502</color>
     <color name="noticeBoardColorAccent">#4387B3</color>
 
-    <color name="default_type">#000000</color>
+    <color name="change_type_background_default">#000000</color>
+    <color name="background_default">#FFFFFF</color>
 
     <color name="added">#4CAF50</color>
     <color name="changed">#2196F3</color>
@@ -14,9 +15,10 @@
     <color name="fixed">#009688</color>
     <color name="security">#00BCD4</color>
 
-    <color name="notice_board_change_type_text_default">#FFFFFF</color>
-    <color name="notice_board_description_text_default">#000000</color>
+    <color name="noticeboard_change_type_text_default">#FFFFFF</color>
+    <color name="noticeboard_description_text_default">#000000</color>
 
-    <color name="background_default">#FFFFFF</color>
+    <color name="noticeboard_title_text_activity_default">#FFFFFF</color>
+    <color name="noticeboard_title_text_dialog_default">#000000</color>
 
 </resources>
