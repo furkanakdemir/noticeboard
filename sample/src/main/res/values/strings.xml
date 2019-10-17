@@ -47,7 +47,6 @@
     <string name="description_json_invalid">This sample shows a noticeboard created from an invalid Json file.</string>
     <string name="title_json_invalid">Json Invalid</string>
 
-
     <!-- Unreleased -->
     <string name="description_unreleased_top">This sample shows a noticeboard with an unreleased section at top.</string>
     <string name="title_unreleased_top">Top</string>
@@ -58,6 +57,19 @@
     <string name="description_unreleased_none">This sample shows a noticeboard with an unreleased section as not merged.</string>
     <string name="title_unreleased_none">None</string>
 
+    <!-- Custom Color -->
+    <string name="description_custom_color_change_type">This sample shows the changing color of the change types.</string>
+    <string name="title_custom_color_change_type">Change Type</string>
+
+    <string name="description_custom_color_background">This sample shows the changing color of the background.</string>
+    <string name="title_custom_color_background">Background</string>
+
+    <string name="description_custom_color_description">This sample shows the changing color of a description text.</string>
+    <string name="title_custom_color_description">Description</string>
+
+    <string name="description_custom_color_title">This sample shows the changing color of the title.</string>
+    <string name="title_custom_color_title">Title</string>
+
     <!-- Show Rule -->
     <string name="description_show_rule_always">This sample shows a noticeboard all the time.</string>
     <string name="title_show_rule_always">Always</string>
@@ -67,4 +79,5 @@
 
     <string name="description_show_rule_once">This sample shows a noticeboard only once.</string>
     <string name="title_show_rule_once">Once</string>
+    <string name="title_custom_color">Custom Color</string>
 </resources>
