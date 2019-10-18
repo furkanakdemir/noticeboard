@@ -40,7 +40,7 @@ Download
 
 ```
 dependencies {
-    implementation "net.furkanakdemir:noticeboard:1.0.1"
+    implementation "net.furkanakdemir:noticeboard:1.1.0"
 }
 
 ```
