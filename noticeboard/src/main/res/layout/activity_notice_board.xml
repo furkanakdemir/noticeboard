@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:clipChildren="false"
+    android:id="@+id/rootLayout"
     android:layout_height="match_parent"
     tools:context=".ui.NoticeBoardActivity">
 
@@ -25,7 +26,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-
+        android:id="@+id/contentLayout"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_height="match_parent">
 

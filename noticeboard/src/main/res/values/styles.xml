@@ -41,6 +41,12 @@
         <item name="colorAccent">@color/noticeBoardColorAccent</item>
     </style>
 
+    <style name="NoticeBoard.Dialog.Title" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/montserrat_medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/noticeboard_title_text_dialog_default</item>
+    </style>
+
 
     <!-- Header Styles-->
 
@@ -76,7 +82,7 @@
         <item name="android:background">@drawable/background_change_type</item>
         <item name="android:ellipsize">end</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/notice_board_change_type_text_default</item>
+        <item name="android:textColor">@color/noticeboard_change_type_text_default</item>
         <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
@@ -85,6 +91,7 @@
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">3</item>
         <item name="android:gravity">start</item>
+        <item name="android:textColor">@color/noticeboard_description_text_default</item>
     </style>
 
 

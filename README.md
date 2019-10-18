@@ -130,7 +130,16 @@ Override the default color provider
 
 ``` java
 class CustomColorProvider(private val context: Context) : NoticeBoardColorProvider(context) {
-    override var colorAdded: Int = ContextCompat.getColor(context, R.color.colorAccent)
+    override var colorAdded: Int = R.color.colorAccent
+    override var colorChanged: Int = R.color.colorAccent
+    override var colorDeprecated: Int = R.color.colorPrimary
+    override var colorRemoved: Int = R.color.colorPrimary
+    override var colorFixed: Int = R.color.colorPrimaryDark
+    override var colorSecurity: Int = R.color.colorPrimaryDark
+    override var colorDescriptionText = R.color.colorDescriptionCustom
+    override var colorBackground: Int = R.color.colorBackgroundCustom
+    override var colorTitleDialog: Int = R.color.colorTitleCustom
+    override var colorTitleActivity: Int = R.color.colorTitleCustom
 }
 ```
 
@@ -139,6 +148,18 @@ Or Implement `ColorProvider` interface
 ```java
 class CustomColorProvider : ColorProvider {
     override fun getChangeTypeBackgroundColor(changeType: ChangeType): Int {
+
+    }
+
+    override fun getBackgroundColor(): Int {
+
+    }
+
+    override fun getDescriptionColor(): Int {
+
+    }
+
+    override fun getTitleColor(displayOptions: DisplayOptions): Int {
 
     }
 }

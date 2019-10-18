@@ -1,6 +1,6 @@
 package net.furkanakdemir.noticeboard.ui
 
-import android.graphics.PorterDuff
+import android.graphics.PorterDuff.Mode
 import android.graphics.PorterDuffColorFilter
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +14,7 @@ import net.furkanakdemir.noticeboard.ui.NoticeBoardItem.ReleaseHeader
 import net.furkanakdemir.noticeboard.ui.NoticeBoardItem.UnreleasedHeader
 import net.furkanakdemir.noticeboard.ui.NoticeBoardItem.UnreleasedItem
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
+import net.furkanakdemir.noticeboard.util.ext.getColorId
 
 internal class NoticeBoardAdapter(val colorProvider: ColorProvider) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {
@@ -88,13 +89,20 @@ internal class NoticeBoardAdapter(val colorProvider: ColorProvider) :
     inner class ChangeViewHolder(itemView: View) :
         BaseViewHolder<ChangeItem>(itemView) {
         override fun bind(item: ChangeItem) {
-            itemView.findViewById<TextView>(R.id.change_description).text = item.description
-            itemView.findViewById<TextView>(R.id.change_type).text = item.type.name
 
-            val colorId = colorProvider.getChangeTypeBackgroundColor(item.type)
+            val descriptionColorRes = colorProvider.getDescriptionColor()
+            val descriptionColorId = itemView.context.getColorId(descriptionColorRes)
+
+            val descriptionTextView = itemView.findViewById<TextView>(R.id.change_description)
+            descriptionTextView.text = item.description
+            descriptionTextView.setTextColor(descriptionColorId)
+
+            val changeTypeColorRes = colorProvider.getChangeTypeBackgroundColor(item.type)
+            val colorId = itemView.context.getColorId(changeTypeColorRes)
+
             val changeTypeTextView = itemView.findViewById<TextView>(R.id.change_type)
-            changeTypeTextView.background.colorFilter =
-                PorterDuffColorFilter(colorId, PorterDuff.Mode.SRC_IN)
+            changeTypeTextView.text = item.type.name
+            changeTypeTextView.background.colorFilter = PorterDuffColorFilter(colorId, Mode.SRC_IN)
         }
     }
 

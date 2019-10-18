@@ -9,11 +9,15 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import net.furkanakdemir.noticeboard.DialogNoticeBoardBehavior
+import net.furkanakdemir.noticeboard.DisplayOptions.DIALOG
 import net.furkanakdemir.noticeboard.InternalNoticeBoard
 import net.furkanakdemir.noticeboard.NoticeBoard.Companion.KEY_TITLE
 import net.furkanakdemir.noticeboard.NoticeBoard.Companion.TITLE_DEFAULT
+import net.furkanakdemir.noticeboard.NoticeBoardBehavior
 import net.furkanakdemir.noticeboard.R
 import net.furkanakdemir.noticeboard.result.EventObserver
+import net.furkanakdemir.noticeboard.util.ext.getColorId
 
 internal class NoticeBoardDialogFragment : DialogFragment() {
 
@@ -21,12 +25,15 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
     private var messageTextView: TextView? = null
     private lateinit var noticeBoardAdapter: NoticeBoardAdapter
 
+    private lateinit var noticeBoardBehavior: NoticeBoardBehavior
+    private val colorProvider = InternalNoticeBoard.getInstance().getColorProvider()
+
     private val noticeBoardViewModel by viewModels<NoticeBoardViewModel>()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireContext(), R.style.NoticeBoard_Dialog)
 
-        val title = arguments?.getString(KEY_TITLE, TITLE_DEFAULT)
+        val title = arguments?.getString(KEY_TITLE, TITLE_DEFAULT).orEmpty()
 
         builder.setTitle(title).setPositiveButton(
             getString(R.string.dialog_notice_board_close)
@@ -35,9 +42,25 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
         val view = buildView()
         builder.setView(view)
 
+        val titleRootView =
+            requireActivity().layoutInflater.inflate(R.layout.layout_title_dialog, null)
+        val titleTextView = titleRootView.findViewById<TextView>(R.id.titleDialogTextView)
+
+        builder.setCustomTitle(titleRootView)
+
         setupViewModel()
 
-        return builder.create()
+        val dialog = builder.create()
+        noticeBoardBehavior = DialogNoticeBoardBehavior(dialog, titleTextView)
+
+        val backgroundColorId = requireContext().getColorId(colorProvider.getBackgroundColor())
+        noticeBoardBehavior.setBackgroundColor(backgroundColorId)
+
+        val titleColorId = colorProvider.getTitleColor(DIALOG)
+        noticeBoardBehavior.setTitleColor(requireContext().getColorId(titleColorId))
+        noticeBoardBehavior.setTitleText(title)
+
+        return dialog
     }
 
     private fun setupViewModel() {
@@ -57,7 +80,7 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
 
     private fun buildView(): View? {
         val view = requireActivity().layoutInflater.inflate(R.layout.dialog_notice_board, null)
-        noticeBoardAdapter = NoticeBoardAdapter(InternalNoticeBoard.getInstance().getColorProvider())
+        noticeBoardAdapter = NoticeBoardAdapter(colorProvider)
 
         recyclerView = view.findViewById(R.id.change_recyclerview)
         messageTextView = view.findViewById(R.id.messageTextView)

@@ -21,29 +21,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".invalid.InvalidActivity" />
         <activity android:name=".invalid.InvalidJsonSampleActivity" />
         <activity android:name=".invalid.InvalidXmlSampleActivity" />
+
+        <activity android:name=".empty.EmptyActivity" />
         <activity android:name=".empty.EmptyXmlSampleActivity" />
         <activity android:name=".empty.EmptyDynamicSampleActivity" />
         <activity android:name=".empty.EmptyJsonSampleActivity" />
-        <activity android:name=".title.CustomTitleSampleActivity" />
 
         <activity android:name=".sourcetype.SourceTypeActivity" />
         <activity android:name=".sourcetype.DynamicSampleActivity" />
         <activity android:name=".sourcetype.JsonSampleActivity" />
         <activity android:name=".sourcetype.XmlSampleActivity" />
-        <activity android:name=".empty.EmptyActivity" />
-        <activity android:name=".invalid.InvalidActivity" />
+
         <activity android:name=".title.TitleSampleActivity" />
+
         <activity android:name=".unreleased.UnreleasedSampleActivity" />
         <activity android:name=".unreleased.UnreleasedTopActivity" />
         <activity android:name=".unreleased.UnreleasedNoneActivity" />
         <activity android:name=".unreleased.UnreleasedBottomActivity" />
-        <activity android:name=".color.ColorSampleActivity" />
+
         <activity android:name=".showrule.ShowRuleSampleActivity" />
         <activity android:name=".showrule.ShowAlwaysActivity" />
         <activity android:name=".showrule.ShowLimitedActivity" />
         <activity android:name=".showrule.ShowOnceActivity" />
+
+        <activity android:name=".color.ColorSampleActivity" />
+        <activity android:name=".color.ChangeTypeColorActivity" />
+        <activity android:name=".color.BackgroundColorActivity" />
+        <activity android:name=".color.DescriptionColorActivity" />
+        <activity android:name=".color.TitleColorActivity" />
     </application>
 
 </manifest>

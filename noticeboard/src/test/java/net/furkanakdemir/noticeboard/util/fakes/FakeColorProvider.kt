@@ -8,9 +8,16 @@ import net.furkanakdemir.noticeboard.ChangeType.FIXED
 import net.furkanakdemir.noticeboard.ChangeType.REMOVED
 import net.furkanakdemir.noticeboard.ChangeType.SECURITY
 import net.furkanakdemir.noticeboard.ChangeType.UNRELEASED
+import net.furkanakdemir.noticeboard.DisplayOptions
 import net.furkanakdemir.noticeboard.util.color.ColorProvider
 
 class FakeColorProvider : ColorProvider {
+    override fun getBackgroundColor(): Int = 7
+
+    override fun getDescriptionColor(): Int = 8
+
+    override fun getTitleColor(displayOptions: DisplayOptions): Int = 9
+
     override fun getChangeTypeBackgroundColor(changeType: ChangeType): Int {
         return when (changeType) {
             UNRELEASED -> -1
