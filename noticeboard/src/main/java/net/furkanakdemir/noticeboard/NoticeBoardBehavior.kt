@@ -3,6 +3,7 @@ package net.furkanakdemir.noticeboard
 import android.app.Dialog
 import android.graphics.PorterDuff.Mode.SRC_ATOP
 import android.graphics.PorterDuffColorFilter
+import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +21,7 @@ internal class DialogNoticeBoardBehavior(
     private val titleView: TextView
 ) : NoticeBoardBehavior {
     override fun setBackgroundColor(colorId: Int) {
-        dialog.window?.setBackgroundDrawableResource(colorId)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(colorId))
     }
 
     override fun setTitleColor(colorId: Int) {

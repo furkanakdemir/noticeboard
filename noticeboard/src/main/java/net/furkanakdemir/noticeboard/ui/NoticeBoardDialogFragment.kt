@@ -52,7 +52,10 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
 
         val dialog = builder.create()
         noticeBoardBehavior = DialogNoticeBoardBehavior(dialog, titleTextView)
-        noticeBoardBehavior.setBackgroundColor(colorProvider.getBackgroundColor())
+
+        val backgroundColorRes = colorProvider.getBackgroundColor()
+        val backgroundColorId = ContextCompat.getColor(requireActivity(), backgroundColorRes)
+        noticeBoardBehavior.setBackgroundColor(backgroundColorId)
 
         val titleColorId = colorProvider.getTitleColor(DIALOG)
         noticeBoardBehavior.setTitleColor(ContextCompat.getColor(requireActivity(), titleColorId))
