@@ -356,13 +356,11 @@ NoticeBoard(this).pin {
 Upcoming
 -------
 1. Add `Known Issues` section support
-2. Add showing rules ( only once, always )
-3. Add a custom change types
-4. Add `MarkdownDataSource` support
-5. Add remote data support
-6. Add a GOTO button
-7. Enhance Color API
-8. New Date formats
+2. Add a custom change types
+3. Add `MarkdownDataSource` support
+4. Add remote data support
+5. Add a GOTO button
+6. New Date formats
 
 Contribution
 -------
