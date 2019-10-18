@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -18,6 +17,7 @@ import net.furkanakdemir.noticeboard.NoticeBoard.Companion.TITLE_DEFAULT
 import net.furkanakdemir.noticeboard.NoticeBoardBehavior
 import net.furkanakdemir.noticeboard.R
 import net.furkanakdemir.noticeboard.result.EventObserver
+import net.furkanakdemir.noticeboard.util.ext.getColorId
 
 internal class NoticeBoardDialogFragment : DialogFragment() {
 
@@ -53,12 +53,11 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
         val dialog = builder.create()
         noticeBoardBehavior = DialogNoticeBoardBehavior(dialog, titleTextView)
 
-        val backgroundColorRes = colorProvider.getBackgroundColor()
-        val backgroundColorId = ContextCompat.getColor(requireActivity(), backgroundColorRes)
+        val backgroundColorId = requireContext().getColorId(colorProvider.getBackgroundColor())
         noticeBoardBehavior.setBackgroundColor(backgroundColorId)
 
         val titleColorId = colorProvider.getTitleColor(DIALOG)
-        noticeBoardBehavior.setTitleColor(ContextCompat.getColor(requireActivity(), titleColorId))
+        noticeBoardBehavior.setTitleColor(requireContext().getColorId(titleColorId))
         noticeBoardBehavior.setTitleText(title)
 
         return dialog

@@ -5,9 +5,9 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.State
+import net.furkanakdemir.noticeboard.util.ext.getColorId
 import net.furkanakdemir.noticeboardsample.R
 import net.furkanakdemir.noticeboardsample.ui.SampleAdapter.Companion.VIEW_TYPE_HEADER
 import net.furkanakdemir.noticeboardsample.ui.SampleAdapter.Companion.VIEW_TYPE_SAMPLE
@@ -19,7 +19,7 @@ class CustomItemDecoration constructor(context: Context) : RecyclerView.ItemDeco
 
     init {
         paint.style = Paint.Style.FILL
-        paint.color = ContextCompat.getColor(context, R.color.colorDivider)
+        paint.color = context.getColorId(R.color.colorDivider)
     }
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: State) {

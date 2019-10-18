@@ -8,7 +8,6 @@ import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_notice_board.*
@@ -19,6 +18,7 @@ import net.furkanakdemir.noticeboard.NoticeBoard.Companion.KEY_TITLE
 import net.furkanakdemir.noticeboard.NoticeBoardBehavior
 import net.furkanakdemir.noticeboard.R
 import net.furkanakdemir.noticeboard.result.EventObserver
+import net.furkanakdemir.noticeboard.util.ext.getColorId
 
 internal class NoticeBoardActivity : AppCompatActivity() {
 
@@ -58,8 +58,8 @@ internal class NoticeBoardActivity : AppCompatActivity() {
     private fun setupColors() {
         val backgroundColorId = colorProvider.getBackgroundColor()
         val titleColorId = colorProvider.getTitleColor(ACTIVITY)
-        noticeBoardBehavior.setBackgroundColor(ContextCompat.getColor(this, backgroundColorId))
-        noticeBoardBehavior.setTitleColor(ContextCompat.getColor(this, titleColorId))
+        noticeBoardBehavior.setBackgroundColor(getColorId(backgroundColorId))
+        noticeBoardBehavior.setTitleColor(getColorId(titleColorId))
     }
 
     private fun showMessage() {

@@ -3,7 +3,7 @@ package net.furkanakdemir.noticeboardsample.util
 import net.furkanakdemir.noticeboard.util.color.NoticeBoardColorProvider
 import net.furkanakdemir.noticeboardsample.R
 
-class CustomColorProvider : NoticeBoardColorProvider() {
+class CustomChangeTypeColorProvider : NoticeBoardColorProvider() {
 
     override var colorAdded: Int = R.color.colorAccent
     override var colorChanged: Int = R.color.colorAccent
