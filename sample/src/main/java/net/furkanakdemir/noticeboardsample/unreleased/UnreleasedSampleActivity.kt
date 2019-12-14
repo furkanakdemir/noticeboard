@@ -13,7 +13,7 @@ class UnreleasedSampleActivity : BaseListSampleActivity() {
 
     override fun createSamples(): List<SampleItem> = Unreleased.values().map { Sample(it.type) }
 
-    override fun getToolbarTitle(): Int = R.string.title_source_type
+    override fun getToolbarTitle(): Int = R.string.title_unreleased_section
 
     override fun getOnClickListener(): (SampleItem) -> Unit = {
         when (it.title) {

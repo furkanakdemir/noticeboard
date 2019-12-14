@@ -3,6 +3,7 @@ package net.furkanakdemir.noticeboardsample.base
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
@@ -96,26 +97,25 @@ abstract class BaseSampleActivity : BaseToolbarActivity() {
     protected fun pinNoticeBoard(
         source: Source,
         colorProvider: ColorProvider? = null,
-        title: String? = null,
+        title: String = "",
         unreleasedPosition: Position = TOP,
         showRule: ShowRule = Always,
-        tag: String? = null
+        tag: String = "",
+        emptyText: String = "",
+        @DrawableRes emptyIcon: Int = -1,
+        errorText: String = "",
+        @DrawableRes errorIcon: Int = -1
     ) {
         NoticeBoard(this).pin {
             displayIn(currentDisplayOptions)
             source(source)
-            colorProvider?.let {
-                colorProvider(it)
-            }
-            title?.let {
-                title(title)
-            }
-
-            tag?.let {
-                tag(tag)
-            }
+            colorProvider?.let { colorProvider(it) }
+            title(title)
+            tag(tag)
             unreleasedPosition(unreleasedPosition)
             showRule(showRule)
+            setEmpty(emptyText, emptyIcon)
+            setError(errorText, errorIcon)
         }
     }
 

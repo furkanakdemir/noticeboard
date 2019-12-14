@@ -18,15 +18,15 @@ internal class SharedPreferenceHelper(context: Context) : PreferenceHelper {
         sharedPref = context.getSharedPreferences(fileKey, MODE_PRIVATE)
     }
 
-    override fun getPins(): Int = sharedPref.getInt(buildKey, NUMBER_NOT_USED)
+    override fun getPinCount(): Int = sharedPref.getInt(buildKey, NUMBER_NOT_USED)
 
-    override fun increase() {
-        var numberOfPin = getPins()
+    override fun plusPin() {
+        var numberOfPin = getPinCount()
         numberOfPin++
         sharedPref.edit().putInt(buildKey, numberOfPin).apply()
     }
 
-    override fun reset() {
+    override fun resetPinCount() {
         sharedPref.edit().putInt(buildKey, NUMBER_NOT_USED).apply()
     }
 

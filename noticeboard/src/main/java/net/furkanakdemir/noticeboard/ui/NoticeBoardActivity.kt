@@ -9,7 +9,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_notice_board.*
 import net.furkanakdemir.noticeboard.ActivityNoticeBoardBehavior
 import net.furkanakdemir.noticeboard.DisplayOptions.ACTIVITY
@@ -18,12 +17,13 @@ import net.furkanakdemir.noticeboard.NoticeBoard.Companion.KEY_TITLE
 import net.furkanakdemir.noticeboard.NoticeBoardBehavior
 import net.furkanakdemir.noticeboard.R
 import net.furkanakdemir.noticeboard.result.EventObserver
+import net.furkanakdemir.noticeboard.ui.NoticeBoardViewModel.ViewEvent.Empty
+import net.furkanakdemir.noticeboard.ui.NoticeBoardViewModel.ViewEvent.Error
 import net.furkanakdemir.noticeboard.util.ext.getColorId
 
 internal class NoticeBoardActivity : AppCompatActivity() {
 
     private var toolbar: Toolbar? = null
-    private lateinit var recyclerView: RecyclerView
     private lateinit var noticeBoardAdapter: NoticeBoardAdapter
     private lateinit var noticeBoardBehavior: NoticeBoardBehavior
 
@@ -33,7 +33,6 @@ internal class NoticeBoardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_notice_board)
 
         noticeBoardBehavior = ActivityNoticeBoardBehavior(this)
@@ -48,7 +47,29 @@ internal class NoticeBoardActivity : AppCompatActivity() {
         })
 
         noticeBoardViewModel.eventLiveData.observe(this, EventObserver {
-            messageTextView.text = it
+
+            when (it) {
+                Empty -> {
+                    val emptyText =
+                        InternalNoticeBoard.getInstance(this@NoticeBoardActivity).getEmptyText()
+                    messageTextView.text = emptyText
+
+                    val emptyIcon =
+                        InternalNoticeBoard.getInstance(this@NoticeBoardActivity).getEmptyIcon()
+                    messageTextView.setCompoundDrawablesWithIntrinsicBounds(0, emptyIcon, 0, 0)
+                }
+
+                Error -> {
+                    val errorText =
+                        InternalNoticeBoard.getInstance(this@NoticeBoardActivity).getErrorText()
+                    messageTextView?.text = errorText
+
+                    val errorIcon =
+                        InternalNoticeBoard.getInstance(this@NoticeBoardActivity).getErrorIcon()
+                    messageTextView?.setCompoundDrawablesWithIntrinsicBounds(0, errorIcon, 0, 0)
+                }
+            }
+
             showMessage()
         })
 
@@ -64,18 +85,18 @@ internal class NoticeBoardActivity : AppCompatActivity() {
 
     private fun showMessage() {
         messageTextView.visibility = VISIBLE
-        recyclerView.visibility = GONE
+        changeRecyclerView.visibility = GONE
     }
 
     private fun showContent() {
         messageTextView.visibility = GONE
-        recyclerView.visibility = VISIBLE
+        changeRecyclerView.visibility = VISIBLE
     }
 
     private fun setupRecyclerView() {
         noticeBoardAdapter = NoticeBoardAdapter(colorProvider)
 
-        recyclerView = findViewById<RecyclerView>(R.id.change_recyclerview).apply {
+        changeRecyclerView.apply {
             setHasFixedSize(true)
             adapter = noticeBoardAdapter
         }

@@ -13,7 +13,12 @@
     <string name="title_samples">Samples</string>
 
     <string name="title_source_type">Source Types</string>
-    <string name="title_show_rule">Show Rules</string>
+    <string name="title_empty">Empty</string>
+    <string name="title_invalid">Invalid</string>
+    <string name="title_custom_title">Custom Title</string>
+    <string name="title_unreleased_section">Unreleased Section</string>
+    <string name="title_custom_color">Custom Color</string>
+    <string name="title_show_rules">Show Rules</string>
 
     <!-- Source Types -->
     <string name="description_dynamic">This sample shows a noticeboard created dynamically.</string>
@@ -27,7 +32,6 @@
 
     <!-- Custom Title -->
     <string name="description_custom_title">This sample shows a noticeboard that has a custom title.</string>
-    <string name="title_custom_title">Custom Title</string>
     <string name="custom_title">Changelogs</string>
 
     <!-- Empty -->
@@ -40,12 +44,18 @@
     <string name="description_json_empty">This sample shows an empty noticeboard created from a Json file.</string>
     <string name="title_json_empty">Json Empty</string>
 
+    <string name="description_custom_placeholder_empty">This sample shows an empty noticeboard with a custom placeholder.</string>
+    <string name="title_custom_placeholder_empty">Custom Empty</string>
+
     <!-- Invalid -->
     <string name="description_xml_invalid">This sample shows a noticeboard created from an invalid Xml file.</string>
     <string name="title_xml_invalid">Xml Invalid</string>
 
     <string name="description_json_invalid">This sample shows a noticeboard created from an invalid Json file.</string>
     <string name="title_json_invalid">Json Invalid</string>
+
+    <string name="description_custom_placeholder_error">This sample shows an invalid noticeboard with a custom placeholder.</string>
+    <string name="title_custom_placeholder_error">Custom Invalid</string>
 
     <!-- Unreleased -->
     <string name="description_unreleased_top">This sample shows a noticeboard with an unreleased section at top.</string>
@@ -79,5 +89,4 @@
 
     <string name="description_show_rule_once">This sample shows a noticeboard only once.</string>
     <string name="title_show_rule_once">Once</string>
-    <string name="title_custom_color">Custom Color</string>
 </resources>

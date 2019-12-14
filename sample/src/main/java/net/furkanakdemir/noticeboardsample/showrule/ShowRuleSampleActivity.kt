@@ -13,7 +13,7 @@ class ShowRuleSampleActivity : BaseListSampleActivity() {
 
     override fun createSamples(): List<SampleItem> = ShowRule.values().map { Sample(it.type) }
 
-    override fun getToolbarTitle(): Int = R.string.title_show_rule
+    override fun getToolbarTitle(): Int = R.string.title_show_rules
 
     override fun getOnClickListener(): (SampleItem) -> Unit = {
         when (it.title) {

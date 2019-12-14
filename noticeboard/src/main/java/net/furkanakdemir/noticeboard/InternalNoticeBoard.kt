@@ -3,6 +3,10 @@ package net.furkanakdemir.noticeboard
 import android.content.Context
 import net.furkanakdemir.noticeboard.Position.TOP
 import net.furkanakdemir.noticeboard.config.ConfigRepository
+import net.furkanakdemir.noticeboard.config.ConfigRepository.Companion.KEY_EMPTY_ICON
+import net.furkanakdemir.noticeboard.config.ConfigRepository.Companion.KEY_EMPTY_TEXT
+import net.furkanakdemir.noticeboard.config.ConfigRepository.Companion.KEY_ERROR_ICON
+import net.furkanakdemir.noticeboard.config.ConfigRepository.Companion.KEY_ERROR_TEXT
 import net.furkanakdemir.noticeboard.config.ConfigRepository.Companion.KEY_RELEASED_POSITION
 import net.furkanakdemir.noticeboard.config.NoticeBoardConfigRepository
 import net.furkanakdemir.noticeboard.data.datasource.NoticeBoardDataSourceFactory
@@ -73,15 +77,43 @@ internal class InternalNoticeBoard private constructor(context: Context?) {
     fun setUnreleasedPosition(position: Position) =
         configRepository.setConfig(KEY_RELEASED_POSITION, position)
 
-    fun getNumberOfPin(): Int = preferenceHelper.getPins()
+    fun getPinCount(): Int = preferenceHelper.getPinCount()
 
-    fun increaseNumberOfPin() = preferenceHelper.increase()
+    fun plusPin() = preferenceHelper.plusPin()
 
-    fun resetNumberOfPin() = preferenceHelper.reset()
+    fun resetNumberOfPin() = preferenceHelper.resetPinCount()
 
     fun setTag(tag: String) {
         preferenceHelper.setTag(tag)
     }
 
-    companion object : SingletonHolder<InternalNoticeBoard, Context>(::InternalNoticeBoard)
+    fun setEmptyText(text: String = "") {
+        val emptyText = if (text.isEmpty()) TEXT_EMPTY_DEFAULT else text
+        configRepository.setConfig(KEY_EMPTY_TEXT, emptyText)
+    }
+
+    fun setEmptyIcon(iconRes: Int = -1) {
+        val icon = if (iconRes == -1) R.drawable.ic_logo else iconRes
+        configRepository.setConfig(KEY_EMPTY_ICON, icon)
+    }
+
+    fun setErrorText(text: String = "") {
+        val emptyText = if (text.isEmpty()) TEXT_ERROR_DEFAULT else text
+        configRepository.setConfig(KEY_ERROR_TEXT, emptyText)
+    }
+
+    fun setErrorIcon(iconRes: Int = -1) {
+        val icon = if (iconRes == -1) R.drawable.ic_logo else iconRes
+        configRepository.setConfig(KEY_ERROR_ICON, icon)
+    }
+
+    fun getEmptyText(): String = configRepository.getConfig(KEY_EMPTY_TEXT, TEXT_EMPTY_DEFAULT)
+    fun getEmptyIcon(): Int = configRepository.getConfig(KEY_EMPTY_ICON, R.drawable.ic_logo)
+    fun getErrorText(): String = configRepository.getConfig(KEY_ERROR_TEXT, TEXT_ERROR_DEFAULT)
+    fun getErrorIcon(): Int = configRepository.getConfig(KEY_ERROR_ICON, R.drawable.ic_logo)
+
+    companion object : SingletonHolder<InternalNoticeBoard, Context>(::InternalNoticeBoard) {
+        const val TEXT_EMPTY_DEFAULT = "Empty"
+        const val TEXT_ERROR_DEFAULT = "Error"
+    }
 }

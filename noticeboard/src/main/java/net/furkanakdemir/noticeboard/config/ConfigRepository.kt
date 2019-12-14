@@ -11,5 +11,9 @@ internal interface ConfigRepository {
 
     companion object {
         internal const val KEY_RELEASED_POSITION = "KEY_RELEASED_POSITION"
+        internal const val KEY_EMPTY_TEXT = "KEY_EMPTY_TEXT"
+        internal const val KEY_EMPTY_ICON = "KEY_EMPTY_ICON"
+        internal const val KEY_ERROR_TEXT = "KEY_ERROR_TEXT"
+        internal const val KEY_ERROR_ICON = "KEY_ERROR_ICON"
     }
 }

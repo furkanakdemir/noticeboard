@@ -22,7 +22,7 @@ class SharedPreferenceHelperTest {
     @Test
     fun testGetNumberOfPin() {
 
-        val actual = preferenceHelper.getPins()
+        val actual = preferenceHelper.getPinCount()
         val expected = 0
 
         assertThat(actual, Is(expected))
@@ -31,10 +31,10 @@ class SharedPreferenceHelperTest {
     @Test
     fun testIncreaseNumberOfPin() {
 
-        preferenceHelper.increase()
+        preferenceHelper.plusPin()
 
         val expected = 1
-        val actual = preferenceHelper.getPins()
+        val actual = preferenceHelper.getPinCount()
 
         assertThat(actual, Is(expected))
     }
@@ -42,13 +42,13 @@ class SharedPreferenceHelperTest {
     @Test
     fun testMultiIncreaseNumberOfPin() {
 
-        preferenceHelper.increase()
-        preferenceHelper.increase()
-        preferenceHelper.increase()
-        preferenceHelper.increase()
+        preferenceHelper.plusPin()
+        preferenceHelper.plusPin()
+        preferenceHelper.plusPin()
+        preferenceHelper.plusPin()
 
         val expected = 4
-        val actual = preferenceHelper.getPins()
+        val actual = preferenceHelper.getPinCount()
 
         assertThat(actual, Is(expected))
     }
@@ -56,26 +56,26 @@ class SharedPreferenceHelperTest {
     @Test
     fun testResetNumberOfPin() {
 
-        preferenceHelper.increase()
-        preferenceHelper.increase()
-        preferenceHelper.reset()
+        preferenceHelper.plusPin()
+        preferenceHelper.plusPin()
+        preferenceHelper.resetPinCount()
         val expected = 0
-        val actual = preferenceHelper.getPins()
+        val actual = preferenceHelper.getPinCount()
 
         assertThat(actual, Is(expected))
     }
 
     @Test
     fun testSetTag() {
-        preferenceHelper.increase()
+        preferenceHelper.plusPin()
         val expected = 1
-        val actual = preferenceHelper.getPins()
+        val actual = preferenceHelper.getPinCount()
         assertThat(actual, Is(expected))
 
         preferenceHelper.setTag(TAG_CUSTOM)
-        preferenceHelper.increase()
+        preferenceHelper.plusPin()
         val expectedOther = 1
-        val actualOther = preferenceHelper.getPins()
+        val actualOther = preferenceHelper.getPinCount()
         assertThat(actualOther, Is(expectedOther))
     }
 }
