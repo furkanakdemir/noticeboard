@@ -17,12 +17,15 @@ import net.furkanakdemir.noticeboard.NoticeBoard.Companion.TITLE_DEFAULT
 import net.furkanakdemir.noticeboard.NoticeBoardBehavior
 import net.furkanakdemir.noticeboard.R
 import net.furkanakdemir.noticeboard.result.EventObserver
+import net.furkanakdemir.noticeboard.ui.NoticeBoardViewModel.ViewEvent.Empty
+import net.furkanakdemir.noticeboard.ui.NoticeBoardViewModel.ViewEvent.Error
 import net.furkanakdemir.noticeboard.util.ext.getColorId
 
 internal class NoticeBoardDialogFragment : DialogFragment() {
 
     private var recyclerView: RecyclerView? = null
     private var messageTextView: TextView? = null
+
     private lateinit var noticeBoardAdapter: NoticeBoardAdapter
 
     private lateinit var noticeBoardBehavior: NoticeBoardBehavior
@@ -71,7 +74,26 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
         })
 
         noticeBoardViewModel.eventLiveData.observe(this, EventObserver {
-            messageTextView?.text = it
+            when (it) {
+                Empty -> {
+                    val emptyText =
+                        InternalNoticeBoard.getInstance(requireContext()).getEmptyText()
+                    messageTextView?.text = emptyText
+
+                    val emptyIcon = InternalNoticeBoard.getInstance(requireContext()).getEmptyIcon()
+                    messageTextView?.setCompoundDrawablesWithIntrinsicBounds(0, emptyIcon, 0, 0)
+                }
+
+                Error -> {
+                    val errorText =
+                        InternalNoticeBoard.getInstance(requireContext()).getErrorText()
+                    messageTextView?.text = errorText
+
+                    val errorIcon = InternalNoticeBoard.getInstance(requireContext()).getErrorIcon()
+                    messageTextView?.setCompoundDrawablesWithIntrinsicBounds(0, errorIcon, 0, 0)
+                }
+            }
+
             showMessage()
         })
 
@@ -82,7 +104,7 @@ internal class NoticeBoardDialogFragment : DialogFragment() {
         val view = requireActivity().layoutInflater.inflate(R.layout.dialog_notice_board, null)
         noticeBoardAdapter = NoticeBoardAdapter(colorProvider)
 
-        recyclerView = view.findViewById(R.id.change_recyclerview)
+        recyclerView = view.findViewById(R.id.changeRecyclerView)
         messageTextView = view.findViewById(R.id.messageTextView)
         recyclerView?.apply {
             setHasFixedSize(true)

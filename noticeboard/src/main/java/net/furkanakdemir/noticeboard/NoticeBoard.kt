@@ -1,6 +1,7 @@
 package net.furkanakdemir.noticeboard
 
 import android.util.Log
+import androidx.annotation.DrawableRes
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -58,6 +59,10 @@ class NoticeBoard(private val target: FragmentActivity) {
         internalNoticeBoard.setDefaultColorProvider()
         internalNoticeBoard.setUnreleasedPosition(TOP)
         internalNoticeBoard.setTag(TAG_DEFAULT)
+        internalNoticeBoard.setEmptyText()
+        internalNoticeBoard.setEmptyIcon()
+        internalNoticeBoard.setErrorText()
+        internalNoticeBoard.setErrorIcon()
     }
 
     fun source(source: Source) {
@@ -101,6 +106,16 @@ class NoticeBoard(private val target: FragmentActivity) {
         this.showRule = showRule
     }
 
+    fun setEmpty(emptyText: String = "", @DrawableRes emptyIcon: Int = -1) {
+        internalNoticeBoard.setEmptyIcon(emptyIcon)
+        internalNoticeBoard.setEmptyText(emptyText)
+    }
+
+    fun setError(errorText: String = "", @DrawableRes errorIcon: Int = -1) {
+        internalNoticeBoard.setErrorText(errorText)
+        internalNoticeBoard.setErrorIcon(errorIcon)
+    }
+
     fun pin(func: NoticeBoard.() -> Unit) {
         initialize()
         this.func()
@@ -111,7 +126,7 @@ class NoticeBoard(private val target: FragmentActivity) {
         internalNoticeBoard.fetchChanges(sourceType)
         internalNoticeBoard.setTag(tag)
 
-        val numberOfPin = internalNoticeBoard.getNumberOfPin()
+        val numberOfPin = internalNoticeBoard.getPinCount()
         if (numberOfPin < showRule.number) {
             when (displayOptions) {
                 ACTIVITY -> target.startActivity(
@@ -124,7 +139,7 @@ class NoticeBoard(private val target: FragmentActivity) {
                 }
             }
 
-            internalNoticeBoard.increaseNumberOfPin()
+            internalNoticeBoard.plusPin()
         } else {
             Log.i(TAG, "Maximum number of pin: $numberOfPin")
         }

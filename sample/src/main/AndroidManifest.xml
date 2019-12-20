@@ -25,11 +25,13 @@
         <activity android:name=".invalid.InvalidActivity" />
         <activity android:name=".invalid.InvalidJsonSampleActivity" />
         <activity android:name=".invalid.InvalidXmlSampleActivity" />
+        <activity android:name=".invalid.InvalidCustomPlaceholderSampleActivity" />
 
         <activity android:name=".empty.EmptyActivity" />
         <activity android:name=".empty.EmptyXmlSampleActivity" />
         <activity android:name=".empty.EmptyDynamicSampleActivity" />
         <activity android:name=".empty.EmptyJsonSampleActivity" />
+        <activity android:name=".empty.EmptyCustomPlaceholderSampleActivity" />
 
         <activity android:name=".sourcetype.SourceTypeActivity" />
         <activity android:name=".sourcetype.DynamicSampleActivity" />
